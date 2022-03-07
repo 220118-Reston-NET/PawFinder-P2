@@ -75,7 +75,7 @@ jobs:
     - name: Deploy
       uses: azure/webapps-deploy@v2
       with:
-        app-name: PPDBWebApp
+        app-name: PawFinderWebApp
         slot-name: 'Production'
         publish-profile: $${{secrets.PawFinder_Web_App_Publish_Profile}}
         package: ./publish
