@@ -1,5 +1,7 @@
+using PawFinderModel;
+
 namespace PawFinderBL;
-public class Class1
+public class IUserBL
 {
 
 }
