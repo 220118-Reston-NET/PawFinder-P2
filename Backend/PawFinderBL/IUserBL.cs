@@ -1,7 +1,8 @@
 using PawFinderModel;
 
 namespace PawFinderBL;
-public class IUserBL
-{
 
+public interface IUserBL
+{
+    
 }
