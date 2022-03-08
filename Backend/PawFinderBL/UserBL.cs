@@ -24,7 +24,7 @@ public class UserBL : IUserBL
 
     public List<User> SearchUser(string p_name)
     {
-        List<User> ListOfUsers = _repo.GetAllUsers;
+        List<User> ListOfUsers = _repo.GetAllUsers();
 
              return ListOfUsers
                          .Where(user => user.UserName.Contains(p_name))
