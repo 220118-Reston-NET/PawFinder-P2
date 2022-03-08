@@ -65,8 +65,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: pwsh
       run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"220118-Reston-NET_PawFinder-P2" /o:"220118-reston-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions=**/Backend/PawFinderApi/wwwroot/lib/**,**/**PawFinderDL/*.cs,**/**PawFinderApi/**/*.cs /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.vstest.reportsPath="**/TestResults/*.trx"
-          dotnet build ./Backend/PawFinderAPI -c Release
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"220118-Reston-NET_PawFinder-P2" /o:"220118-reston-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions=**/PawFinderAPI/wwwroot/lib/**,**/**PawFinderDL/*.cs,**/**PawFinderAPI/**/*.cs /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.vstest.reportsPath="**/TestResults/*.trx"
+          dotnet build ./PawFinderAPI -c Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
         
         
@@ -80,4 +80,4 @@ jobs:
         app-name: PawFinderWebApp
         slot-name: 'Production'
         publish-profile: $${{secrets.PawFinder_Web_App_Publish_Profile}}
-        package: ./Backend
+        package: Backend/publish
