@@ -13,7 +13,7 @@ public class SQLRepository : IRepository
     public User RegisterUser(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userID, @userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
+                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -21,7 +21,7 @@ public class SQLRepository : IRepository
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
 
-            command.Parameters.AddWithValue("@userID", p_user.UserID);
+            //command.Parameters.AddWithValue("@userID", p_user.UserID);
             command.Parameters.AddWithValue("@userName", p_user.UserName);
             command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
             command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
@@ -55,7 +55,7 @@ public class SQLRepository : IRepository
                 userList.Add(new User(){
                     UserID = reader.GetInt32(0), 
                     UserName = reader.GetString(1),
-                    UserPassword = reader.GetInt32(2),
+                    UserPassword = reader.GetString(2),
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
@@ -133,4 +133,96 @@ public class SQLRepository : IRepository
         return pictureID;
     }
 
+    public User GetUser(int UserID)
+    {
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6)
+                });
+            }
+            return Result;
+
+        }
+
+    }
+
+    public List<User> ViewMatchedUser(int UserID)
+    {
+        List<int> listOfMatchedUserID = new List<int>();
+        List<User> listOfMatchedUser = new List<User>();
+
+        string sqlQuery = @"SELECT * FROM MATCHEDUSERS WHERE userID1 = @userID or userID2 = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if(reader.GetInt32(1) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(2));
+                }
+                else if(reader.GetInt32(2) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(1));
+                }
+            }
+            
+            foreach(var ID in listOfMatchedUserID)
+            {
+                listOfMatchedUser.Add(GetUser(ID));
+            }
+
+            return listOfMatchedUser;
+        }
+    }
+
+    public List<Message> GetConversation(int UserID1, int UserID2)
+    {
+        List<Message> Result = new List<Message>();
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE userID1 = @userID1 or userID2 = @userID1 or userID1 = @userID2 or userID2 = @userID2";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID1", UserID1);
+            command.Parameters.AddWithValue("@userID2", UserID2);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Result.Add(new Message(){
+                    messageID = reader.GetInt32(0),
+                    SenderID = reader.GetInt32(1),
+                    ReceiverID = reader.GetInt32(2),
+                    messageText = reader.GetString(3),
+                    messageTimeStamp = reader.GetDateTime(4)
+                });
+            }
+
+        return Result;
+        }
+    }
 }
