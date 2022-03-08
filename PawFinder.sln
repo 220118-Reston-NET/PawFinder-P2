@@ -3,6 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{B8A35A4E-968C-4BCB-B9D5-2536067D7C65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderAPI", "Backend\PawFinderAPI\PawFinderAPI.csproj", "{B0ACECAD-BD3E-4F04-9878-E2FC481E8C97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderBL", "Backend\PawFinderBL\PawFinderBL.csproj", "{C803122E-4DF4-4F32-BF6A-936DC2640D1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderDL", "Backend\PawFinderDL\PawFinderDL.csproj", "{77CA8C5B-FAA4-4CC4-8BDA-6EEE85B223A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderModel", "Backend\PawFinderModel\PawFinderModel.csproj", "{785A3D16-A4B6-4AC7-97CA-E36F44FD7824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderTest", "Backend\PawFinderTest\PawFinderTest.csproj", "{534578D7-970D-4753-B0EC-AA58EB822E29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +22,34 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0ACECAD-BD3E-4F04-9878-E2FC481E8C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0ACECAD-BD3E-4F04-9878-E2FC481E8C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0ACECAD-BD3E-4F04-9878-E2FC481E8C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0ACECAD-BD3E-4F04-9878-E2FC481E8C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C803122E-4DF4-4F32-BF6A-936DC2640D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C803122E-4DF4-4F32-BF6A-936DC2640D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C803122E-4DF4-4F32-BF6A-936DC2640D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C803122E-4DF4-4F32-BF6A-936DC2640D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77CA8C5B-FAA4-4CC4-8BDA-6EEE85B223A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CA8C5B-FAA4-4CC4-8BDA-6EEE85B223A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CA8C5B-FAA4-4CC4-8BDA-6EEE85B223A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CA8C5B-FAA4-4CC4-8BDA-6EEE85B223A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{785A3D16-A4B6-4AC7-97CA-E36F44FD7824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{785A3D16-A4B6-4AC7-97CA-E36F44FD7824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{785A3D16-A4B6-4AC7-97CA-E36F44FD7824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{785A3D16-A4B6-4AC7-97CA-E36F44FD7824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{534578D7-970D-4753-B0EC-AA58EB822E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{534578D7-970D-4753-B0EC-AA58EB822E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{534578D7-970D-4753-B0EC-AA58EB822E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{534578D7-970D-4753-B0EC-AA58EB822E29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B0ACECAD-BD3E-4F04-9878-E2FC481E8C97} = {B8A35A4E-968C-4BCB-B9D5-2536067D7C65}
+		{C803122E-4DF4-4F32-BF6A-936DC2640D1F} = {B8A35A4E-968C-4BCB-B9D5-2536067D7C65}
+		{77CA8C5B-FAA4-4CC4-8BDA-6EEE85B223A5} = {B8A35A4E-968C-4BCB-B9D5-2536067D7C65}
+		{785A3D16-A4B6-4AC7-97CA-E36F44FD7824} = {B8A35A4E-968C-4BCB-B9D5-2536067D7C65}
+		{534578D7-970D-4753-B0EC-AA58EB822E29} = {B8A35A4E-968C-4BCB-B9D5-2536067D7C65}
 	EndGlobalSection
 EndGlobal
