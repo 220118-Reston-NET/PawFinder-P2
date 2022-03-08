@@ -67,6 +67,39 @@ public class SQLRepository : IRepository
         return userList;
     }
 
+        public User GetAllUserData(int p_userID)
+    {
+        User currUser = new User();
+
+        string sqlQuery = @"SELECT * FROM Users WHERE userID=@userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        { 
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+
+            command.Parameters.AddWithValue("@userID", p_userID);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                currUser = new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6)
+                };
+            }
+        }
+
+        return currUser;
+    }
+
     public int CreateUserID()
     {
         int userID = 1000;
