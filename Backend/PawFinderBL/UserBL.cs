@@ -39,8 +39,6 @@ public class UserBL : IUserBL
         {
             return _repo.RegisterUser(p_user);
         }
-
-
     }
 
     public List<User> SearchUser(string p_name)
@@ -61,6 +59,16 @@ public class UserBL : IUserBL
     public List<Message> GetConversation(int UserID1, int UserID2)
     {
         return _repo.GetConversation(UserID1, UserID2);
+    }
+
+    public User UpdateUser(User user)
+    {
+        return _repo.UpdateUser(user);
+    }
+
+    public Message AddMessage(Message message)
+    {
+        return _repo.AddMessage(message);
     }
 
 
