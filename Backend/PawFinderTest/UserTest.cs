@@ -1,5 +1,6 @@
 using Xunit;
 using PawFinderModel;
+using System;
 
 namespace PawFinderTest;
 
@@ -44,18 +45,6 @@ public class UserTest
 
     }
 
-    /*
-
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string UserPassword { get; set; }
-        public DateTime UserDOB { get; set; }
-        public string UserBio { get; set; }
-        public string UserBreed { get; set; }
-        public string UserSize { get; set; }
-
-    */
-
     [Fact]
     public void TestDataInt()
     {
@@ -71,6 +60,24 @@ public class UserTest
         //Assert
         Assert.NotNull(newUser.UserID );
         Assert.Equal(userID, newUser.UserID );
+
+    }
+
+    [Fact]
+    public void TestDataOther()
+    {
+
+        //Arrange
+        User newUser = new User();
+        DateTime userDOB = DateTime.Today;
+
+
+        //Act
+        newUser.UserDOB = userDOB;
+
+        //Assert
+        Assert.NotNull(newUser.UserDOB);
+        Assert.Equal(userDOB, newUser.UserDOB);
 
     }
     
