@@ -63,6 +63,23 @@ public class UserBL : IUserBL
         return _repo.GetConversation(UserID1, UserID2);
     }
 
+    private string GenerateFileName(string fileName, string userName)
+    {
+        try
+        {
+            string strFileName = string.Empty;
+            string[] strName = fileName.Split('.');
+            strFileName = userName + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd") + "/"
+                + DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." +
+                strName[strName.Length - 1];
+            return strFileName;
+        }
+        catch (Exception ex)
+        {
+            return fileName;
+        }
+    }
+
 
 
 
