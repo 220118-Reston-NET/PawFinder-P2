@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PawfinderService } from './../services/pawfinder.service';
+import { Users } from './../models/users.model';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  constructor() { }
+ userName:string | null = "No users Selected";
+// Users:PawfinderApi;
+ Users: any;
+  constructor(private router:ActivatedRoute , private PawService:PawfinderService) {
+    this.Users={ sprites: {
+      back_default:"",
+      back_shiny:"",
+      front_default:"",
+      front_shiny:""
+    }};
+   }
 
   ngOnInit(): void {
+    // this.userName = this.router.snapshot.paramMap.get("userName");
+    // this.PawService.getAllUsers(this.userName).subscribe(result=>{
+    //   this.Users=result;
+    // });
   }
 
 }
