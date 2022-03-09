@@ -99,4 +99,54 @@ public class UserBL : IUserBL
         return _repo.GetPhotobyUserID(p_userID);
     }
 
+
+    // Async Functions=======================================================================================
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        return await _repo.GetAllUsersAsync();
+    }
+
+    public async Task<User> RegisterUserAsync(User p_user)
+    {
+        return await _repo.RegisterUserAsync(p_user);
+    }
+
+    public async Task<List<User>> SearchUserAsync(string p_name)
+    {
+        List<User> ListOfUsers = await _repo.GetAllUsersAsync();
+
+             return ListOfUsers
+                         .Where(user => user.UserName.Contains(p_name))
+                         .ToList();
+    }
+
+    public async Task<List<User>> ViewMatchedUserAsync(int userID)
+    {
+        return await _repo.ViewMatchedUserAsync(userID);
+    }
+
+    public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
+    {
+        return await _repo.GetConversationAsync(UserID1, UserID2);
+    }
+
+    public async Task<User> UpdateUserAsync(User user)
+    {
+        return await UpdateUserAsync(user);
+    }
+
+    public async Task<Message> AddMessageAsync(Message message)
+    {
+        return await AddMessageAsync(message);
+    }
+
+    public async void AddPhotoAsync(string p_fileName, int p_userID)
+    {
+        _repo.AddPhotoAsync(p_fileName,p_userID);
+    }
+
+    public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
+    {
+        return await _repo.GetPhotobyUserIDAsync(p_userID);
+    }
 }
