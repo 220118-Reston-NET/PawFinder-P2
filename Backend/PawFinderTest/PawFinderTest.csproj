@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PawFinderModel\PawFinderModel.csproj" />
+    <ProjectReference Include="..\PawFinderBL\PawFinderBL.csproj" />
+    <ProjectReference Include="..\PawFinderDL\PawFinderDL.csproj" />
   </ItemGroup>
 
 </Project>
