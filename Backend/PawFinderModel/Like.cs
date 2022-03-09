@@ -2,7 +2,7 @@ namespace PawFinderModel;
 
 public class Like
 {
-    public int LikerOneID { get; set; }
-    public int LikerTwoID { get; set; }
+    public int LikerID { get; set; }
+    public int LikedID { get; set; }
     
 }

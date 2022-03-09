@@ -13,15 +13,13 @@ public class SQLRepository : IRepository
     public User RegisterUser(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userID, @userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
+                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
-
-            command.Parameters.AddWithValue("@userID", p_user.UserID);
             command.Parameters.AddWithValue("@userName", p_user.UserName);
             command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
             command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
@@ -55,11 +53,12 @@ public class SQLRepository : IRepository
                 userList.Add(new User(){
                     UserID = reader.GetInt32(0), 
                     UserName = reader.GetString(1),
-                    UserPassword = reader.GetInt32(2),
+                    UserPassword = reader.GetString(2),
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6)
+                    UserSize = reader.GetString(6),
+                    Photo = GetPhotobyUserID(reader.GetInt32(0))
                 });
             }
         }
@@ -67,70 +66,205 @@ public class SQLRepository : IRepository
         return userList;
     }
 
-    public int CreateUserID()
+    public User GetUser(int UserID)
     {
-        int userID = 1000;
-
-        string sqlQuery = @"SELECT count(*) FROM Users";
-
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
             
             SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                userID += reader.GetInt32(0)*10;
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6)
+                });
             }
+            return Result;
+
         }
 
-        return userID;
     }
 
-    public int CreateConversationID()
+    public List<User> ViewMatchedUser(int UserID)
     {
-        int conversationID = 20000;
+        List<int> listOfMatchedUserID = new List<int>();
+        List<User> listOfMatchedUser = new List<User>();
 
-        string sqlQuery = @"SELECT count(*) FROM ChatMessage";
-
+        string sqlQuery = @"SELECT * FROM MATCHEDUSERS WHERE userID1 = @userID or userID2 = @userID";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
             
             SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                conversationID += reader.GetInt32(0)*10+10;
+                if(reader.GetInt32(1) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(2));
+                }
+                else if(reader.GetInt32(2) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(1));
+                }
             }
-        }
+            
+            foreach(var ID in listOfMatchedUserID)
+            {
+                listOfMatchedUser.Add(GetUser(ID));
+            }
 
-        return conversationID;
+            return listOfMatchedUser;
+        }
     }
 
-    public int CreatePictureID()
+    public List<Message> GetConversation(int UserID1, int UserID2)
     {
-        int pictureID = 300000;
-
-        string sqlQuery = @"SELECT count(*) FROM Pictures";
-
+        List<Message> Result = new List<Message>();
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE userID1 = @userID1 or userID2 = @userID1 or userID1 = @userID2 or userID2 = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
             
             SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID1", UserID1);
+            command.Parameters.AddWithValue("@userID2", UserID2);
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                pictureID += reader.GetInt32(0)*10+10;
+                Result.Add(new Message(){
+                    messageID = reader.GetInt32(0),
+                    SenderID = reader.GetInt32(1),
+                    ReceiverID = reader.GetInt32(2),
+                    messageText = reader.GetString(3),
+                    messageTimeStamp = reader.GetDateTime(4)
+                });
             }
-        }
 
-        return pictureID;
+        return Result;
+        }
     }
 
+    public User UpdateUser(User p_user)
+    {
+        User Result = new User();
+        string sqlQuery = @"Update User set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize where userID = @userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userName", p_user.UserName);
+            command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
+            command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
+            command.Parameters.AddWithValue("@userBio", p_user.UserBio);
+            command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
+            command.Parameters.AddWithValue("@userSize", p_user.UserSize);
+
+            command.Parameters.AddWithValue("@userID", p_user.UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6)
+                });
+            }
+            return Result;
+        }
+    }
+
+    public Message AddMessage(Message message)
+    {
+        string sqlQuery = @"INSERT INTO ChatMessage
+                            VALUES(@senderID,@receiverID,@messageText, @messageTimeStamp)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@senderID", message.SenderID);
+            command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
+            command.Parameters.AddWithValue("@messagetext", message.messageText);
+            command.Parameters.AddWithValue("@messagetext", DateTime.Now);
+
+            command.ExecuteNonQuery();
+
+        }
+
+        return message;
+    }
+
+    public void AddPhoto(string p_fileName, int p_userID)
+    {
+        string sqlQuery = @"INSERT INTO Photos
+                            VALUES(@fileName, @userID);
+                            SELECT SCOPE_IDENTITY();";
+        
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@fileName", p_fileName);
+            command.Parameters.AddWithValue("@userID", p_userID);
+
+            int p_photoID = Convert.ToInt32(command.ExecuteScalar());
+
+            command.ExecuteNonQuery();
+        }
+    }
+
+    public List<Photo> GetPhotobyUserID(int p_userID)
+    {
+        List<Photo> listofPhoto = new List<Photo>();
+
+        string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
+                            WHERE p.userID = 1";
+        
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", p_userID);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listofPhoto.Add(new Photo()
+                {
+                    photoID = reader.GetInt32(0),
+                    fileName = reader.GetString(1),
+                    userID = reader.GetInt32(2),
+                });
+            }
+        }
+        return listofPhoto;
+    }
 }
+
+    
+

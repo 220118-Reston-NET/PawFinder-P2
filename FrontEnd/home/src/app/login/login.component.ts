@@ -13,8 +13,11 @@ export class LoginComponent implements OnInit {
 
   show:boolean = false;
 
+  constructor() { }
+
   ngOnInit(): void {
   }
+
 
   showPassword()
   {

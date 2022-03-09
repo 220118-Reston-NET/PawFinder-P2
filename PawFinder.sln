@@ -3,6 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{C2A7A4BC-4837-4343-86D5-1037BAB7C827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderAPI", "Backend\PawFinderAPi\PawFinderAPI.csproj", "{37EB2348-C5DB-428A-9598-0453E9577486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderBL", "Backend\PawFinderBL\PawFinderBL.csproj", "{42C13EED-8936-46FB-8504-8177EC41B481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderDL", "Backend\PawFinderDL\PawFinderDL.csproj", "{AE6CF2EE-3E77-485C-8DBB-00C08F8A3ABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderModel", "Backend\PawFinderModel\PawFinderModel.csproj", "{209B4D95-90A5-477F-A98C-461630AC534A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawFinderTest", "Backend\PawFinderTest\PawFinderTest.csproj", "{9EFCED1D-C851-4A2A-9877-C612A3B147B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +22,34 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37EB2348-C5DB-428A-9598-0453E9577486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EB2348-C5DB-428A-9598-0453E9577486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EB2348-C5DB-428A-9598-0453E9577486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EB2348-C5DB-428A-9598-0453E9577486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C13EED-8936-46FB-8504-8177EC41B481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42C13EED-8936-46FB-8504-8177EC41B481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42C13EED-8936-46FB-8504-8177EC41B481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42C13EED-8936-46FB-8504-8177EC41B481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE6CF2EE-3E77-485C-8DBB-00C08F8A3ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6CF2EE-3E77-485C-8DBB-00C08F8A3ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6CF2EE-3E77-485C-8DBB-00C08F8A3ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6CF2EE-3E77-485C-8DBB-00C08F8A3ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209B4D95-90A5-477F-A98C-461630AC534A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209B4D95-90A5-477F-A98C-461630AC534A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209B4D95-90A5-477F-A98C-461630AC534A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209B4D95-90A5-477F-A98C-461630AC534A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EFCED1D-C851-4A2A-9877-C612A3B147B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EFCED1D-C851-4A2A-9877-C612A3B147B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EFCED1D-C851-4A2A-9877-C612A3B147B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EFCED1D-C851-4A2A-9877-C612A3B147B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37EB2348-C5DB-428A-9598-0453E9577486} = {C2A7A4BC-4837-4343-86D5-1037BAB7C827}
+		{42C13EED-8936-46FB-8504-8177EC41B481} = {C2A7A4BC-4837-4343-86D5-1037BAB7C827}
+		{AE6CF2EE-3E77-485C-8DBB-00C08F8A3ABE} = {C2A7A4BC-4837-4343-86D5-1037BAB7C827}
+		{209B4D95-90A5-477F-A98C-461630AC534A} = {C2A7A4BC-4837-4343-86D5-1037BAB7C827}
+		{9EFCED1D-C851-4A2A-9877-C612A3B147B1} = {C2A7A4BC-4837-4343-86D5-1037BAB7C827}
 	EndGlobalSection
 EndGlobal
