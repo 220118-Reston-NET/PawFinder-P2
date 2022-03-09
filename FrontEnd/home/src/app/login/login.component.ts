@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Users } from '../models/users.model';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +16,12 @@ export class LoginComponent implements OnInit {
 
   show:boolean = false;
 
+  userGroup = new FormGroup({
+
+  })
+
+  constructor() { }
+
   ngOnInit(): void {
   }
 
@@ -21,20 +30,32 @@ export class LoginComponent implements OnInit {
     this.show = !this.show;
   } 
 
-  switchBetweenLoginAndSignUp()
+  checkUser(p_userGroup:FormGroup)
   {
-    if(this.loginSignUpHeading === "Login:")
+    if(this.loginOrRegister === "Login:")
     {
-      this.loginSignUpHeading = "Sign Up:";
-      this.newOrExistingUser = "Already have an account?";
-      this.loginOrRegister = "Back to Login Page";
+      
+      // let user:Users =
+      // {
+      //   userID: 0,
+      //   userName: p_userGroup.get("userName")?.value,
+      //   userPassword: p_userGroup.get("password")?.value,
+      //   userBio: "",
+      //   userBreed: "",
+      //   userSize: 0
+      // }
+
+    }
+    else if(this.loginOrRegister === "Sign Up:")
+    {
+      console.log("User is signing up!");
     }
     else
     {
-      this.loginSignUpHeading = "Login:";
-      this.newOrExistingUser = "Don't have an account?";
-      this.loginOrRegister = "Create an Account";
+      //something is wrong and for some reason loginOrRegister does not have correct value.
+      throwError;
     }
   }
+
 
 }
