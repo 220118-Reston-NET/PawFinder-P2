@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
+import { FormGroup,FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";    
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+
+
+export class LoginComponent {
+ 
 
   loginSignUpHeading:String = "Login:"
   newOrExistingUser:String = "Don't have an account?"
@@ -15,9 +20,22 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
+ 
+    public input: any;
+
+
+    constructor( private router: Router) {
+        this.input = {
+            "email": "",
+            "password": ""
+        };
+    }
+
+    Login()
+    {
+      this.router.navigate(["/login"]);
+    }
 
   showPassword()
   {
@@ -41,3 +59,4 @@ export class LoginComponent implements OnInit {
   }
 
 }
+

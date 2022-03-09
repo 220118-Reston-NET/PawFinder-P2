@@ -1,0 +1,26 @@
+
+<h1>{{title}}</h1>
+
+<!-- <img [src]="src1"> -->
+<div class=" ">
+    
+        <ul>
+            <li>userName</li>
+            <li>UserBio</li>
+            <li [ngStyle]="{color:isVisible ? 'black': 'red'}">
+                Image
+                <button (click)="changeVisible()" class="btn btn-primary">Hide</button>
+            </li>
+        </ul>
+    <div>
+        <ul *ngFor="let user of filteredListOfUser">
+            <li>{{user.userName}}</li>
+            <li>{{user.userName | uppercase}}</li>
+            <!-- <li>{{user.Bio}}</li> -->
+            <li><app-like></app-like></li>
+            <li>
+                <!-- <img *ngIf="isVisible" [src] = "user.sprites.front_default"> -->
+            </li>
+        </ul>
+    </div>
+</div>
