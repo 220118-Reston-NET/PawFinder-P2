@@ -1,6 +1,10 @@
 using Xunit;
 using PawFinderModel;
 using System;
+using System.Collections.Generic;
+using PawFinderDL;
+using PawFinderBL;
+using Moq;
 
 namespace PawFinderTest;
 
@@ -79,6 +83,48 @@ public class UserTest
         Assert.NotNull(newUser.UserDOB);
         Assert.Equal(userDOB, newUser.UserDOB);
 
+    }
+
+    [Fact]
+    public void GetAllUsers()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+
+
+        User newOrder = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+
+
+        };
+
+        List<User> expectedList = new List<User>();
+        expectedList.Add(newOrder);
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(expectedList);
+
+        IUserBL costumerBL = new UserBL(mockRepo.Object);
+
+        //Act
+        List<User> actualList = costumerBL.GetAllUsers();
+
+        //Assert
+        Assert.Equal(expectedList, actualList);
     }
     
 }
