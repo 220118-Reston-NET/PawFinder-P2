@@ -4,6 +4,7 @@ namespace PawFinderBL;
 
 public interface IUserBL
 {
+  
     List<User> GetAllUsers();
     User RegisterUser(User p_user);
     List<User> SearchUser(string p_name);
