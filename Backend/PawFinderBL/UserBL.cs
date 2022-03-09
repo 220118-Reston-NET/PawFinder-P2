@@ -132,12 +132,12 @@ public class UserBL : IUserBL
 
     public async Task<User> UpdateUserAsync(User user)
     {
-        return await UpdateUserAsync(user);
+        return await _repo.UpdateUserAsync(user);
     }
 
     public async Task<Message> AddMessageAsync(Message message)
     {
-        return await AddMessageAsync(message);
+        return await _repo.AddMessageAsync(message);
     }
 
     public async void AddPhotoAsync(string p_fileName, int p_userID)
