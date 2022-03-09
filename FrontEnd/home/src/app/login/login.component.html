@@ -1,0 +1,7 @@
+<form style="margin-left:40%; border-width: 10px solid;">
+    <label for="email">Email:</label><br />
+    <input type="email" name="email" placeholder="Email" [(ngModel)]="input.email" /><br />
+    <label for="password">Password:</label><br />
+    <input type="password" name="password" placeholder="Password" [(ngModel)]="input.password" /><br />
+    <a [routerLink]="['/registor']">Register</a><button type="button" style="margin:2rem;" class="btn btn-outline-primary " (click)="Login()">Login</button>
+</form>
