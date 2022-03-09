@@ -39,8 +39,6 @@ public class UserBL : IUserBL
         {
             return _repo.RegisterUser(p_user);
         }
-
-
     }
 
     public List<User> SearchUser(string p_name)
@@ -63,6 +61,7 @@ public class UserBL : IUserBL
         return _repo.GetConversation(UserID1, UserID2);
     }
 
+
     private string GenerateFileName(string fileName, string userName)
     {
         try
@@ -78,9 +77,16 @@ public class UserBL : IUserBL
         {
             return fileName;
         }
+     }
+
+    public User UpdateUser(User user)
+    {
+        return _repo.UpdateUser(user);
     }
 
-
-
+    public Message AddMessage(Message message)
+    {
+        return _repo.AddMessage(message);
+    }
 
 }
