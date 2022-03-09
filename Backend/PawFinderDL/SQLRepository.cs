@@ -57,7 +57,8 @@ public class SQLRepository : IRepository
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6)
+                    UserSize = reader.GetString(6),
+                    Photo = GetPhotobyUserID(reader.GetInt32(0))
                 });
             }
         }
@@ -214,4 +215,56 @@ public class SQLRepository : IRepository
 
         return message;
     }
+
+    public void AddPhoto(string p_fileName, int p_userID)
+    {
+        string sqlQuery = @"INSERT INTO Photos
+                            VALUES(@fileName, @userID);
+                            SELECT SCOPE_IDENTITY();";
+        
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@fileName", p_fileName);
+            command.Parameters.AddWithValue("@userID", p_userID);
+
+            int p_photoID = Convert.ToInt32(command.ExecuteScalar());
+
+            command.ExecuteNonQuery();
+        }
+    }
+
+    public List<Photo> GetPhotobyUserID(int p_userID)
+    {
+        List<Photo> listofPhoto = new List<Photo>();
+
+        string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
+                            WHERE p.userID = 1";
+        
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", p_userID);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listofPhoto.Add(new Photo()
+                {
+                    photoID = reader.GetInt32(0),
+                    fileName = reader.GetString(1),
+                    userID = reader.GetInt32(2),
+                });
+            }
+        }
+        return listofPhoto;
+    }
 }
+
+    
+

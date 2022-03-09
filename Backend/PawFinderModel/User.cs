@@ -10,14 +10,14 @@ public class User
     public string UserBreed { get; set; }
     public string UserSize { get; set; }
     private List<Photo> _photos;
-        public List<Photo> Photo
+    public List<Photo> Photo
+    {
+        get { return _photos; }
+        set 
         {
-            get { return _photos; }
-            set 
-            {
-                _photos = value;
-            }
+            _photos = value;
         }
+    }
 
 
 }

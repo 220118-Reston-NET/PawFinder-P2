@@ -12,5 +12,7 @@ public interface IUserBL
     List<Message> GetConversation(int UserID1, int UserID2);
     User UpdateUser(User user);
     Message AddMessage(Message message);
+    void AddPhoto(string p_fileName, int p_userID);
+    List<Photo> GetPhotobyUserID(int p_userID);
     
 }

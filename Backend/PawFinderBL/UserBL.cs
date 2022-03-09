@@ -73,7 +73,7 @@ public class UserBL : IUserBL
                 strName[strName.Length - 1];
             return strFileName;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return fileName;
         }
@@ -87,6 +87,16 @@ public class UserBL : IUserBL
     public Message AddMessage(Message message)
     {
         return _repo.AddMessage(message);
+    }
+
+    public void AddPhoto(string p_fileName, int p_userID)
+    {
+        _repo.AddPhoto(p_fileName, p_userID);
+    }
+
+    public List<Photo> GetPhotobyUserID(int p_userID)
+    {
+        return _repo.GetPhotobyUserID(p_userID);
     }
 
 }

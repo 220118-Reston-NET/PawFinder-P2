@@ -11,5 +11,7 @@ public interface IRepository
 
     User UpdateUser(User p_user);
     Message AddMessage(Message message);
+    void AddPhoto(string p_fileName, int p_userID);
+    List<Photo> GetPhotobyUserID(int p_userID);
 
 }
