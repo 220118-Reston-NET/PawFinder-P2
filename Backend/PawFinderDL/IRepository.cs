@@ -6,7 +6,12 @@ public interface IRepository
 {
     User RegisterUser(User p_user);
     List<User> GetAllUsers();
-    int CreateUserID();
-    int CreateConversationID();
+    List<User> ViewMatchedUser(int UserID);
+    List<Message> GetConversation(int UserID1, int UserID2);
+
+    User UpdateUser(User p_user);
+    Message AddMessage(Message message);
+    void AddPhoto(string p_fileName, int p_userID);
+    List<Photo> GetPhotobyUserID(int p_userID);
 
 }

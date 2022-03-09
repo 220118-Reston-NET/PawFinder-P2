@@ -19,6 +19,7 @@ import { UserComponent } from './user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PassComponent,
     ChatComponent,
     UserComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
