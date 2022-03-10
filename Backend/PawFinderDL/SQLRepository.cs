@@ -13,7 +13,7 @@ public class SQLRepository : IRepository
     public User RegisterUser(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize, @photoURl)";
+                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize, @photoURL)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -162,7 +162,9 @@ public class SQLRepository : IRepository
     public User UpdateUser(User p_user)
     {
         User Result = new User();
-        string sqlQuery = @"Update User set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize, photoURL = @photoURL where userID = @userID";
+        string sqlQuery = @"Update Users 
+                        set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize, photoURL = @photoURL 
+                        where userID = @userID";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -222,7 +224,7 @@ public class SQLRepository : IRepository
     public async Task<User> RegisterUserAsync(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
+                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize, @photoURL)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -370,7 +372,9 @@ public class SQLRepository : IRepository
     public async Task<User> UpdateUserAsync(User p_user)
     {
         User Result = new User();
-        string sqlQuery = @"Update User set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize where userID = @userID";
+        string sqlQuery = @"Update Users 
+                        set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize, photoURL = @photoURL 
+                        where userID = @userID";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {

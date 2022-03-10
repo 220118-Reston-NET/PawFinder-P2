@@ -190,7 +190,7 @@ namespace PawFinderAPI.Controllers
 
         // PUT: api/PawFinder
         [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUserAsync(int UserID, [FromBody] User p_user)
+        public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
         {
             try
             {
