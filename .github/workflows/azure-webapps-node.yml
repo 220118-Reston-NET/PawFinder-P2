@@ -34,6 +34,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: 'Angular'
     steps:
     - uses: actions/checkout@v2
 
@@ -48,10 +50,11 @@ jobs:
         npm run build --prod
       working-directory: ./FrontEnd/home
 
-    - name: 'Deploy to Azure WebApp'
+    - name: Deploy
       uses: azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        app-name: PawFinderWebAppFE
+        slot-name: 'Angular'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: ./Frontend/home/dist/home
         
