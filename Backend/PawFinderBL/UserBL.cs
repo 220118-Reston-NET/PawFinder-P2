@@ -75,22 +75,22 @@ public class UserBL : IUserBL
     }
 
 
-    public string GenerateFileName(string fileName, string userName)
-    {
-        try
-        {
-            string strFileName = string.Empty;
-            string[] strName = fileName.Split('.');
-            strFileName = userName + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd") + "/"
-                + DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." +
-                strName[strName.Length - 1];
-            return strFileName;
-        }
-        catch (Exception)
-        {
-            return fileName;
-        }
-     }
+    // public string GenerateFileName(string fileName, string userName)
+    // {
+    //     try
+    //     {
+    //         string strFileName = string.Empty;
+    //         string[] strName = fileName.Split('.');
+    //         strFileName = userName + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd") + "/"
+    //             + DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." +
+    //             strName[strName.Length - 1];
+    //         return strFileName;
+    //     }
+    //     catch (Exception)
+    //     {
+    //         return fileName;
+    //     }
+    // }
 
     public User UpdateUser(User user)
     {
@@ -100,16 +100,6 @@ public class UserBL : IUserBL
     public Message AddMessage(Message message)
     {
         return _repo.AddMessage(message);
-    }
-
-    public Photo AddPhoto(Photo p_photo)
-    {
-        return _repo.AddPhoto(p_photo);
-    }
-
-    public List<Photo> GetPhotobyUserID(int p_userID)
-    {
-        return _repo.GetPhotobyUserID(p_userID);
     }
 
     public List<User> GetPotentialMatch(User p_user)
@@ -228,16 +218,6 @@ public class UserBL : IUserBL
     public async Task<Message> AddMessageAsync(Message message)
     {
         return await _repo.AddMessageAsync(message);
-    }
-
-    public async Task<Photo> AddPhotoAsync(Photo p_photo)
-    {
-       return await _repo.AddPhotoAsync(p_photo);
-    }
-
-    public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
-    {
-        return await _repo.GetPhotobyUserIDAsync(p_userID);
     }
 
     public async Task<List<User>> GetPotentialMatchAsync(User p_user)

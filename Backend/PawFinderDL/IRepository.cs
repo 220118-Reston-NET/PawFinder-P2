@@ -9,11 +9,8 @@ public interface IRepository
     User GetUser(int UserID);
     List<User> ViewMatchedUser(int UserID);
     List<Message> GetConversation(int UserID1, int UserID2);
-
     User UpdateUser(User p_user);
     Message AddMessage(Message message);
-    Photo AddPhoto(Photo p_photo);
-    List<Photo> GetPhotobyUserID(int p_userID);
 
 
 
@@ -23,9 +20,7 @@ public interface IRepository
     Task<User> GetUserAsync(int UserID);
     Task<List<User>> ViewMatchedUserAsync(int UserID);
     Task<List<Message>> GetConversationAsync(int UserID1, int UserID2);
-
     Task<User> UpdateUserAsync(User p_user);
     Task<Message> AddMessageAsync(Message message);
-    Task<Photo> AddPhotoAsync(Photo p_photo);
-    Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
+
 }

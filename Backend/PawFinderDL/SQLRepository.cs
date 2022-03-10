@@ -13,7 +13,7 @@ public class SQLRepository : IRepository
     public User RegisterUser(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
+                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize, @photoURl)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -26,7 +26,7 @@ public class SQLRepository : IRepository
             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
-
+            command.Parameters.AddWithValue("@photoURL", p_user.photoURL);
 
             command.ExecuteNonQuery();
 
@@ -58,7 +58,7 @@ public class SQLRepository : IRepository
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
                     UserSize = reader.GetString(6),
-                    Photo = GetPhotobyUserID(reader.GetInt32(0))
+                    photoURL = reader.GetString(7)
                 });
             }
         }
@@ -87,7 +87,8 @@ public class SQLRepository : IRepository
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6)
+                    UserSize = reader.GetString(6),
+                    photoURL = reader.GetString(7)
                 });
             }
             return Result;
@@ -161,7 +162,7 @@ public class SQLRepository : IRepository
     public User UpdateUser(User p_user)
     {
         User Result = new User();
-        string sqlQuery = @"Update User set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize where userID = @userID";
+        string sqlQuery = @"Update User set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize, photoURL = @photoURL where userID = @userID";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -173,6 +174,7 @@ public class SQLRepository : IRepository
             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
+            command.Parameters.AddWithValue("@photoURL", p_user.photoURL);
 
             command.Parameters.AddWithValue("@userID", p_user.UserID);
             SqlDataReader reader = command.ExecuteReader();
@@ -186,7 +188,8 @@ public class SQLRepository : IRepository
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6)
+                    UserSize = reader.GetString(6),
+                    photoURL = reader.GetString(7)
                 });
             }
             return Result;
@@ -215,58 +218,6 @@ public class SQLRepository : IRepository
         return message;
     }
 
-    public Photo AddPhoto(Photo p_photo)
-    {
-        string sqlQuery = @"INSERT INTO Photos
-                            VALUES(@fileName, @userID);
-                            SELECT SCOPE_IDENTITY();";
-        
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
-
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@fileName", p_photo.fileName);
-            command.Parameters.AddWithValue("@userID", p_photo.userID);
-
-            int p_photoID = Convert.ToInt32(command.ExecuteScalar());
-
-            command.ExecuteNonQuery();
-        }
-        return p_photo;
-    }
-
-    public List<Photo> GetPhotobyUserID(int p_userID)
-    {
-        List<Photo> listofPhoto = new List<Photo>();
-
-        string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
-                            WHERE p.userID = 1";
-        
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
-
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", p_userID);
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                listofPhoto.Add(new Photo()
-                {
-                    photoID = reader.GetInt32(0),
-                    fileName = reader.GetString(1),
-                    userID = reader.GetInt32(2),
-                });
-            }
-        }
-        return listofPhoto;
-    }
-
-
-
     //Async versions of functions=================================================================
     public async Task<User> RegisterUserAsync(User p_user)
     {
@@ -284,7 +235,7 @@ public class SQLRepository : IRepository
             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
-
+            command.Parameters.AddWithValue("@photoURL", p_user.photoURL);
 
             await command.ExecuteNonQueryAsync();
 
@@ -315,7 +266,7 @@ public class SQLRepository : IRepository
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
                     UserSize = reader.GetString(6),
-                    Photo = GetPhotobyUserID(reader.GetInt32(0))
+                    photoURL = reader.GetString(7)
                 });
             }
         }
@@ -344,7 +295,8 @@ public class SQLRepository : IRepository
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6)
+                    UserSize = reader.GetString(6),
+                    photoURL = reader.GetString(7)
                 });
             }
             return Result;
@@ -430,6 +382,7 @@ public class SQLRepository : IRepository
             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
+            command.Parameters.AddWithValue("@photoURL", p_user.photoURL);
 
             command.Parameters.AddWithValue("@userID", p_user.UserID);
             SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -443,7 +396,8 @@ public class SQLRepository : IRepository
                     UserDOB = reader.GetDateTime(3),
                     UserBio = reader.GetString(4),
                     UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6)
+                    UserSize = reader.GetString(6),
+                    photoURL = reader.GetString(7)
                 });
             }
             return Result;
@@ -470,56 +424,6 @@ public class SQLRepository : IRepository
         }
 
         return message;
-    }
-
-    public async Task<Photo> AddPhotoAsync(Photo p_photo)
-    {
-        string sqlQuery = @"INSERT INTO Photos
-                            VALUES(@fileName, @userID);
-                            SELECT SCOPE_IDENTITY();";
-        
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@fileName", p_photo.fileName);
-            command.Parameters.AddWithValue("@userID", p_photo.userID);
-
-            int p_photoID = Convert.ToInt32(command.ExecuteScalar());
-
-            await command.ExecuteNonQueryAsync();
-        }
-        return p_photo;
-    }
-
-    public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
-    {
-        List<Photo> listofPhoto = new List<Photo>();
-
-        string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
-                            WHERE p.userID = 1";
-        
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", p_userID);
-
-            SqlDataReader reader = await command.ExecuteReaderAsync();
-
-            while (reader.Read())
-            {
-                listofPhoto.Add(new Photo()
-                {
-                    photoID = reader.GetInt32(0),
-                    fileName = reader.GetString(1),
-                    userID = reader.GetInt32(2),
-                });
-            }
-        }
-        return listofPhoto;
     }
 }
 
