@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,14 +9,17 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, public nav: NavbarService) { }
 
   ngOnInit(): void {
   }
+
   goToProfile()
   {
      this.router.navigate(["/profile"]);
   }
+
+  
 
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PawfinderService } from './../services/pawfinder.service';
 import { Users } from './../models/users.model';
 import { ActivatedRoute} from '@angular/router';
+import { NavbarService } from '../services/navbar.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
  userName:string | null = "No users Selected";
 // Users:PawfinderApi;
  Users: any;
-  constructor(private router:ActivatedRoute , private PawService:PawfinderService) {
+  constructor(private router:ActivatedRoute , private PawService:PawfinderService, public nav: NavbarService) {
     this.Users={ sprites: {
       back_default:"",
       back_shiny:"",
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
     // this.PawService.getAllUsers(this.userName).subscribe(result=>{
     //   this.Users=result;
     // });
+    this.nav.show();
   }
   matchColorPinck()
   {

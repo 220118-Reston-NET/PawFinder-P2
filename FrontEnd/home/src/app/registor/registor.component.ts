@@ -2,6 +2,7 @@ import { Users } from './../models/users.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component} from '@angular/core';
 import { Router } from "@angular/router";
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-registor',
@@ -11,6 +12,13 @@ import { Router } from "@angular/router";
 export class RegistorComponent {
   
   show:boolean = false;
+  
+  constructor(private router: Router, public nav: NavbarService) {
+  }
+
+  ngOnInit(): void {
+    this.nav.hide();
+  }
 
    registorFormGroup= new FormGroup({
             userID:new FormControl(""),
@@ -44,8 +52,6 @@ export class RegistorComponent {
     }
     // this.service.Add
 
-  }
-  constructor(private router: Router) {
   }
     Registor() 
     {
