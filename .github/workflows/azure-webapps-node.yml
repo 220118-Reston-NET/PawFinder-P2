@@ -56,5 +56,5 @@ jobs:
         app-name: PawFinderWebAppFE
         slot-name: 'Angular'
         publish-profile: ${{ secrets.PAWFINDER_WEB_APP_PUBLISH_PROFILE_FE}}
-        package: ./Frontend/home/dist/home
+        package: ./FrontEnd/home/dist/home
         
