@@ -330,6 +330,39 @@ public class UserTest
     }
 
     [Fact]
+    public void AddMessage()
+    {
+        //Arrange
+        int messageID = 123456;
+        int senderID = 1111;
+        int receiverID = 2222;
+        string messageText = "Message test string";
+        DateTime timeStamp = DateTime.Today;
+
+        Message expectedMessage = new Message()
+        {
+            messageID = messageID,
+            SenderID = senderID,
+            ReceiverID = receiverID,
+            messageText = messageText,
+            messageTimeStamp = timeStamp
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.AddMessage(expectedMessage)).Returns(expectedMessage);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        Message actualMessage = userBL.AddMessage(expectedMessage);
+
+        //Assert
+        Assert.Equal(expectedMessage, actualMessage);
+    }
+
+    [Fact]
     public async Task GetAllUsersAsync()
     {
         //Arrange
@@ -410,8 +443,8 @@ public class UserTest
         Assert.Equal(expectedUser, actualUser);
     }
 
-        [Fact]
-    public async void RegisterUserAsync()
+    [Fact]
+    public async Task RegisterUserAsync()
     {
         //Arrange
         int userID = 1111;
@@ -448,6 +481,156 @@ public class UserTest
 
         //Assert
         Assert.Equal(expectedUser, actualUser);
+    }
+
+    [Fact]
+    public async Task ViewMatchedUserAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+        string photoURL = "test.com";
+
+
+        User newUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+        List<User> expectedList = new List<User>();
+        expectedList.Add(newUser);
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.ViewMatchedUserAsync(1111)).ReturnsAsync(expectedList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        List<User> actualList = await userBL.ViewMatchedUserAsync(1111);
+
+        //Assert
+        Assert.Equal(expectedList, actualList);
+    }
+
+    public async Task UpdateUserAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+        string photoURL = "test.com";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.UpdateUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.UpdateUserAsync(expectedUser);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+
+    [Fact]
+    public async Task GetConversationAsync()
+    {
+        //Arrange
+        int messageID = 123456;
+        int senderID = 1111;
+        int receiverID = 2222;
+        string messageText = "Message test string";
+        DateTime timeStamp = DateTime.Today;
+
+        Message newMessage = new Message()
+        {
+            messageID = messageID,
+            SenderID = senderID,
+            ReceiverID = receiverID,
+            messageText = messageText,
+            messageTimeStamp = timeStamp
+        };
+
+
+        List<Message> expectedList = new List<Message>();
+        expectedList.Add(newMessage);
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.GetConversationAsync(1111,2222)).ReturnsAsync(expectedList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        List<Message> actualList = await userBL.GetConversationAsync(1111,2222);
+
+        //Assert
+        Assert.Equal(expectedList, actualList);
+    }
+
+    [Fact]
+    public async Task AddMessageAsync()
+    {
+        //Arrange
+        int messageID = 123456;
+        int senderID = 1111;
+        int receiverID = 2222;
+        string messageText = "Message test string";
+        DateTime timeStamp = DateTime.Today;
+
+        Message expectedMessage = new Message()
+        {
+            messageID = messageID,
+            SenderID = senderID,
+            ReceiverID = receiverID,
+            messageText = messageText,
+            messageTimeStamp = timeStamp
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.AddMessageAsync(expectedMessage)).ReturnsAsync(expectedMessage);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        Message actualMessage = await userBL.AddMessageAsync(expectedMessage);
+
+        //Assert
+        Assert.Equal(expectedMessage, actualMessage);
     }
     
 }
