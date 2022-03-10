@@ -53,38 +53,38 @@ namespace PawFinderAPI.Controllers
             
         }
 
-        // POST: api/PawFinder
-        [HttpPost("UploadPhoto")]
-        public async Task<IActionResult> UploadPhoto(string UserName, [FromForm] string p_filename, IFormFile file)
-        {
-            try
-            {
-                var filename = _userBL.GenerateFileName(p_filename, UserName);
-                var fileUrl = "";
-                BlobContainerClient container = new BlobContainerClient("ConnectionString", "ContainerName");
+        // // POST: api/PawFinder
+        // [HttpPost("UploadPhoto")]
+        // public async Task<IActionResult> UploadPhoto(string UserName, [FromForm] string p_filename, IFormFile file)
+        // {
+        //     try
+        //     {
+        //         var filename = _userBL.GenerateFileName(p_filename, UserName);
+        //         var fileUrl = "";
+        //         BlobContainerClient container = new BlobContainerClient("ConnectionString", "ContainerName");
             
-                BlobClient blob = container.GetBlobClient(filename);
-                using (Stream stream = file.OpenReadStream())
-                {
-                    blob.Upload(stream);
-                }
-                fileUrl = blob.Uri.AbsoluteUri;
+        //         BlobClient blob = container.GetBlobClient(filename);
+        //         using (Stream stream = file.OpenReadStream())
+        //         {
+        //             blob.Upload(stream);
+        //         }
+        //         fileUrl = blob.Uri.AbsoluteUri;
                 
-                List<User> user = await _userBL.SearchUserAsync(UserName);
-                Photo _photo = new Photo();
-                foreach (var item in user)
-                {
-                    _photo.userID = item.UserID;
-                    _photo.fileName = fileUrl;
-                }
-                return Created("Successfully added photo", _userBL.AddPhoto(_photo));
+        //         List<User> user = await _userBL.SearchUserAsync(UserName);
+        //         Photo _photo = new Photo();
+        //         foreach (var item in user)
+        //         {
+        //             _photo.userID = item.UserID;
+        //             _photo.fileName = fileUrl;
+        //         }
+        //         return Created("Successfully added photo", _userBL.AddPhoto(_photo));
                 
-            }
-            catch (System.Exception ex)
-            { 
-               return StatusCode(422, ex.Message);
-            }
-        }
+        //     }
+        //     catch (System.Exception ex)
+        //     { 
+        //        return StatusCode(422, ex.Message);
+        //     }
+        // }
 
         // GET: api/PawFinder/2
         [HttpGet("GetUser")]
@@ -134,18 +134,18 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
-        // GET: api/PawFinder/5
-        [HttpGet("GetPhotoByUserID")]
-        public async Task<IActionResult> GetPhotoByUserIDAsync([FromQuery] int userID)
+        // GET: api/PawFinder/4
+        [HttpGet("GetPotentialMatch")]
+        public async Task<IActionResult> GetPotentialMatchAsync([FromBody] User p_user)
         {
             try
             {
-                Log.Information("Successfully returned the photo with userID");
-                return Ok(await _userBL.GetPhotobyUserIDAsync(userID));
+                Log.Information("Successfully returned conversation between users.");
+                return Ok(await _userBL.GetPotentialMatchAsync(p_user));
             }
             catch (SqlException)
             {
-                Log.Warning("Could not find photo in the database.");
+                Log.Warning("Could not find an existing conversation between users.");
                 return NotFound();
             } 
         }
@@ -214,13 +214,6 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
-
-
     }
-        // // DELETE: api/PawFinder/5
-        // [HttpDelete("{id}")]
-        // public void Delete(int id)
-        // {
-        // }
 }
 

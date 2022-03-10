@@ -11,11 +11,10 @@ public interface IUserBL
     List<User> SearchUser(string p_name);
     List<User> ViewMatchedUser(int userID);
     List<Message> GetConversation(int UserID1, int UserID2);
-    string GenerateFileName(string fileName, string userName);
+    
+    // string GenerateFileName(string fileName, string userName);
     User UpdateUser(User user);
     Message AddMessage(Message message);
-    Photo AddPhoto(Photo p_photo);
-    List<Photo> GetPhotobyUserID(int p_userID);
     List<User> GetPotentialMatch(User p_user);
 
     //Async version functions
@@ -27,9 +26,6 @@ public interface IUserBL
     Task<List<Message>> GetConversationAsync(int UserID1, int UserID2);
     Task<User> UpdateUserAsync(User user);
     Task<Message> AddMessageAsync(Message message);
-    Task<Photo> AddPhotoAsync(Photo p_user);
-    Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
-
     Task<List<User>> GetPotentialMatchAsync(User p_user);
 
 
