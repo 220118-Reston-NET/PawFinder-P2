@@ -1,1 +1,63 @@
-<p>chat</p>
+<h1>Chat room</h1>
+<div  class="chat-room">
+    <div>
+
+        <!-- Grid row -->
+        <div class="row px-lg-2 px-2">
+
+            <!-- Grid column -->
+            <div class="col-md-6 col-xl-4 px-0">
+
+                <h6 class="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
+                <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
+                    <ul class="list-unstyled friend-list">
+                        <li class="active grey lighten-3 p-2">
+                            <a routerLink="/Profile.UserID" class="d-flex justify-content-between">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.webp" alt="avatar"
+                                    class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                                <div class="text-small">
+                                    <h3>John Doe</h3>
+                                    <p class="last-message text-muted">Hello, Are you there?</p>
+                                </div>
+                                <div class="chat-footer">
+                                    <p class="text-smaller text-muted mb-0">Just now</p>
+                                    <!-- <mdb-badge danger="true" class="float-right">1</mdb-badge> -->
+                                </div>
+                            </a>
+                        </li>
+                        <li class="p-2">
+                            <a class="d-flex justify-content-between" routerLink="/Profile.UserID" >
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                                    class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                                <div class="text-small">
+                                    <strong>Danny Smith</strong>
+                                    <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                                </div>
+                                <div class="chat-footer">
+                                    <p class="text-smaller text-muted mb-0">5 min ago</p>
+                                    <span class="text-muted float-right">
+                                        <!-- <mdb-icon fas icon="reply" aria-hidden="true"></mdb-icon> -->
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="white">
+                        <div class="form-group basic-textarea">
+                            <textarea class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3"
+                                placeholder="Type your message here..."></textarea>
+                        </div>
+                    </div>
+                    <button type="button" mdbBtn color="pink" outline="true" rounded="true" size="sm"
+                        class="waves-effect waves-dark float-right">Send</button>
+
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+</div>

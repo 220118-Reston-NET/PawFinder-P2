@@ -1,37 +1,236 @@
-<!-- <div style ="margin-left: 40%;">
-<img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7" alt="">
-<h2>{{Users.userName}} UserName</h2> 
-<h4>{{Users.userBio}}userBio</h4> 
-<h4>{{Users.userBreed}}userBreed</h4>
-<h4>{{Users.userSize}}userSize</h4>
-</div> -->
-
+<ul>
+    <li>
 <div class="container d-flex justify-content-center align-items-center">
     <div class="card">
-         <div class="upper">
-             <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid" alt=""> 
-            </div>
-        <div class="user text-center">
-            <div class="profile"> <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7" class="rounded-circle" width="80" alt=""> 
+        <div class="upper">
+            <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
+        </div>
+        <div class="profile">
+            <div class="user text-center">
+                <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
+                    class="rounded-circle" width="220" alt="profile">
             </div>
         </div>
         <div class="mt-5 text-center">
-            <h4 class="mb-0">Benjamin Tims</h4> <span class="text-muted d-block mb-2">Los Angles</span> <button
-                class="btn btn-primary btn-sm follow">Follow</button>
-            <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+            <h2 class="mb-0">{{Users.userName}} UserName</h2>
+            <h4>{{Users.userBio}}userBio</h4>
+            <h4>{{Users.userBreed}}userBreed</h4>
+            <h4>{{Users.userSize}}userSize</h4>
+            <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
                 <div class="stats">
-                    <button class="mb-0">Match</button> <span>8,797</span>
-                </div>
-                <div class="stats">
-                    <h6 class="mb-0">Like</h6> <span>142</span>
-                </div>
-                <div class="stats">
-                    <h6 class="mb-0">Chat</h6> <span>129</span>
-                </div>
-                <div class="stats">
-                    <h6 class="mb-0">Pass</h6> <span>129</span>
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <button class="favorite styled btn-danger" type="button" data-toggle="popover"
+                                        title="Go-back" Back><i class="material-icons">arrow_back</i></button>
+                                </a>
+                            </li>
+                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                <a class="page-link" href="/FrontEnd/home/src/app/chat/chat.component.html" routLink="/chat" aria-label="Next">
+                                    <button class="favorite styled btn-success" type="button" data-toggle="popover"
+                                        title="Chat" chat><i class="material-icons">chat</i></button>
+                                </a>
+                            </li>
+                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                <a class="page-link" href="/FrontEnd/home//src/app/match/match.component.html" aria-label="Next">
+                                    <button class="favorite styled btn-primary" type="button" data-toggle="popover"
+                                        title="Match" match><i class="material-icons ">favorite</i></button>
+                                </a>
+                            </li>
+
+                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <button class="favorite styled btn-dark" type="button" data-toggle="popover"
+                                        title="Pass" pass><i class="material-icons">arrow_forward</i></button>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+</li>
+    <li>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="card">
+                <div class="upper">
+                    <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
+                </div>
+                <div class="profile">
+                    <div class="user text-center">
+                        <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
+                            class="rounded-circle" width="220" alt="profile">
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <h2 class="mb-0">{{Users.userName}} UserName</h2>
+                    <h4>{{Users.userBio}}userBio</h4>
+                    <h4>{{Users.userBreed}}userBreed</h4>
+                    <h4>{{Users.userSize}}userSize</h4>
+                    <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
+                        <div class="stats">
+    
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <button class="favorite styled btn-danger" type="button" data-toggle="popover"
+                                                title="Go-back" Back><i class="material-icons">arrow_back</i></button>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" href="/FrontEnd/home/src/app/chat/chat.component.html"
+                                            routLink="/chat" aria-label="Next">
+                                            <button class="favorite styled btn-success" type="button" data-toggle="popover"
+                                                title="Chat" chat><i class="material-icons">chat</i></button>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" href="/FrontEnd/home//src/app/match/match.component.html"
+                                            aria-label="Next">
+                                            <button class="favorite styled btn-primary" type="button" data-toggle="popover"
+                                                title="Match" match><i class="material-icons ">favorite</i></button>
+                                        </a>
+                                    </li>
+    
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <button class="favorite styled btn-dark" type="button" data-toggle="popover"
+                                                title="Pass" pass><i class="material-icons">arrow_forward</i></button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+    
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </li>
+        <li>
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="card">
+                    <div class="upper">
+                        <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
+                    </div>
+                    <div class="profile">
+                        <div class="user text-center">
+                            <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
+                                class="rounded-circle" width="220" alt="profile">
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <h2 class="mb-0">{{Users.userName}} UserName</h2>
+                        <h4>{{Users.userBio}}userBio</h4>
+                        <h4>{{Users.userBreed}}userBreed</h4>
+                        <h4>{{Users.userSize}}userSize</h4>
+                        <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
+                            <div class="stats">
+        
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <button class="favorite styled btn-danger" type="button" data-toggle="popover"
+                                                    title="Go-back" Back><i class="material-icons">arrow_back</i></button>
+                                            </a>
+                                        </li>
+                                        <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                            <a class="page-link" href="/FrontEnd/home/src/app/chat/chat.component.html"
+                                                routLink="/chat" aria-label="Next">
+                                                <button class="favorite styled btn-success" type="button" data-toggle="popover"
+                                                    title="Chat" chat><i class="material-icons">chat</i></button>
+                                            </a>
+                                        </li>
+                                        <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                            <a class="page-link" href="/FrontEnd/home//src/app/match/match.component.html"
+                                                aria-label="Next">
+                                                <button class="favorite styled btn-primary" type="button" data-toggle="popover"
+                                                    title="Match" match><i class="material-icons ">favorite</i></button>
+                                            </a>
+                                        </li>
+        
+                                        <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <button class="favorite styled btn-dark" type="button" data-toggle="popover"
+                                                    title="Pass" pass><i class="material-icons">arrow_forward</i></button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+        
+                            </div>
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </li>
+            <li>
+                <div class="container d-flex justify-content-center align-items-center">
+                    <div class="card">
+                        <div class="upper">
+                            <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
+                        </div>
+                        <div class="profile">
+                            <div class="user text-center">
+                                <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
+                                    class="rounded-circle" width="220" alt="profile">
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center">
+                            <h2 class="mb-0">{{Users.userName}} UserName</h2>
+                            <h4>{{Users.userBio}}userBio</h4>
+                            <h4>{{Users.userBreed}}userBreed</h4>
+                            <h4>{{Users.userSize}}userSize</h4>
+                            <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
+                                <div class="stats">
+            
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
+                                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <button class="favorite styled btn-danger" type="button" data-toggle="popover"
+                                                        title="Go-back" Back><i class="material-icons">arrow_back</i></button>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                                <a class="page-link" href="/FrontEnd/home/src/app/chat/chat.component.html"
+                                                    routLink="/chat" aria-label="Next">
+                                                    <button class="favorite styled btn-success" type="button" data-toggle="popover"
+                                                        title="Chat" chat><i class="material-icons">chat</i></button>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                                <a class="page-link" href="/FrontEnd/home//src/app/match/match.component.html"
+                                                    aria-label="Next">
+                                                    <button class="favorite styled btn-primary" type="button" data-toggle="popover"
+                                                        title="Match" match><i class="material-icons ">favorite</i></button>
+                                                </a>
+                                            </li>
+            
+                                            <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <button class="favorite styled btn-dark" type="button" data-toggle="popover"
+                                                        title="Pass" pass><i class="material-icons">arrow_forward</i></button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+            
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </li>
+</ul>

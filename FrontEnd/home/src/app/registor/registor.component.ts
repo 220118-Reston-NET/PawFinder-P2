@@ -20,6 +20,9 @@ export class RegistorComponent {
             
   });
   addUser(p_userGroup:FormGroup){
+    // if(p_userGroup.valid){
+
+    // }
     let user:Users=
     {
       userID:p_userGroup.get("userID")?.value,
