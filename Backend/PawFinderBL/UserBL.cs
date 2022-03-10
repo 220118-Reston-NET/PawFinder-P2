@@ -18,6 +18,14 @@ public class UserBL : IUserBL
 
     public User RegisterUser(User p_user)
     {
+        List<User> listOfAllUsers = _repo.GetAllUsers();
+        foreach(var U in listOfAllUsers)
+        {
+            if(p_user.UserName == U.UserName)
+            {
+                throw new Exception("UserName already exist.");
+            }
+        }
 
         if (p_user.UserName is null)
         {
@@ -99,6 +107,50 @@ public class UserBL : IUserBL
         return _repo.GetPhotobyUserID(p_userID);
     }
 
+    public List<User> GetPotentialMatch(User p_user)
+    {
+        List<User> listOfAllUsers = _repo.GetAllUsers();
+        DateTime zeroTime = new DateTime(1, 1, 1);
+        List<User> Result = new List<User>();
+
+        foreach(var U in listOfAllUsers)
+        {
+            if(p_user.UserDOB > U.UserDOB)
+            {
+                TimeSpan ageSpan = (p_user.UserDOB - U.UserDOB);
+                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
+                if(AgeDifferencesInYears> 5)
+                {
+                    continue;
+                }
+                else if(AgeDifferencesInYears <= 5)
+                {
+                    Result.Add(U);
+                }
+            }
+            else if (U.UserDOB < p_user.UserDOB)
+            {
+                TimeSpan ageSpan = (U.UserDOB-p_user.UserDOB);
+                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
+                if(AgeDifferencesInYears> 5)
+                {
+                    continue;
+                }
+                else if(AgeDifferencesInYears <= 5)
+                {
+                    Result.Add(U);
+                }
+                
+            }
+            else if (U.UserDOB == p_user.UserDOB)
+            {
+                Result.Add(U);
+            }
+        }
+
+
+        return listOfAllUsers;
+    }
 
     // Async Functions=======================================================================================
     public async Task<List<User>> GetAllUsersAsync()
@@ -108,7 +160,35 @@ public class UserBL : IUserBL
 
     public async Task<User> RegisterUserAsync(User p_user)
     {
-        return await _repo.RegisterUserAsync(p_user);
+        List<User> listOfAllUsers = _repo.GetAllUsers();
+        foreach(var U in listOfAllUsers)
+        {
+            if(p_user.UserName == U.UserName)
+            {
+                throw new Exception("UserName already exist.");
+            }
+        }
+
+        if (p_user.UserName is null)
+        {
+            throw new Exception("User Name is empty");
+        }
+        else if (p_user.UserBreed is null)
+        {
+            throw new Exception("User Breed is empty");
+        }
+        else if (p_user.UserPassword is null)
+        {
+            throw new Exception("User Password is empty");
+        }
+        else if (p_user.UserSize is null)
+        {
+            throw new Exception("User Size is empty");
+        }
+        else 
+        {
+            return await _repo.RegisterUserAsync(p_user);
+        }
     }
 
     public async Task<List<User>> SearchUserAsync(string p_name)
@@ -148,5 +228,49 @@ public class UserBL : IUserBL
     public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
     {
         return await _repo.GetPhotobyUserIDAsync(p_userID);
+    }
+
+    public async Task<List<User>> GetPotentialMatchAsync(User p_user)
+    {
+        List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
+        DateTime zeroTime = new DateTime(1, 1, 1);
+        List<User> Result = new List<User>();
+
+        foreach(var U in listOfAllUsers)
+        {
+            if(p_user.UserDOB > U.UserDOB)
+            {
+                TimeSpan ageSpan = (p_user.UserDOB - U.UserDOB);
+                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
+                if(AgeDifferencesInYears> 5)
+                {
+                    continue;
+                }
+                else if(AgeDifferencesInYears <= 5)
+                {
+                    Result.Add(U);
+                }
+            }
+            else if (U.UserDOB < p_user.UserDOB)
+            {
+                TimeSpan ageSpan = (U.UserDOB-p_user.UserDOB);
+                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
+                if(AgeDifferencesInYears> 5)
+                {
+                    continue;
+                }
+                else if(AgeDifferencesInYears <= 5)
+                {
+                    Result.Add(U);
+                }
+                
+            }
+            else if (U.UserDOB == p_user.UserDOB)
+            {
+                Result.Add(U);
+            }
+        }
+
+        return listOfAllUsers;
     }
 }
