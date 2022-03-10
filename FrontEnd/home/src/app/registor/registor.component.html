@@ -1,12 +1,13 @@
-<div style="margin-left: 40%;border-color: darkolivegreen;border-width: 5px black;">
-<form>
-    <!-- <div>
+<div style="margin-left: 40%;">
+<form [formGroup]="registorFormGroup">
+    <div>
     <label for="userID">UserID</label><br>
-    <input type="number" placeholder="ID" formControlName="userID" /><br />
-    </div> -->
+    <input type="number" placeholder="ID" formControlName="userID"  required/><br />
+    </div>
     <div>
     <label for="userName">UserName</label><br>
     <input type="text" placeholder="userName" formControlName="userName"/><br>
+    <span id="userName" class="help-block"></span>
     </div>
     <div>
     <label for="password">Password</label><br>
@@ -32,7 +33,7 @@
     <label for="userSize">Size</label><br>
     <input type="number" placeholder="Size" formControlName="userSize" /><br />
     </div>
-<a routerLink="login">Back To Login</a> <button class="btn btn-outline-success" style="margin: 1rem;" type="button" (click)="Registor()">Submit</button>
+   <a routerLink="/Login">Login</a> <button class="btn btn-outline-success" style="margin: 1rem;" type="button" >Registor</button>
 </form>
 </div>
 

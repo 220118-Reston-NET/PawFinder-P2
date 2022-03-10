@@ -3,6 +3,7 @@ import { PawfinderService } from './../services/pawfinder.service';
 import { Users } from './../models/users.model';
 import { ActivatedRoute} from '@angular/router';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -26,6 +27,10 @@ export class ProfileComponent implements OnInit {
     // this.PawService.getAllUsers(this.userName).subscribe(result=>{
     //   this.Users=result;
     // });
+  }
+  matchColorPinck()
+  {
+    return 
   }
 
 }
