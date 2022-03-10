@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -28,65 +29,141 @@ namespace PawFinderAPI.Controllers
         //------------------------------------------------------
 
 
-        // // GET: api/PawFinder/
-        // [HttpGet("GetAllUsers")]
-        // public async Task<IActionResult> GetAllUsersAsync()
-        // {
-        //     try
-        //     {
-        //         List<User> listofUser = new List<User>();
-        //         //TryGetValue (check if the cache still exists and if it does "out listofCustomer" puts that data inside our variable)
-        //         if (!_memoryCache.TryGetValue("UserList", out listofUser))
-        //         {
-        //             listofUser = await _userBL.GetAllUsersAsync();
-        //             _memoryCache.Set("UserList", listofUser, new TimeSpan(0, 0, 30));
-        //         }
-        //         Log.Information("Successfully returned a list of all users");
-        //         return Ok(listofUser);
-        //     }
-        //     catch (SqlException)
-        //     {
-        //         //In this case, if it was unable to connect to the database, it'll give a 404 status code
-        //         Log.Warning("Could not find a list of users.");
-        //         return NotFound();
-        //     }
-            
-        // }
-
-        // // POST: api/PawFinder
-        // [HttpPost("UploadPhoto")]
-        // public async Task<IActionResult> UploadPhoto([FromForm] string username, string p_filename, byte file)
-        // {
-        //     try
-        //     {
-        //         var filename = GenerateFileName(p_filename, username);
-        //         var fileUrl = "";
-        //         BlobContainerClient container = new BlobContainerClient("ConnectionString", "ContainerName");
-            
-        //         BlobClient blob = container.GetBlobClient(filename);
-        //         using (Stream stream = File.OpenReadStream())
-        //         {
-        //             blob.Upload(stream);
-        //         }
-        //         fileUrl = blob.Uri.AbsoluteUri;
-                
-        //     }
-        //     catch (System.Exception)
-        //     {
-                
-        //         throw;
-        //     }
-
-
-
-        // POST: api/User
-        [HttpPost("RegisterUser")]
-        public IActionResult RegisterUser([FromBody] User p_user)
+        // GET: api/PawFinder/
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsersAsync()
         {
             try
             {
+                List<User> listofUser = new List<User>();
+    
+                if (!_memoryCache.TryGetValue("UserList", out listofUser))
+                {
+                    listofUser = await _userBL.GetAllUsersAsync();
+                    _memoryCache.Set("UserList", listofUser, new TimeSpan(0, 0, 30));
+                }
+                Log.Information("Successfully returned a list of all users");
+                return Ok(listofUser);
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find a list of users.");
+                return NotFound();
+            }
+            
+        }
+
+        // POST: api/PawFinder
+        [HttpPost("UploadPhoto")]
+        public async Task<IActionResult> UploadPhoto(string UserName, [FromForm] string p_filename, IFormFile file)
+        {
+            try
+            {
+                var filename = _userBL.GenerateFileName(p_filename, UserName);
+                var fileUrl = "";
+                BlobContainerClient container = new BlobContainerClient("ConnectionString", "ContainerName");
+            
+                BlobClient blob = container.GetBlobClient(filename);
+                using (Stream stream = file.OpenReadStream())
+                {
+                    blob.Upload(stream);
+                }
+                fileUrl = blob.Uri.AbsoluteUri;
+                
+                List<User> user = await _userBL.SearchUserAsync(UserName);
+                Photo _photo = new Photo();
+                foreach (var item in user)
+                {
+                    _photo.userID = item.UserID;
+                    _photo.fileName = fileUrl;
+                }
+                return Created("Successfully added photo", _userBL.AddPhoto(_photo));
+                
+            }
+            catch (System.Exception ex)
+            { 
+               return StatusCode(422, ex.Message);
+            }
+        }
+
+        // GET: api/PawFinder/2
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUserAsync([FromQuery] int userID)
+        {
+            try
+            {
+                Log.Information("Successfully returned the user with userID");
+                return Ok(await _userBL.GetUserAsync(userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find user in the database.");
+                return NotFound();
+            } 
+        }
+
+        // GET: api/PawFinder/3
+        [HttpGet("ViewMatchedUser")]
+        public async Task<IActionResult> ViewMatchedUserAsync([FromQuery] int userID)
+        {
+            try
+            {
+                Log.Information("Successfully returned the matched user.");
+                return Ok(await _userBL.ViewMatchedUserAsync(userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find the matched user.");
+                return NotFound();
+            } 
+        }
+
+        // GET: api/PawFinder/4
+        [HttpGet("GetConversation")]
+        public async Task<IActionResult> GetConversationAsync([FromQuery] int UserID1, int UserID2)
+        {
+            try
+            {
+                Log.Information("Successfully returned conversation between users.");
+                return Ok(await _userBL.GetConversationAsync(UserID1, UserID2));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find an existing conversation between users.");
+                return NotFound();
+            } 
+        }
+
+        // GET: api/PawFinder/5
+        [HttpGet("GetPhotoByUserID")]
+        public async Task<IActionResult> GetPhotoByUserIDAsync([FromQuery] int userID)
+        {
+            try
+            {
+                Log.Information("Successfully returned the photo with userID");
+                return Ok(await _userBL.GetPhotobyUserIDAsync(userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find photo in the database.");
+                return NotFound();
+            } 
+        }
+
+        // POST: api/PawFinder
+        [HttpPost("RegisterUser")]
+        public async Task<IActionResult> RegisterUserAsync([FromBody] User p_user)
+        {
+            try
+            {
+                List<User> user = await _userBL.SearchUserAsync(p_user.UserName);
+                if (user.Count() >= 1)
+                {
+                    Log.Information("There is already an existing username in this app.");
+                    throw new Exception("This username is already taken!");
+                }
                 Log.Information("Successfully added a new user.");
-                return Created("Successfully added", _userBL.RegisterUser(p_user));
+                return Created("Successfully added", await _userBL.RegisterUserAsync(p_user));
             }
             catch (System.Exception ex)
             {
@@ -94,6 +171,51 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        // POST: api/PawFinder/2
+        [HttpPost("AddMessage")]
+        public async Task<IActionResult> AddMessageAsync([FromBody] Message message)
+        {
+            try
+            {
+                Log.Information("Successfully added a new message.");
+                return Created("Successfully added a message", await _userBL.AddMessageAsync(message));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
+
+        // PUT: api/PawFinder
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUserAsync(int UserID, [FromBody] User p_user)
+        {
+            try
+            {
+                List<User> user = await _userBL.SearchUserAsync(p_user.UserName);
+                if (user.Count() == 0)
+                {
+                    Log.Information("Failed to find a user to update.");
+                    throw new Exception("User Not Found");
+                }
+                else if (user.Count() > 1)
+                {
+                    Log.Information("The usernames in this app should all be unique.");
+                    throw new Exception("This username is already taken!");
+                }
+                Log.Information("Successfully updated user information.");
+                return Ok(await _userBL.UpdateUserAsync(p_user));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not update user information.");
+                return Conflict(ex.Message);
+            }
+        }
+
+
     }
         // // DELETE: api/PawFinder/5
         // [HttpDelete("{id}")]

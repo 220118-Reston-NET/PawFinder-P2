@@ -1,0 +1,4 @@
+2022-03-09 17:18:56.564 -05:00 [INF] Successfully returned a list of all users
+2022-03-09 23:51:22.647 -05:00 [INF] Successfully returned a list of all users
+2022-03-09 23:51:38.933 -05:00 [INF] Successfully returned the matched user.
+2022-03-10 14:01:46.691 -05:00 [INF] Successfully returned a list of all users

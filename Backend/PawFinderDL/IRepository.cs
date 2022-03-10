@@ -6,12 +6,13 @@ public interface IRepository
 {
     User RegisterUser(User p_user);
     List<User> GetAllUsers();
+    User GetUser(int UserID);
     List<User> ViewMatchedUser(int UserID);
     List<Message> GetConversation(int UserID1, int UserID2);
 
     User UpdateUser(User p_user);
     Message AddMessage(Message message);
-    void AddPhoto(string p_fileName, int p_userID);
+    Photo AddPhoto(Photo p_photo);
     List<Photo> GetPhotobyUserID(int p_userID);
 
 
@@ -19,11 +20,12 @@ public interface IRepository
     //Async version functions
     Task<User> RegisterUserAsync(User p_user);
     Task<List<User>> GetAllUsersAsync();
+    Task<User> GetUserAsync(int UserID);
     Task<List<User>> ViewMatchedUserAsync(int UserID);
     Task<List<Message>> GetConversationAsync(int UserID1, int UserID2);
 
     Task<User> UpdateUserAsync(User p_user);
     Task<Message> AddMessageAsync(Message message);
-    void AddPhotoAsync(string p_fileName, int p_userID);
+    Task<Photo> AddPhotoAsync(Photo p_photo);
     Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
 }
