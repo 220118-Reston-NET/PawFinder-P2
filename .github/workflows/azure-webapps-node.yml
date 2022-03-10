@@ -46,7 +46,7 @@ jobs:
       run: |
         npm install
         npm run build --prod
-      working-directory: ./FrontEnd
+      working-directory: ./FrontEnd/home
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp 
