@@ -19,5 +19,18 @@ public class User
         }
     }
 
+    public User()
+    {
+        UserName = "";
+        UserPassword = "";
+        UserDOB = DateTime.UtcNow;
+        UserBio = "";
+        UserBreed = "";
+        UserSize = "";
+        _photos = new List<Photo>()
+        {
+            new Photo()
+        };
+    }
 
 }

@@ -215,7 +215,7 @@ public class SQLRepository : IRepository
         return message;
     }
 
-    public void AddPhoto(string p_fileName, int p_userID)
+    public Photo AddPhoto(Photo p_photo)
     {
         string sqlQuery = @"INSERT INTO Photos
                             VALUES(@fileName, @userID);
@@ -226,13 +226,14 @@ public class SQLRepository : IRepository
             conn.Open();
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@fileName", p_fileName);
-            command.Parameters.AddWithValue("@userID", p_userID);
+            command.Parameters.AddWithValue("@fileName", p_photo.fileName);
+            command.Parameters.AddWithValue("@userID", p_photo.userID);
 
             int p_photoID = Convert.ToInt32(command.ExecuteScalar());
 
             command.ExecuteNonQuery();
         }
+        return p_photo;
     }
 
     public List<Photo> GetPhotobyUserID(int p_userID)
@@ -328,7 +329,7 @@ public class SQLRepository : IRepository
         string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            conn.OpenAsync();
+            await conn.OpenAsync();
             
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@userID", UserID);
@@ -471,7 +472,7 @@ public class SQLRepository : IRepository
         return message;
     }
 
-    public async void AddPhotoAsync(string p_fileName, int p_userID)
+    public async Task<Photo> AddPhotoAsync(Photo p_photo)
     {
         string sqlQuery = @"INSERT INTO Photos
                             VALUES(@fileName, @userID);
@@ -482,13 +483,14 @@ public class SQLRepository : IRepository
             await conn.OpenAsync();
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@fileName", p_fileName);
-            command.Parameters.AddWithValue("@userID", p_userID);
+            command.Parameters.AddWithValue("@fileName", p_photo.fileName);
+            command.Parameters.AddWithValue("@userID", p_photo.userID);
 
             int p_photoID = Convert.ToInt32(command.ExecuteScalar());
 
             await command.ExecuteNonQueryAsync();
         }
+        return p_photo;
     }
 
     public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)

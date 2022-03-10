@@ -16,6 +16,11 @@ public class UserBL : IUserBL
         return _repo.GetAllUsers();
     }
 
+    public User GetUser(int UserID)
+    {
+        return _repo.GetUser(UserID);
+    }
+
     public User RegisterUser(User p_user)
     {
 
@@ -62,7 +67,7 @@ public class UserBL : IUserBL
     }
 
 
-    private string GenerateFileName(string fileName, string userName)
+    public string GenerateFileName(string fileName, string userName)
     {
         try
         {
@@ -89,9 +94,9 @@ public class UserBL : IUserBL
         return _repo.AddMessage(message);
     }
 
-    public void AddPhoto(string p_fileName, int p_userID)
+    public Photo AddPhoto(Photo p_photo)
     {
-        _repo.AddPhoto(p_fileName, p_userID);
+        return _repo.AddPhoto(p_photo);
     }
 
     public List<Photo> GetPhotobyUserID(int p_userID)
@@ -104,6 +109,11 @@ public class UserBL : IUserBL
     public async Task<List<User>> GetAllUsersAsync()
     {
         return await _repo.GetAllUsersAsync();
+    }
+
+    public async Task<User> GetUserAsync(int UserID)
+    {
+        return await _repo.GetUserAsync(UserID);
     }
 
     public async Task<User> RegisterUserAsync(User p_user)
@@ -140,9 +150,9 @@ public class UserBL : IUserBL
         return await _repo.AddMessageAsync(message);
     }
 
-    public async void AddPhotoAsync(string p_fileName, int p_userID)
+    public async Task<Photo> AddPhotoAsync(Photo p_photo)
     {
-        _repo.AddPhotoAsync(p_fileName,p_userID);
+       return await _repo.AddPhotoAsync(p_photo);
     }
 
     public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
