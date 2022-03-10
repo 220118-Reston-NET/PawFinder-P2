@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundError } from 'rxjs';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { NotFoundError } from 'rxjs';
     PassComponent,
     ChatComponent,
     UserComponent,
-  
+
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

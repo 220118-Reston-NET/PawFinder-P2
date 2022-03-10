@@ -9,6 +9,9 @@ import { Router } from "@angular/router";
   styleUrls: ['./registor.component.css']
 })
 export class RegistorComponent {
+  
+  show:boolean = false;
+
    registorFormGroup= new FormGroup({
             userID:new FormControl(""),
             userName: new FormControl(),
@@ -19,6 +22,12 @@ export class RegistorComponent {
             userSize:new FormControl()
             
   });
+
+  showPassword()
+  {
+    this.show = !this.show;
+  }
+
   addUser(p_userGroup:FormGroup){
     // if(p_userGroup.valid){
 

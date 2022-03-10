@@ -11,7 +11,11 @@
     </div>
     <div>
     <label for="password">Password</label><br>
-    <input type="number" placeholder="password" formControlName="userPassword" /><br />
+    <input [type]="show ? 'text' : 'password'" type="password" placeholder="password" formControlName="userPassword" /><br />
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" class="password-check-box" id="exampleCheck1" (click)="showPassword()">
+        <label class="form-check-label" for="exampleCheck1">Show Password</label>
     </div>
     <div>
     <label for="userDBO">DBO</label><br>
