@@ -26,16 +26,9 @@ on:
     branches:
         [Main]
 
-env:
-  AZURE_WEBAPP_NAME: PawFinderWebAppFE
-  AZURE_WEBAPP_PACKAGE_PATH: './FrontEnd/home/dist/home'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14.x'                # set this to the node version to use
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: 'Angular'
     steps:
     - uses: actions/checkout@main
 
@@ -54,7 +47,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: PawFinderWebAppFE
-        slot-name: 'Angular'
         publish-profile: ${{ secrets.PAWFINDER_WEB_APP_PUBLISH_PROFILE_FE}}
         package: ./FrontEnd/home/dist/home
         
