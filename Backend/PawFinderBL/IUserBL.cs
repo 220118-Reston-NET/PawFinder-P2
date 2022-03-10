@@ -16,6 +16,7 @@ public interface IUserBL
     Message AddMessage(Message message);
     Photo AddPhoto(Photo p_photo);
     List<Photo> GetPhotobyUserID(int p_userID);
+    List<User> GetPotentialMatch(User p_user);
 
     //Async version functions
     Task<List<User>> GetAllUsersAsync();
@@ -28,6 +29,8 @@ public interface IUserBL
     Task<Message> AddMessageAsync(Message message);
     Task<Photo> AddPhotoAsync(Photo p_user);
     Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
+
+    Task<List<User>> GetPotentialMatchAsync(User p_user);
 
 
     
