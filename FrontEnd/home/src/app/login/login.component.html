@@ -1,10 +1,10 @@
-<form style="margin-left:40%; border-width: 10px solid;">
+<!-- <form style="margin-left:40%; border-width: 10px solid;">
     <label for="email">Email:</label><br />
     <input type="email" name="email" placeholder="Email" [(ngModel)]="input.email" /><br />
     <label for="password">Password:</label><br />
     <input type="password" name="password" placeholder="Password" [(ngModel)]="input.password" /><br />
     <a routerLink="/Registor">Register</a><button type="button" style="margin:2rem;" class="btn btn-outline-primary " routerLink="/Profile">Login</button>
-</form>
+</form> -->
 
 <div class="loginPage">
   <title>Paw Finder Login</title>
@@ -31,8 +31,8 @@
     </form>
   
     <div class="switch-login-to-signup">
-      <label class="form-check-label">{{newOrExistingUser}}</label>
-      <button type="button" class="btn btn-warning" class="paw-finder-login-signup-button">Register Here</button>
+      <label class="form-check-label">Don't have an account?</label>
+      <a routerLink="/Registor" class="paw-finder-login-signup-button">Login</a>
     </div>
 
     <footer class="login-footer">PawFinder © 2022</footer>
