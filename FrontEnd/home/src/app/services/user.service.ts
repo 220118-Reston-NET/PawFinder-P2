@@ -9,10 +9,11 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  verifyUser()
-  {
-    //used to verify the user
-  }
+  // verifyUser()
+  // {
+  //   //some functionality to verify a user (could just be through verifying email and pw for now).
+  //   return this.http.get<Users>("https://")
+  // }
 
   addUser(user:Users)
   {

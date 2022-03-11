@@ -3,7 +3,7 @@
 
 <H1 class="loginHeading" style="margin-top: 1.5rem;">Sign Up:</H1>
 <div style="margin-left: 54rem;">
-<form [formGroup]="registorFormGroup">
+<form [formGroup]="userGroup">
     <div>
     <label for="userID">UserID</label><br>
     <input type="number" placeholder="ID" formControlName="userID"  required/><br />
@@ -37,7 +37,7 @@
     <label for="userSize">Size</label><br>
     <input type="number" placeholder="Size" formControlName="userSize" /><br />
     </div>
-    <button class="btn btn-primary" style="margin-top: 1rem; margin-left: 2.5rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" >Submit</button>
+    <button class="btn btn-primary" style="margin-top: 1rem; margin-left: 2.5rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" (click)="addUser(userGroup)">Submit</button>
     <div>
         <label class="form-check-label" style="margin-top: 1rem;">Already have an account?</label>  
         <a routerLink="/Login" class="paw-finder-login-signup-button" style="padding: 0.5rem;">Login</a> 

@@ -1,0 +1,17 @@
+.switch-login-to-signup
+{
+    font-size: 2rem;
+    text-align: center;
+}
+
+.paw-finder-login-signup-button
+{
+    background-color: #940132;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: white; 
+    border: none;
+}
