@@ -183,7 +183,7 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-        [HttpPut("LogIn")]
+        [HttpGet("LogIn")]
         public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)
         {
             List<User> ListOfAllUsers = await _userBL.GetAllUsersAsync();
