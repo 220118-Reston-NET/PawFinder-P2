@@ -80,14 +80,10 @@ public class UserTest
 
         //Act
         newUser.UserDOB = userDOB;
-        newUser.photoURL = photoURL;
 
         //Assert
         Assert.NotNull(newUser.UserDOB);
         Assert.Equal(userDOB, newUser.UserDOB);
-
-        Assert.NotNull(newUser.photoURL);
-        Assert.Equal(photoURL, newUser.photoURL);
 
     }
 
@@ -195,7 +191,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -235,7 +230,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
         List<User> expectedList = new List<User>();
@@ -276,7 +270,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
 
@@ -385,7 +378,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
         List<User> expectedList = new List<User>();
@@ -466,7 +458,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -506,7 +497,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
         List<User> expectedList = new List<User>();
@@ -547,7 +537,6 @@ public class UserTest
             UserBio = userBio,
             UserBreed = userBreed,
             UserSize = userSize,
-            photoURL = photoURL
         };
 
 

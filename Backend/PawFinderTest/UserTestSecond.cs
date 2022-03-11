@@ -33,8 +33,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -73,8 +72,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -111,8 +109,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -149,8 +146,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -187,8 +183,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -226,8 +221,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -266,8 +260,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -304,8 +297,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -342,8 +334,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
@@ -380,8 +371,7 @@ public class UserTestSecond
             UserDOB = userDOB,
             UserBio = userBio,
             UserBreed = userBreed,
-            UserSize = userSize,
-            photoURL = photoURL
+            UserSize = userSize
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
