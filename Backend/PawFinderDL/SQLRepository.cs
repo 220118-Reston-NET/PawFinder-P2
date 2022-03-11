@@ -425,8 +425,7 @@ public class SQLRepository : IRepository
     public async Task<Photo> AddPhotoAsync(Photo p_photo)
     {
         string sqlQuery = @"INSERT INTO Photos
-                            VALUES(@fileName, @userID);
-                            SELECT SCOPE_IDENTITY();";
+                            VALUES(@fileName, @userID)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -435,8 +434,6 @@ public class SQLRepository : IRepository
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@fileName", p_photo.fileName);
             command.Parameters.AddWithValue("@userID", p_photo.userID);
-
-            int p_photoID = Convert.ToInt32(command.ExecuteScalar());
 
             await command.ExecuteNonQueryAsync();
         }
@@ -448,7 +445,7 @@ public class SQLRepository : IRepository
         List<Photo> listofPhoto = new List<Photo>();
 
         string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
-                            WHERE p.userID = 1";
+                            WHERE p.userID = @userID";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {

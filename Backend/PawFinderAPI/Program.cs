@@ -2,7 +2,6 @@ global using Serilog;
 using Azure.Storage.Blobs;
 using PawFinderBL;
 using PawFinderDL;
-// using AzureBlob.Api.Logics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +21,6 @@ builder.Services.AddScoped<IUserBL, UserBL>();
 builder.Services.AddScoped(_ => {
   return new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobStorage"));
 });
-// builder.Services.AddScoped<IFileManagerLogic, FileManagerLogic>();
 
 var app = builder.Build();
 
