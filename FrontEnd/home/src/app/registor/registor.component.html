@@ -14,7 +14,7 @@
     <span id="userName" class="help-block"></span>
     </div>
     <div>
-    <label for="password">Password</label><br>
+    <label for="userPassword">Password</label><br>
     <input [type]="show ? 'text' : 'password'" type="password" placeholder="password" formControlName="userPassword" /><br />
     </div>
     <div class="form-check">
@@ -35,7 +35,7 @@
     </div>
     <div>
     <label for="userSize">Size</label><br>
-    <input type="string" placeholder="Size" formControlName="userSize" /><br />
+    <input type="text" placeholder="Size" formControlName="userSize" /><br />
     </div>
     <button class="btn btn-primary" style="margin-top: 1rem; margin-left: 2.5rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" (click)="addUser(userGroup)">Submit</button>
     <div>
