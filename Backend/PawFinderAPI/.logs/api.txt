@@ -29,3 +29,4 @@
 2022-03-11 18:02:24.057 -05:00 [INF] There is already an existing username in this app.
 2022-03-11 18:02:24.062 -05:00 [WRN] Could not add a user.
 2022-03-11 18:02:41.674 -05:00 [WRN] Incorrect password
+2022-03-11 18:06:11.218 -05:00 [INF] Logged in as user: 18
