@@ -3,4 +3,4 @@ obj
 .vscode
 publish
 appsettings.json
-
+appsettings.Development.json
