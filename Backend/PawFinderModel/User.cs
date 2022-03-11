@@ -9,7 +9,15 @@ public class User
     public string UserBio { get; set; }
     public string UserBreed { get; set; }
     public string UserSize { get; set; }
-    public string photoURL { get; set; }
+    private List<Photo> _photos;
+    public List<Photo> Photo
+    {
+        get { return _photos; }
+        set 
+        {
+            _photos = value;
+        }
+    }
     public User()
     {
         UserName = "";
@@ -18,7 +26,10 @@ public class User
         UserBio = "";
         UserBreed = "";
         UserSize = "";
-        photoURL = "";
+         _photos = new List<Photo>()
+        {
+            new Photo()
+        };
     }
 
 }
