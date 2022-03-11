@@ -160,7 +160,7 @@ public class UserBL : IUserBL
 
     public async Task<User> RegisterUserAsync(User p_user)
     {
-        List<User> listOfAllUsers = _repo.GetAllUsers();
+        List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
         foreach(var U in listOfAllUsers)
         {
             if(p_user.UserName == U.UserName)
@@ -168,7 +168,6 @@ public class UserBL : IUserBL
                 throw new Exception("UserName already exist.");
             }
         }
-
         if (p_user.UserName is null)
         {
             throw new Exception("User Name is empty");

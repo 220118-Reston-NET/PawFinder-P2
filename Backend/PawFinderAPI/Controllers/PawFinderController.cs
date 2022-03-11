@@ -214,6 +214,48 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        [HttpPut("Login")]
+        public async Task<IActionResult> LoginAsync(string UsernameInput, string PasswordInput)
+        {
+            List<User> ListOfAllUsers = await _userBL.GetAllUsersAsync();
+            foreach(var User in ListOfAllUsers)
+            {
+                if(User.UserName == UsernameInput)
+                {
+                    if(User.UserPassword == PasswordInput)
+                    {
+                        CurrentUser.currentuser = User;
+                        Log.Information("Logged in as user: " + User.UserID);
+                        return Ok(User);
+                    }
+                    else
+                    {
+                        Log.Warning("Incorrect Password");
+                        return Conflict("Incorrect Password");
+                    }
+                }
+            }
+            Log.Warning("Incorrect Username");
+            return Conflict("Incorrect Username or Password");
+        }
+
+        [HttpDelete("LogOut")]
+        public async Task<IActionResult> LogOutAsync()
+        {
+            try
+            {
+                CurrentUser.currentuser = new User();
+                Log.Information("Logged out");
+                return Ok(CurrentUser.currentuser);
+            }
+            catch(System.Exception ex)
+            {
+                Log.Warning("Error occured while trying to log out");
+                return Conflict(ex.Message);
+            }
+        }
+
     }
 }
 
