@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     {
       //userID: 0,
       userName: p_userGroup.get("userName")?.value,
-      userPassword: p_userGroup.get("password")?.value,
+      userPassword: p_userGroup.get("userPassword")?.value,
       userDBO: new Date,
       userBio: "",
       userBreed: "",

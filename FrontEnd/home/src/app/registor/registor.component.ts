@@ -12,14 +12,16 @@ import { UserService } from '../services/user.service';
 })
 export class RegistorComponent implements OnInit{
   
+  myResult:any;
+
   userGroup= new FormGroup({
     userID:new FormControl(""),
-    userName: new FormControl(),
-    uesrPassword:new FormControl(),
-    userDBO: new FormControl(),
-    userBio:new FormControl(),
-    userBreed:new FormControl(),
-    userSize:new FormControl()
+    userName: new FormControl(""),
+    userPassword:new FormControl(""),
+    userDBO: new FormControl(""),
+    userBio:new FormControl(""),
+    userBreed:new FormControl(""),
+    userSize:new FormControl("")
     
 });
 
@@ -38,14 +40,11 @@ export class RegistorComponent implements OnInit{
   }
 
   addUser(p_userGroup:FormGroup){
-    // if(p_userGroup.valid){
 
-    // }
     let user:Users=
     {
-      //userID:p_userGroup.get("userID")?.value,
       userName:p_userGroup.get("userName")?.value,
-      userPassword:p_userGroup.get("password")?.value,
+      userPassword:p_userGroup.get("userPassword")?.value,
       userDBO:p_userGroup.get("userDBO")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
@@ -53,7 +52,8 @@ export class RegistorComponent implements OnInit{
     }
     
     this.userService.addUser(user).subscribe();
-
+    //this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Match"])}});
+    
   }
 
   Registor() 
