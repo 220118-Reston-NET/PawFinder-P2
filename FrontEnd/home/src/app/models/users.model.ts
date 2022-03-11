@@ -6,6 +6,6 @@ export interface Users
     userDBO:Date;
     userBio:string;
     userBreed:string;
-    userSize:number;
+    userSize:string;
 
 }

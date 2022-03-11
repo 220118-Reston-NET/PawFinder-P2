@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       userDBO: new Date,
       userBio: "",
       userBreed: "",
-      userSize: 0
+      userSize: ""
     }
 
   }
