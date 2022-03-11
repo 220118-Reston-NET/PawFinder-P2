@@ -3,6 +3,7 @@ obj
 .vscode
 publish
 appsettings.json
+appsettings.Development.json
 
 # Compiled output
 /dist
