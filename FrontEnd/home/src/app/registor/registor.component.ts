@@ -1,27 +1,36 @@
 import { Users } from './../models/users.model';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
+import { NavbarService } from '../services/navbar.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-registor',
   templateUrl: './registor.component.html',
   styleUrls: ['./registor.component.css']
 })
-export class RegistorComponent {
+export class RegistorComponent implements OnInit{
   
-  show:boolean = false;
+  userGroup= new FormGroup({
+    userID:new FormControl(""),
+    userName: new FormControl(),
+    uesrPassword:new FormControl(),
+    userDBO: new FormControl(),
+    userBio:new FormControl(),
+    userBreed:new FormControl(),
+    userSize:new FormControl()
+    
+});
 
-   registorFormGroup= new FormGroup({
-            userID:new FormControl(""),
-            userName: new FormControl(),
-            uesrPassword:new FormControl(),
-            userDBO: new FormControl(),
-            userBio:new FormControl(),
-            userBreed:new FormControl(),
-            userSize:new FormControl()
-            
-  });
+  show:boolean = false;
+  
+  constructor(private router: Router, private userService: UserService, public nav: NavbarService) {
+  }
+
+  ngOnInit(): void {
+    this.nav.hide();
+  }
 
   showPassword()
   {
@@ -34,7 +43,7 @@ export class RegistorComponent {
     // }
     let user:Users=
     {
-      userID:p_userGroup.get("userID")?.value,
+      //userID:p_userGroup.get("userID")?.value,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("password")?.value,
       userDBO:p_userGroup.get("userDBO")?.value,
@@ -42,14 +51,14 @@ export class RegistorComponent {
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
     }
-    // this.service.Add
+    
+    this.userService.addUser(user).subscribe();
 
   }
-  constructor(private router: Router) {
+
+  Registor() 
+  {
+    this.router.navigate(["/registor"]);
   }
-    Registor() 
-    {
-      this.router.navigate(["/registor"]);
-     }
 
 }

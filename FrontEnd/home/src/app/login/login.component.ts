@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Users } from '../models/users.model';
 import { throwError } from 'rxjs';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +11,15 @@ import { throwError } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  loginSignUpHeading:String = "Login:"
-  newOrExistingUser:String = "Don't have an account?"
-  loginOrRegister:String = "Create an Account"
-
   show:boolean = false;
+  trySubmit:String = "";
 
-  userGroup = new FormGroup({
+  userGroup = new FormGroup({ })
 
-  })
-
-  constructor() { }
+  constructor(public nav: NavbarService) { }
 
   ngOnInit(): void {
+    this.nav.hide();
   }
 
   showPassword()
@@ -32,29 +29,18 @@ export class LoginComponent implements OnInit {
 
   checkUser(p_userGroup:FormGroup)
   {
-    if(this.loginOrRegister === "Login:")
+    
+    let user:Users = 
     {
-      
-      // let user:Users =
-      // {
-      //   userID: 0,
-      //   userName: p_userGroup.get("userName")?.value,
-      //   userPassword: p_userGroup.get("password")?.value,
-      //   userBio: "",
-      //   userBreed: "",
-      //   userSize: 0
-      // }
+      //userID: 0,
+      userName: p_userGroup.get("userName")?.value,
+      userPassword: p_userGroup.get("password")?.value,
+      userDBO: new Date,
+      userBio: "",
+      userBreed: "",
+      userSize: 0
+    }
 
-    }
-    else if(this.loginOrRegister === "Sign Up:")
-    {
-      console.log("User is signing up!");
-    }
-    else
-    {
-      //something is wrong and for some reason loginOrRegister does not have correct value.
-      throwError;
-    }
   }
 
 
