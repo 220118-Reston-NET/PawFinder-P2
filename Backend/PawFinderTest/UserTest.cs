@@ -288,6 +288,7 @@ public class UserTest
         Assert.Equal(expectedList, actualList);
     }
 
+    [Fact]
     public void UpdateUser()
     {
         //Arrange
@@ -469,7 +470,6 @@ public class UserTest
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User newUser = new User()
@@ -549,7 +549,6 @@ public class UserTest
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -588,7 +587,6 @@ public class UserTest
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User newUser = new User()
@@ -618,6 +616,7 @@ public class UserTest
         Assert.Equal(expectedList, actualList);
     }
 
+    [Fact]
     public async Task UpdateUserAsync()
     {
         //Arrange
@@ -628,7 +627,6 @@ public class UserTest
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
