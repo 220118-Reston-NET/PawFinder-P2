@@ -195,7 +195,7 @@ namespace PawFinderAPI.Controllers
                     {
                         Log.Information("Logged in as user: " + User.UserID);
                         CurrentUser.currentuser = User;
-                        return Ok();
+                        return Ok(User);
                     }
                     else
                     {
