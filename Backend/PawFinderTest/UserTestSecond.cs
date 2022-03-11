@@ -172,7 +172,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = null;
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -210,7 +209,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
