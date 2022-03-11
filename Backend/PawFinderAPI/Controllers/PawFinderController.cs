@@ -53,38 +53,6 @@ namespace PawFinderAPI.Controllers
             
         }
 
-        // // POST: api/PawFinder
-        // [HttpPost("UploadPhoto")]
-        // public async Task<IActionResult> UploadPhoto(string UserName, [FromForm] string p_filename, IFormFile file)
-        // {
-        //     try
-        //     {
-        //         var filename = _userBL.GenerateFileName(p_filename, UserName);
-        //         var fileUrl = "";
-        //         BlobContainerClient container = new BlobContainerClient("ConnectionString", "ContainerName");
-            
-        //         BlobClient blob = container.GetBlobClient(filename);
-        //         using (Stream stream = file.OpenReadStream())
-        //         {
-        //             blob.Upload(stream);
-        //         }
-        //         fileUrl = blob.Uri.AbsoluteUri;
-                
-        //         List<User> user = await _userBL.SearchUserAsync(UserName);
-        //         Photo _photo = new Photo();
-        //         foreach (var item in user)
-        //         {
-        //             _photo.userID = item.UserID;
-        //             _photo.fileName = fileUrl;
-        //         }
-        //         return Created("Successfully added photo", _userBL.AddPhoto(_photo));
-                
-        //     }
-        //     catch (System.Exception ex)
-        //     { 
-        //        return StatusCode(422, ex.Message);
-        //     }
-        // }
 
         // GET: api/PawFinder/2
         [HttpGet("GetUser")]
