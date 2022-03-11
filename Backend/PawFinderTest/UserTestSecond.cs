@@ -203,4 +203,197 @@ public class UserTestSecond
         Assert.Throws<Exception>(() => userBL.RegisterUser(expectedUser));
 
     }
+
+    [Fact]
+    public async Task RegisterUserExistsAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+        string photoURL = "test.com";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        List<User> newList = new List<User>();
+        newList.Add(expectedUser);
+
+        mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act and Assert
+        await Assert.ThrowsAsync<Exception>(async () => await userBL.RegisterUserAsync(expectedUser));
+
+    }
+
+    [Fact]
+    public async Task RegisterUserNameNullAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = null;
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+        string photoURL = "test.com";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        List<User> newList = new List<User>();
+
+        mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act and Assert
+        await Assert.ThrowsAsync<Exception>(async () => await userBL.RegisterUserAsync(expectedUser));
+
+    }
+
+    public async Task RegisterUserBreedNullAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = null;
+        string userSize = "Big";
+        string photoURL = "test.com";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        List<User> newList = new List<User>();
+
+        mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act and Assert
+        await Assert.ThrowsAsync<Exception>(async () => await userBL.RegisterUserAsync(expectedUser));
+
+    }
+
+    public async Task RegisterUserPasswordNullAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = null;
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+        string photoURL = "test.com";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        List<User> newList = new List<User>();
+
+        mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act and Assert
+        await Assert.ThrowsAsync<Exception>(async () => await userBL.RegisterUserAsync(expectedUser));
+
+    }
+
+    public async Task RegisterUserSizeNullAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = null;
+        string photoURL = "test.com";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+            photoURL = photoURL
+        };
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        List<User> newList = new List<User>();
+
+        mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act and Assert
+        await Assert.ThrowsAsync<Exception>(async () => await userBL.RegisterUserAsync(expectedUser));
+
+    }
 }
