@@ -15,7 +15,6 @@ export class RegistorComponent implements OnInit{
   myResult:any;
 
   userGroup= new FormGroup({
-    userID:new FormControl(""),
     userName: new FormControl(""),
     userPassword:new FormControl(""),
     userDBO: new FormControl(""),

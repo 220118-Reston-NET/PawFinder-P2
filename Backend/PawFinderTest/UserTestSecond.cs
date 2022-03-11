@@ -22,7 +22,7 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
+
 
 
         User expectedUser = new User()
@@ -61,7 +61,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -88,6 +87,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public void RegisterUserBreedNull()
     {
         //Arrange
@@ -98,7 +98,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = null;
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -125,6 +124,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public void RegisterUserPasswordNull()
     {
         //Arrange
@@ -135,7 +135,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -162,6 +161,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public void RegisterUserSizeNull()
     {
         //Arrange
@@ -172,7 +172,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = null;
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -210,7 +209,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -249,7 +247,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -276,6 +273,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public async Task RegisterUserBreedNullAsync()
     {
         //Arrange
@@ -286,7 +284,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = null;
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -313,6 +310,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public async Task RegisterUserPasswordNullAsync()
     {
         //Arrange
@@ -323,7 +321,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -350,6 +347,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public async Task RegisterUserSizeNullAsync()
     {
         //Arrange
@@ -360,7 +358,6 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = null;
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
