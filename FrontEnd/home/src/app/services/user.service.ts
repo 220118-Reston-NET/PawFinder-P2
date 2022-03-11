@@ -11,7 +11,7 @@ export class UserService {
 
   verifyUser(user: Users)
   {
-    return this.http.post<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/LogIn", user);
+    return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/LogIn");
   }
 
   addUser(user:Users)
