@@ -43,7 +43,7 @@ export class RegistorComponent implements OnInit{
     // }
     let user:Users=
     {
-      userID:p_userGroup.get("userID")?.value,
+      //userID:p_userGroup.get("userID")?.value,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("password")?.value,
       userDBO:p_userGroup.get("userDBO")?.value,

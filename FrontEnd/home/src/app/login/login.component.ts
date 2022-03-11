@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     
     let user:Users = 
     {
-      userID: 0,
+      //userID: 0,
       userName: p_userGroup.get("userName")?.value,
       userPassword: p_userGroup.get("password")?.value,
       userDBO: new Date,
