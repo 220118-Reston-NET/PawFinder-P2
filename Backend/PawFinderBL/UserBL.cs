@@ -263,4 +263,15 @@ public class UserBL : IUserBL
 
         return listOfAllUsers;
     }
+
+    public async Task<Photo> AddPhotoAsync(Photo p_photo)
+    {
+       return await _repo.AddPhotoAsync(p_photo);
+    }
+
+    public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
+    {
+        return await _repo.GetPhotobyUserIDAsync(p_userID);
+    }
+
 }

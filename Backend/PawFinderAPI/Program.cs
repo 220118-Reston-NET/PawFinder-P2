@@ -1,10 +1,11 @@
 global using Serilog;
+using Azure.Storage.Blobs;
 using PawFinderBL;
 using PawFinderDL;
+// using AzureBlob.Api.Logics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 // Add services to the container.
 Log.Logger = new LoggerConfiguration()
             .WriteTo.File("./.logs/api.txt")
@@ -12,12 +13,16 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRepository>(repo => new SQLRepository(builder.Configuration.GetConnectionString("Reference2DB")));
 builder.Services.AddScoped<IUserBL, UserBL>();
+
+builder.Services.AddScoped(_ => {
+  return new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobStorage"));
+});
+// builder.Services.AddScoped<IFileManagerLogic, FileManagerLogic>();
 
 var app = builder.Build();
 

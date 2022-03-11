@@ -65,4 +65,7 @@ public interface IRepository
     /// <returns> Returns a new message that was added. </returns>
     Task<Message> AddMessageAsync(Message message);
 
+    Task<Photo> AddPhotoAsync(Photo p_photo);
+    Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
+
 }

@@ -18,3 +18,4 @@
 2022-03-10 15:53:04.074 -05:00 [WRN] Could not add a user.
 2022-03-10 15:55:55.388 -05:00 [INF] Successfully added a new user.
 2022-03-10 16:02:31.055 -05:00 [INF] Successfully updated user information.
+2022-03-10 16:38:10.414 -05:00 [INF] Successfully returned a list of all users

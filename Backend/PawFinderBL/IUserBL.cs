@@ -80,4 +80,7 @@ public interface IUserBL
     /// <returns> Returns a potential match. </returns>
     Task<List<User>> GetPotentialMatchAsync(User p_user);
 
+    Task<Photo> AddPhotoAsync(Photo p_photo);
+    Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
+
 }
