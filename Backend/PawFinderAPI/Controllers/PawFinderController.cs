@@ -104,17 +104,17 @@ namespace PawFinderAPI.Controllers
 
         // GET: api/PawFinder/4
         [HttpGet("GetPotentialMatch")]
-        public async Task<IActionResult> GetPotentialMatchAsync([FromBody] User p_user)
+        public async Task<IActionResult> GetPotentialMatchAsync()
         {
             try
             {
-                Log.Information("Successfully returned conversation between users.");
-                return Ok(await _userBL.GetPotentialMatchAsync(p_user));
+                Log.Information("Successfully returned list of potential matches");
+                return Ok(await _userBL.GetPotentialMatchAsync(CurrentUser.currentuser));
             }
-            catch (SqlException)
+            catch (System.Exception ex)
             {
-                Log.Warning("Could not find an existing conversation between users.");
-                return NotFound();
+                Log.Warning("Failed to return list of potential matches");
+                return Conflict(ex.Message);
             } 
         }
 
@@ -222,6 +222,8 @@ namespace PawFinderAPI.Controllers
                 return Conflict();
             }
         }
+
+
 
 
 

@@ -223,45 +223,17 @@ public class UserBL : IUserBL
     public async Task<List<User>> GetPotentialMatchAsync(User p_user)
     {
         List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
-        DateTime zeroTime = new DateTime(1, 1, 1);
         List<User> Result = new List<User>();
 
         foreach(var U in listOfAllUsers)
         {
-            if(p_user.UserDOB > U.UserDOB)
-            {
-                TimeSpan ageSpan = (p_user.UserDOB - U.UserDOB);
-                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
-                if(AgeDifferencesInYears> 5)
-                {
-                    continue;
-                }
-                else if(AgeDifferencesInYears <= 5)
-                {
-                    Result.Add(U);
-                }
-            }
-            else if (U.UserDOB < p_user.UserDOB)
-            {
-                TimeSpan ageSpan = (U.UserDOB-p_user.UserDOB);
-                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
-                if(AgeDifferencesInYears> 5)
-                {
-                    continue;
-                }
-                else if(AgeDifferencesInYears <= 5)
-                {
-                    Result.Add(U);
-                }
-                
-            }
-            else if (U.UserDOB == p_user.UserDOB)
+            double ageDifferenceInDays = Math.Abs(p_user.UserDOB.Subtract(U.UserDOB).TotalDays);
+            if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID)
             {
                 Result.Add(U);
             }
         }
-
-        return listOfAllUsers;
+        return Result;
     }
 
     public async Task<Photo> AddPhotoAsync(Photo p_photo)
