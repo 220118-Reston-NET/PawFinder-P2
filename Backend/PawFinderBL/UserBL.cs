@@ -146,9 +146,9 @@ public class UserBL : IUserBL
 
         return listOfAllUsers;
     }
-    public List<User> GetPassedUsers(int UserID)
+    public List<int> GetPassedUsersID(int UserID)
     {
-        return _repo.GetPassedUsers(UserID);
+        return _repo.GetPassedUsersID(UserID);
     }
 
     // Async Functions=======================================================================================
@@ -226,13 +226,13 @@ public class UserBL : IUserBL
     public async Task<List<User>> GetPotentialMatchAsync(User p_user)
     {
         List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
-        List<User> listOfPassedUsers = await _repo.GetPassedUsersAsync(p_user.UserID);
+        List<int> listOfPassedUsersID = await _repo.GetPassedUsersIDAsync(p_user.UserID);
         List<User> Result = new List<User>();
 
 
         foreach(var U in listOfAllUsers)
         {
-            bool passed = listOfPassedUsers.Contains(U);
+            bool passed = listOfPassedUsersID.Contains(U.UserID);
             double ageDifferenceInDays = Math.Abs(p_user.UserDOB.Subtract(U.UserDOB).TotalDays);
             if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID && passed == false)
             {
@@ -252,8 +252,8 @@ public class UserBL : IUserBL
         return await _repo.GetPhotobyUserIDAsync(p_userID);
     }
 
-    public async Task<List<User>> GetPassedUsersAsync(int UserID)
+    public async Task<List<int>> GetPassedUsersIDAsync(int UserID)
     {
-        return await _repo.GetPassedUsersAsync(UserID);
+        return await _repo.GetPassedUsersIDAsync(UserID);
     }
 }

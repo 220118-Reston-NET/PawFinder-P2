@@ -128,9 +128,8 @@ public class SQLRepository : IRepository
         }
     }
 
-    public List<User> GetPassedUsers(int UserID)
+    public List<int> GetPassedUsersID(int UserID)
     {
-        List<User> Result = new List<User>();
         List<int> listOfPassedUsersID = new List<int>();
         
         string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
@@ -146,13 +145,10 @@ public class SQLRepository : IRepository
             {
                 listOfPassedUsersID.Add(reader.GetInt32(1));
             }
-            foreach(var ID in listOfPassedUsersID)
-            {   
-                Result.Add(GetUser(ID));
-            }
 
-            return Result;
+            return listOfPassedUsersID;
         }
+
     }
 
     public List<Message> GetConversation(int UserID1, int UserID2)
@@ -496,9 +492,8 @@ public class SQLRepository : IRepository
         return listofPhoto;
     }
 
-    public async Task<List<User>> GetPassedUsersAsync(int UserID)
+    public async Task<List<int>> GetPassedUsersIDAsync(int UserID)
     {
-        List<User> Result = new List<User>();
         List<int> listOfPassedUsersID = new List<int>();
         
         string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
@@ -513,13 +508,10 @@ public class SQLRepository : IRepository
             while (reader.Read())
             {
                 listOfPassedUsersID.Add(reader.GetInt32(1));
-            }
-            foreach(var ID in listOfPassedUsersID)
-            {   
-                Result.Add(GetUser(ID));
+                Console.WriteLine(reader.GetInt32(1));
             }
 
-            return Result;
+            return listOfPassedUsersID;
         }
     }
 }

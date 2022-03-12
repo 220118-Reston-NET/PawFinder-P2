@@ -93,7 +93,14 @@ namespace PawFinderAPI.Controllers
             try
             {
                 Log.Information("Getting List of passed User of user " + UserID);
-                return Ok(await _userBL.GetPassedUsersAsync(UserID));
+                List<int> listOfPassedUsersID = await _userBL.GetPassedUsersIDAsync(UserID);
+                List<User> Result = new List<User>();
+                
+                foreach(var ID in listOfPassedUsersID)
+                {
+                    Result.Add(_userBL.GetUser(ID));
+                }
+                return Ok(Result);
             }
             catch(System.Exception ex)
             {   
