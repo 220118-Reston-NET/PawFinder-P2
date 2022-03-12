@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Users } from '../models/users.model';
 import { throwError } from 'rxjs';
 import { NavbarService } from '../services/navbar.service';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   userGroup = new FormGroup({ })
 
-  constructor(public nav: NavbarService) { }
+  constructor(private router: Router, public nav: NavbarService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.nav.hide();
@@ -32,7 +34,6 @@ export class LoginComponent implements OnInit {
     
     let user:Users = 
     {
-      //userID: 0,
       userName: p_userGroup.get("userName")?.value,
       userPassword: p_userGroup.get("userPassword")?.value,
       userDBO: new Date,
@@ -40,6 +41,8 @@ export class LoginComponent implements OnInit {
       userBreed: "",
       userSize: ""
     }
+
+    this.userService.verifyUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
 
   }
 
