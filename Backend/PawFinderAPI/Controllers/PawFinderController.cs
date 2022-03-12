@@ -198,6 +198,23 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        [HttpPost("AddPassedUserID")]
+        public async Task<IActionResult> AddPassedUserID(int passeeID)
+        {
+            try
+            {
+                int ID = _userBL.AddPassedUserID(CurrentUser.currentuser.UserID,passeeID);
+                Log.Information("Added user to passed users list");
+                return Ok(_userBL.GetUser(ID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
+
         // PUT: api/PawFinder
         [HttpPut("UpdateUser")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)

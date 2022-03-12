@@ -12,6 +12,7 @@ public interface IRepository
     User UpdateUser(User p_user);
     Message AddMessage(Message message);
     List<int> GetPassedUsersID(int UserID);
+    int AddPassedUserID(int passerID, int passeeID);
 
 
     //Async version functions
@@ -70,4 +71,5 @@ public interface IRepository
     Task<Photo> AddPhotoAsync(Photo p_photo);
     Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
     Task<List<int>> GetPassedUsersIDAsync(int UserID);
+    Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
 }

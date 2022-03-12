@@ -238,7 +238,29 @@ public class SQLRepository : IRepository
         return message;
     }
 
+    public int AddPassedUserID(int passerID, int passeeID)
+    {
+        string sqlQuery = @"INSERT INTO PassedUsers
+                            VALUES(@passerID, @passeeID)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@passerID", passerID);
+            command.Parameters.AddWithValue("@passeeID", passeeID);
+
+            command.ExecuteNonQuery();
+        }
+
+        return passeeID;
+    }
+
     //Async versions of functions=================================================================
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public async Task<User> RegisterUserAsync(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
@@ -499,7 +521,7 @@ public class SQLRepository : IRepository
         string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            conn.Open();
+            conn.OpenAsync();
             
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@userID", UserID);
@@ -508,11 +530,29 @@ public class SQLRepository : IRepository
             while (reader.Read())
             {
                 listOfPassedUsersID.Add(reader.GetInt32(1));
-                Console.WriteLine(reader.GetInt32(1));
             }
 
             return listOfPassedUsersID;
         }
+    }
+
+    public async Task<int> AddPassedUserIDAsync(int passerID, int passeeID)
+    {
+        string sqlQuery = @"INSERT INTO PassedUsers
+                            VALUES(@passerID, @passeeID)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.OpenAsync();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@passerID", passerID);
+            command.Parameters.AddWithValue("@passeeID", passeeID);
+
+            command.ExecuteNonQueryAsync();
+        }
+
+        return passeeID;
     }
 }
 
