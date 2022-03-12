@@ -156,6 +156,24 @@ namespace PawFinderAPI.Controllers
             }
         }
 
+        // POST: api/PawFinder/2
+        [HttpPost("Chat")]
+        public async Task<IActionResult> ChatAsync(int ReceiverUserID, Message message)
+        {
+            try
+            {
+                CurrentUser.selecteduser = await _userBL.GetUserAsync(ReceiverUserID);
+                message.ReceiverID = CurrentUser.selecteduser.UserID;
+                message.SenderID = CurrentUser.currentuser.UserID;
+                Log.Information("Successfully added a new message.");
+                return Ok(await _userBL.GetConversationAsync(CurrentUser.currentuser.UserID,CurrentUser.selecteduser.UserID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
         // PUT: api/PawFinder
         [HttpPut("UpdateUser")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
@@ -182,6 +200,7 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
+
 
         [HttpPut("LogIn")]
         public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)

@@ -131,7 +131,7 @@ public class SQLRepository : IRepository
     public List<Message> GetConversation(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE userID1 = @userID1 or userID2 = @userID1 or userID1 = @userID2 or userID2 = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 or senderUserID = @userID2 or receiverID  = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
@@ -338,7 +338,7 @@ public class SQLRepository : IRepository
     public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE userID1 = @userID1 or userID2 = @userID1 or userID1 = @userID2 or userID2 = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 or senderUserID = @userID2 or receiverID  = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             await conn.OpenAsync();
