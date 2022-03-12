@@ -196,7 +196,7 @@ public class SQLRepository : IRepository
     public Message AddMessage(Message message)
     {
         string sqlQuery = @"INSERT INTO ChatMessage
-                            VALUES(@senderID,@receiverID,@messageText, @messageTimeStamp)";
+                            VALUES(@senderID,@receiverID, @message, @messageTimeStamp)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -205,8 +205,8 @@ public class SQLRepository : IRepository
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@senderID", message.SenderID);
             command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
-            command.Parameters.AddWithValue("@messagetext", message.messageText);
-            command.Parameters.AddWithValue("@messagetext", DateTime.Now);
+            command.Parameters.AddWithValue("@message", message.messageText);
+            command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
 
             command.ExecuteNonQuery();
 
@@ -403,7 +403,7 @@ public class SQLRepository : IRepository
     public async Task<Message> AddMessageAsync(Message message)
     {
         string sqlQuery = @"INSERT INTO ChatMessage
-                            VALUES(@senderID,@receiverID,@messageText, @messageTimeStamp)";
+                            VALUES(@senderID,@receiverID,@message, @messageTimeStamp)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -412,8 +412,8 @@ public class SQLRepository : IRepository
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@senderID", message.SenderID);
             command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
-            command.Parameters.AddWithValue("@messagetext", message.messageText);
-            command.Parameters.AddWithValue("@messagetext", DateTime.Now);
+            command.Parameters.AddWithValue("@message", message.messageText);
+            command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
 
             await command.ExecuteNonQueryAsync();
 

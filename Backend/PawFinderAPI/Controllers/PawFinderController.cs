@@ -166,6 +166,7 @@ namespace PawFinderAPI.Controllers
                 message.ReceiverID = CurrentUser.selecteduser.UserID;
                 message.SenderID = CurrentUser.currentuser.UserID;
                 Log.Information("Successfully added a new message.");
+                await _userBL.AddMessageAsync(message);
                 return Ok(await _userBL.GetConversationAsync(CurrentUser.currentuser.UserID,CurrentUser.selecteduser.UserID));
             }
             catch (System.Exception ex)
