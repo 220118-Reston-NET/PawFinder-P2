@@ -109,13 +109,13 @@ public class SQLRepository : IRepository
 
             while (reader.Read())
             {
-                if(reader.GetInt32(1) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(2));
-                }
-                else if(reader.GetInt32(2) == UserID)
+                if(reader.GetInt32(0) == UserID)
                 {
                     listOfMatchedUserID.Add(reader.GetInt32(1));
+                }
+                else if(reader.GetInt32(1) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(0));
                 }
             }
             
@@ -125,6 +125,33 @@ public class SQLRepository : IRepository
             }
 
             return listOfMatchedUser;
+        }
+    }
+
+    public List<User> GetPassedUsers(int UserID)
+    {
+        List<User> Result = new List<User>();
+        List<int> listOfPassedUsersID = new List<int>();
+        
+        string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listOfPassedUsersID.Add(reader.GetInt32(1));
+            }
+            foreach(var ID in listOfPassedUsersID)
+            {   
+                Result.Add(GetUser(ID));
+            }
+
+            return Result;
         }
     }
 
@@ -467,6 +494,33 @@ public class SQLRepository : IRepository
             }
         }
         return listofPhoto;
+    }
+
+    public async Task<List<User>> GetPassedUsersAsync(int UserID)
+    {
+        List<User> Result = new List<User>();
+        List<int> listOfPassedUsersID = new List<int>();
+        
+        string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                listOfPassedUsersID.Add(reader.GetInt32(1));
+            }
+            foreach(var ID in listOfPassedUsersID)
+            {   
+                Result.Add(GetUser(ID));
+            }
+
+            return Result;
+        }
     }
 }
 

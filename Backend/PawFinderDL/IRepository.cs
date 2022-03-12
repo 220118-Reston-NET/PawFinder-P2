@@ -11,6 +11,7 @@ public interface IRepository
     List<Message> GetConversation(int UserID1, int UserID2);
     User UpdateUser(User p_user);
     Message AddMessage(Message message);
+    List<User> GetPassedUsers(int UserID);
 
 
     //Async version functions
@@ -21,6 +22,7 @@ public interface IRepository
     /// </summary>
     /// <param name="p_user"></param>
     /// <returns> Returns a user that was added. </returns>
+    /// 
     Task<User> RegisterUserAsync(User p_user);
 
     /// <summary>
@@ -67,5 +69,5 @@ public interface IRepository
 
     Task<Photo> AddPhotoAsync(Photo p_photo);
     Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
-
+    Task<List<User>> GetPassedUsersAsync(int UserID);
 }

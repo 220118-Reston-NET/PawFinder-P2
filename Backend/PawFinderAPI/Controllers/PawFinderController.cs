@@ -87,6 +87,21 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+        [HttpGet("GetPassedUsers")]
+        public async Task<IActionResult> GetPassedUserAsync(int UserID)
+        {
+            try
+            {
+                Log.Information("Getting List of passed User of user " + UserID);
+                return Ok(await _userBL.GetPassedUsersAsync(UserID));
+            }
+            catch(System.Exception ex)
+            {   
+                Log.Warning("Error occured getting list of Passed users");
+                return Conflict(ex.Message);
+            }
+        }
+
         // GET: api/PawFinder/4
         [HttpGet("GetConversation")]
         public async Task<IActionResult> GetConversationAsync([FromQuery] int UserID1, int UserID2)

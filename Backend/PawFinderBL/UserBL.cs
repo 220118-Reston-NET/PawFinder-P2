@@ -146,6 +146,10 @@ public class UserBL : IUserBL
 
         return listOfAllUsers;
     }
+    public List<User> GetPassedUsers(int UserID)
+    {
+        return _repo.GetPassedUsers(UserID);
+    }
 
     // Async Functions=======================================================================================
     public async Task<List<User>> GetAllUsersAsync()
@@ -168,7 +172,6 @@ public class UserBL : IUserBL
                 throw new Exception("UserName already exist.");
             }
         }
-
         if (p_user.UserName is null)
         {
             throw new Exception("User Name is empty");
@@ -223,12 +226,15 @@ public class UserBL : IUserBL
     public async Task<List<User>> GetPotentialMatchAsync(User p_user)
     {
         List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
+        List<User> listOfPassedUsers = await _repo.GetPassedUsersAsync(p_user.UserID);
         List<User> Result = new List<User>();
+
 
         foreach(var U in listOfAllUsers)
         {
+            bool passed = listOfPassedUsers.Contains(U);
             double ageDifferenceInDays = Math.Abs(p_user.UserDOB.Subtract(U.UserDOB).TotalDays);
-            if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID)
+            if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID && passed == false)
             {
                 Result.Add(U);
             }
@@ -246,4 +252,8 @@ public class UserBL : IUserBL
         return await _repo.GetPhotobyUserIDAsync(p_userID);
     }
 
+    public async Task<List<User>> GetPassedUsersAsync(int UserID)
+    {
+        return await _repo.GetPassedUsersAsync(UserID);
+    }
 }
