@@ -75,8 +75,6 @@ public class UserTest
         //Arrange
         User newUser = new User();
         DateTime userDOB = DateTime.Today;
-        string photoURL = "test.com";
-
 
         //Act
         newUser.UserDOB = userDOB;
