@@ -14,6 +14,10 @@ public interface IUserBL
     Message AddMessage(Message message);
     List<User> GetPotentialMatch(User p_user);
 
+    List<int> GetPassedUsersID(int UserID);
+
+    int AddPassedUserID(int passerID, int passeeID);
+
 
     //Async version functions
 
@@ -82,5 +86,8 @@ public interface IUserBL
 
     Task<Photo> AddPhotoAsync(Photo p_photo);
     Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
+    Task<List<int>> GetPassedUsersIDAsync(int UserID);
+
+    Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
 
 }
