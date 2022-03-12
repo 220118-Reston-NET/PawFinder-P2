@@ -316,13 +316,13 @@ public class SQLRepository : IRepository
 
             while (reader.Read())
             {
-                if(reader.GetInt32(1) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(2));
-                }
-                else if(reader.GetInt32(2) == UserID)
+                if(reader.GetInt32(0) == UserID)
                 {
                     listOfMatchedUserID.Add(reader.GetInt32(1));
+                }
+                else if(reader.GetInt32(1) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(0));
                 }
             }
             

@@ -70,6 +70,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+
         // GET: api/PawFinder/3
         [HttpGet("ViewMatchedUser")]
         public async Task<IActionResult> ViewMatchedUserAsync([FromQuery] int userID)
