@@ -373,6 +373,7 @@ public class UserTestSecond
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
         List<User> newList = new List<User>();
+        
 
         mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
         mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);

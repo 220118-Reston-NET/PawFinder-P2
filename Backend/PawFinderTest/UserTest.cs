@@ -458,6 +458,48 @@ public class UserTest
     }
 
     [Fact]
+    public void GetPassedUsersID()
+    {
+        //Arrange
+        List<int> expectedList = new List<int>();
+        expectedList.Add(11111);
+        expectedList.Add(22222);
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        
+        //mockRepo.Setup(repo => repo.GetAllUsers()).Returns(expectedList);
+        mockRepo.Setup(repo => repo.GetPassedUsersID(00000)).Returns(expectedList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        List<int> actualList = userBL.GetPassedUsersID(00000);
+
+        //Assert
+        Assert.Equal(expectedList, actualList);
+    }
+
+    [Fact]
+    public void AddPassedUserID()
+    {
+        //Arrange
+        int expectedResult = 11111;
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        
+        //mockRepo.Setup(repo => repo.GetAllUsers()).Returns(expectedList);
+        mockRepo.Setup(repo => repo.AddPassedUserID(00000,11111)).Returns(expectedResult);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        int actualResult = userBL.AddPassedUserID(00000,11111);
+
+        //Assert
+        Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Fact]
     public async Task GetAllUsersAsync()
     {
         //Arrange
@@ -761,6 +803,48 @@ public class UserTest
 
         //Assert
         Assert.Equal(expectedList, actualList);
+    }
+
+    [Fact]
+    public async Task GetPassedUsersIDAsync()
+    {
+        //Arrange
+        List<int> expectedList = new List<int>();
+        expectedList.Add(11111);
+        expectedList.Add(22222);
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        
+        //mockRepo.Setup(repo => repo.GetAllUsers()).Returns(expectedList);
+        mockRepo.Setup(repo => repo.GetPassedUsersIDAsync(00000)).ReturnsAsync(expectedList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        List<int> actualList = await userBL.GetPassedUsersIDAsync(00000);
+
+        //Assert
+        Assert.Equal(expectedList, actualList);
+    }
+
+    [Fact]
+    public async Task AddPassedUserIDAsync()
+    {
+        //Arrange
+        int expectedResult = 11111;
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        
+        //mockRepo.Setup(repo => repo.GetAllUsers()).Returns(expectedList);
+        mockRepo.Setup(repo => repo.AddPassedUserIDAsync(00000,11111)).ReturnsAsync(expectedResult);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        int actualResult = await userBL.AddPassedUserIDAsync(00000,11111);
+
+        //Assert
+        Assert.Equal(expectedResult, actualResult);
     }
     
 }
