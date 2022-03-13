@@ -14,4 +14,19 @@ export class UserService {
     return this.http.post<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/RegisterUser", user);
   }
 
+  updateUser(user: Users)
+  {
+    return this.http.put<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/UpdateUser", user);
+  }
+
+  getPotentialMatch(p_userID:number)
+  {
+    return this.http.get("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetPotentialMatch?UserID=" + p_userID)
+  }
+
+  getAllUsers()
+  {
+    return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers");
+  }
+
 }
