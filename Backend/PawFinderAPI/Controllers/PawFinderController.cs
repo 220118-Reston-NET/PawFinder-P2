@@ -254,7 +254,6 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-
         [HttpGet("LogIn")]
         public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)
         {

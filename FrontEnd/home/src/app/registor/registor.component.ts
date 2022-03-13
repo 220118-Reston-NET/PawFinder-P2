@@ -20,9 +20,8 @@ export class RegistorComponent implements OnInit{
     userDBO: new FormControl(""),
     userBio:new FormControl(""),
     userBreed:new FormControl(""),
-    userSize:new FormControl("")
-    
-});
+    userSize:new FormControl("")    
+  });
 
   show:boolean = false;
   
@@ -49,15 +48,14 @@ export class RegistorComponent implements OnInit{
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
     }
-    
-    this.userService.addUser(user).subscribe();
-    //this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Match"])}});
-    
+  
+    this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
+
   }
 
   Registor() 
   {
-    this.router.navigate(["/registor"]);
+    this.router.navigate(["/Registor"]);
   }
 
 }

@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
  userName:string | null = "No users Selected";
 // Users:PawfinderApi;
  Users: any;
-  constructor(private router:ActivatedRoute , private PawService:PawfinderService, public nav: NavbarService) {
+  constructor(private router:ActivatedRoute, private PawService:PawfinderService, public nav: NavbarService) {
     this.Users={ sprites: {
       back_default:"",
       back_shiny:"",

@@ -1,7 +1,7 @@
 export interface Users
 {
     userName:string;
-    userPassword:number;
+    userPassword:string;
     userDBO:Date;
     userBio:string;
     userBreed:string;
