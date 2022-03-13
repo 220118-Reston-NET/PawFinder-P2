@@ -257,6 +257,27 @@ public class SQLRepository : IRepository
         return passeeID;
     }
 
+    public User AddLikedUser(int LikerID, int LikedID)
+    {
+        User result = GetUser(LikedID);
+
+        string sqlQuery = "Insert Into LikedUsers Values(@LikerID, @LikedID)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@LikerID", LikerID);
+            command.Parameters.AddWithValue("@LikedID", LikedID);
+            command.ExecuteNonQuery();
+        }
+
+        return result;
+
+    }
+
+
     //Async versions of functions=================================================================
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -553,6 +574,25 @@ public class SQLRepository : IRepository
         }
 
         return passeeID;
+    }
+
+    public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
+    {
+        User result = GetUser(LikedID);
+
+        string sqlQuery = "Insert Into LikedUsers Values(@LikerID, @LikedID)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.OpenAsync();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@LikerID", LikerID);
+            command.Parameters.AddWithValue("@LikedID", LikedID);
+            command.ExecuteNonQueryAsync();
+        }
+        
+        return result;
     }
 }
 

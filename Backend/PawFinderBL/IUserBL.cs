@@ -18,6 +18,7 @@ public interface IUserBL
 
     int AddPassedUserID(int passerID, int passeeID);
 
+    User AddLikedUser(int LikerID, int LikedID);
 
     //Async version functions
 
@@ -89,5 +90,8 @@ public interface IUserBL
     Task<List<int>> GetPassedUsersIDAsync(int UserID);
 
     Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
+    Task<User> AddLikedUserAsync(int LikerID, int LikedID);
+
+
 
 }
