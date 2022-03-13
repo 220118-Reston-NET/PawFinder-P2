@@ -13,6 +13,7 @@ public interface IRepository
     Message AddMessage(Message message);
     List<int> GetPassedUsersID(int UserID);
     int AddPassedUserID(int passerID, int passeeID);
+    User AddLikedUser(int LikerID, int LikedID);
 
 
     //Async version functions
@@ -72,4 +73,5 @@ public interface IRepository
     Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID);
     Task<List<int>> GetPassedUsersIDAsync(int UserID);
     Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
+    Task<User> AddLikedUserAsync(int LikerID, int LikedID);
 }
