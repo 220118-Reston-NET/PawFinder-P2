@@ -50,7 +50,6 @@ namespace PawFinderAPI.Controllers
                 Log.Warning("Could not find a list of users.");
                 return NotFound();
             }
-            
         }
 
 
@@ -127,12 +126,12 @@ namespace PawFinderAPI.Controllers
 
         // GET: api/PawFinder/4
         [HttpGet("GetPotentialMatch")]
-        public async Task<IActionResult> GetPotentialMatchAsync()
+        public async Task<IActionResult> GetPotentialMatchAsync(int UserID)
         {
             try
             {
                 Log.Information("Successfully returned list of potential matches");
-                return Ok(await _userBL.GetPotentialMatchAsync(CurrentUser.currentuser));
+                return Ok(await _userBL.GetPotentialMatchAsync(await _userBL.GetUserAsync(UserID)));
             }
             catch (System.Exception ex)
             {
@@ -181,16 +180,13 @@ namespace PawFinderAPI.Controllers
 
         // POST: api/PawFinder/2
         [HttpPost("Chat")]
-        public async Task<IActionResult> ChatAsync(int ReceiverUserID, Message message)
+        public async Task<IActionResult> ChatAsync(int SenderID,int ReceiverUserID, Message message)
         {
             try
             {
-                CurrentUser.selecteduser = await _userBL.GetUserAsync(ReceiverUserID);
-                message.ReceiverID = CurrentUser.selecteduser.UserID;
-                message.SenderID = CurrentUser.currentuser.UserID;
                 Log.Information("Successfully added a new message.");
                 await _userBL.AddMessageAsync(message);
-                return Ok(await _userBL.GetConversationAsync(CurrentUser.currentuser.UserID,CurrentUser.selecteduser.UserID));
+                return Ok(await _userBL.GetConversationAsync(SenderID,ReceiverUserID));
             }
             catch (System.Exception ex)
             {
@@ -200,11 +196,11 @@ namespace PawFinderAPI.Controllers
         }
 
         [HttpPost("AddPassedUserID")]
-        public async Task<IActionResult> AddPassedUserID(int passeeID)
+        public async Task<IActionResult> AddPassedUserID(int passerID,int passeeID)
         {
             try
             {
-                int ID = _userBL.AddPassedUserID(CurrentUser.currentuser.UserID,passeeID);
+                int ID = _userBL.AddPassedUserID(passerID,passeeID);
                 Log.Information("Added user to passed users list");
                 return Ok(_userBL.GetUser(ID));
             }
@@ -253,7 +249,6 @@ namespace PawFinderAPI.Controllers
                     if(User.UserPassword == PasswordInput)
                     {
                         Log.Information("Logged in as user: " + User.UserID);
-                        CurrentUser.currentuser = User;
                         return Ok(User);
                     }
                     else
@@ -266,24 +261,6 @@ namespace PawFinderAPI.Controllers
             Log.Warning("Incorrect username");
             return Conflict();
         }
-        [HttpDelete("LogOut")]
-        public async Task<IActionResult> LogOutAsync()
-        {
-            try
-            {
-                CurrentUser.currentuser = new User();
-                Log.Information("Log out successful");
-                return Ok(CurrentUser.currentuser );
-            }
-            catch
-            {
-                Log.Warning("Error logging out");
-                return Conflict();
-            }
-        }
-
-
-
 
 
     }
