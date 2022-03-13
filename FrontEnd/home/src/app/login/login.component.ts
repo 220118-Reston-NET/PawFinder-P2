@@ -5,6 +5,7 @@ import { throwError } from 'rxjs';
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,12 @@ export class LoginComponent implements OnInit {
   show:boolean = false;
   trySubmit:String = "";
 
-  userGroup = new FormGroup({ })
+  p_userName:String = "";
+  p_userPW:String = "";
 
-  constructor(private router: Router, public nav: NavbarService, private userService: UserService) { }
+  loginGroup = new FormGroup({ })
+
+  constructor(private router: Router, public nav: NavbarService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.nav.hide();
@@ -29,20 +33,20 @@ export class LoginComponent implements OnInit {
     this.show = !this.show;
   } 
 
-  checkUser(p_userGroup:FormGroup)
+  checkUser(p_loginGroup:FormGroup)
   {
     
-    let user:Users = 
+    let loginGroup:Users =
     {
-      userName: p_userGroup.get("userName")?.value,
-      userPassword: p_userGroup.get("userPassword")?.value,
+      userName:p_loginGroup.get("userName")?.value,
+      userPassword:p_loginGroup.get("userPassword")?.value,
       userDBO: new Date,
-      userBio: "",
-      userBreed: "",
-      userSize: ""
+      userBio:"",
+      userBreed:"",
+      userSize: "",
     }
 
-    this.userService.verifyUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
+    this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
 
   }
 
