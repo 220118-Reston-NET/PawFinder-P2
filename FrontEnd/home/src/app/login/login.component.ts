@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Users } from '../models/users.model';
-import { throwError } from 'rxjs';
 import { NavbarService } from '../services/navbar.service';
-import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
@@ -45,8 +43,8 @@ export class LoginComponent implements OnInit {
       userName:p_loginGroup.get("userName")?.value,
       userPassword:p_loginGroup.get("userPassword")?.value,
       userDBO: new Date,
-      userBio:"",
-      userBreed:"",
+      userBio: "",
+      userBreed: "",
       userSize: "",
     }
 
