@@ -162,6 +162,22 @@ namespace PawFinderAPI.Controllers
             }
         }
 
+        // POST: api/PawFinder
+        [HttpPost("AddLikedUser")]
+        public async Task<IActionResult> AddLikedUserAsync(int LikerID, int LikedID)
+        {
+            try
+            {
+                Log.Information("Successfully added liked user");
+                return Ok(await _userBL.AddLikedUserAsync(LikerID, LikedID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Error adding Liked User");
+                return Conflict(ex.Message);
+            }
+        }
+
         // POST: api/PawFinder/2
         [HttpPost("AddMessage")]
         public async Task<IActionResult> AddMessageAsync([FromBody] Message message)
@@ -239,7 +255,7 @@ namespace PawFinderAPI.Controllers
         }
 
 
-        [HttpPut("LogIn")]
+        [HttpGet("LogIn")]
         public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)
         {
             List<User> ListOfAllUsers = await _userBL.GetAllUsersAsync();
