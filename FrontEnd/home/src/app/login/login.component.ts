@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Users } from '../models/users.model';
 import { throwError } from 'rxjs';
 import { NavbarService } from '../services/navbar.service';
@@ -17,10 +17,14 @@ export class LoginComponent implements OnInit {
   show:boolean = false;
   trySubmit:String = "";
 
-  p_userName:String = "";
-  p_userPW:String = "";
-
-  loginGroup = new FormGroup({ })
+  loginGroup= new FormGroup({
+    userName: new FormControl(""),
+    userPassword:new FormControl(""),
+    userDBO: new FormControl(""),
+    userBio:new FormControl(""),
+    userBreed:new FormControl(""),
+    userSize:new FormControl("")
+  });
 
   constructor(private router: Router, public nav: NavbarService, private loginService: LoginService) { }
 
@@ -49,6 +53,5 @@ export class LoginComponent implements OnInit {
     this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
 
   }
-
 
 }

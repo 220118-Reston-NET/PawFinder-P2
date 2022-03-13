@@ -20,9 +20,8 @@ export class RegistorComponent implements OnInit{
     userDBO: new FormControl(""),
     userBio:new FormControl(""),
     userBreed:new FormControl(""),
-    userSize:new FormControl("")
-    
-});
+    userSize:new FormControl("")    
+  });
 
   show:boolean = false;
   
