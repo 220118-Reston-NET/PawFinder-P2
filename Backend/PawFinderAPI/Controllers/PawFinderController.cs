@@ -70,6 +70,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+
         // GET: api/PawFinder/3
         [HttpGet("ViewMatchedUser")]
         public async Task<IActionResult> ViewMatchedUserAsync([FromQuery] int userID)
@@ -84,6 +85,28 @@ namespace PawFinderAPI.Controllers
                 Log.Warning("Could not find the matched user.");
                 return NotFound();
             } 
+        }
+
+        [HttpGet("GetPassedUsers")]
+        public async Task<IActionResult> GetPassedUserAsync(int UserID)
+        {
+            try
+            {
+                Log.Information("Getting List of passed User of user " + UserID);
+                List<int> listOfPassedUsersID = await _userBL.GetPassedUsersIDAsync(UserID);
+                List<User> Result = new List<User>();
+                
+                foreach(var ID in listOfPassedUsersID)
+                {
+                    Result.Add(_userBL.GetUser(ID));
+                }
+                return Ok(Result);
+            }
+            catch(System.Exception ex)
+            {   
+                Log.Warning("Error occured getting list of Passed users");
+                return Conflict(ex.Message);
+            }
         }
 
         // GET: api/PawFinder/4
@@ -104,17 +127,17 @@ namespace PawFinderAPI.Controllers
 
         // GET: api/PawFinder/4
         [HttpGet("GetPotentialMatch")]
-        public async Task<IActionResult> GetPotentialMatchAsync([FromBody] User p_user)
+        public async Task<IActionResult> GetPotentialMatchAsync()
         {
             try
             {
-                Log.Information("Successfully returned conversation between users.");
-                return Ok(await _userBL.GetPotentialMatchAsync(p_user));
+                Log.Information("Successfully returned list of potential matches");
+                return Ok(await _userBL.GetPotentialMatchAsync(CurrentUser.currentuser));
             }
-            catch (SqlException)
+            catch (System.Exception ex)
             {
-                Log.Warning("Could not find an existing conversation between users.");
-                return NotFound();
+                Log.Warning("Failed to return list of potential matches");
+                return Conflict(ex.Message);
             } 
         }
 
@@ -156,6 +179,42 @@ namespace PawFinderAPI.Controllers
             }
         }
 
+        // POST: api/PawFinder/2
+        [HttpPost("Chat")]
+        public async Task<IActionResult> ChatAsync(int ReceiverUserID, Message message)
+        {
+            try
+            {
+                CurrentUser.selecteduser = await _userBL.GetUserAsync(ReceiverUserID);
+                message.ReceiverID = CurrentUser.selecteduser.UserID;
+                message.SenderID = CurrentUser.currentuser.UserID;
+                Log.Information("Successfully added a new message.");
+                await _userBL.AddMessageAsync(message);
+                return Ok(await _userBL.GetConversationAsync(CurrentUser.currentuser.UserID,CurrentUser.selecteduser.UserID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPost("AddPassedUserID")]
+        public async Task<IActionResult> AddPassedUserID(int passeeID)
+        {
+            try
+            {
+                int ID = _userBL.AddPassedUserID(CurrentUser.currentuser.UserID,passeeID);
+                Log.Information("Added user to passed users list");
+                return Ok(_userBL.GetUser(ID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
+
         // PUT: api/PawFinder
         [HttpPut("UpdateUser")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
@@ -182,6 +241,7 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
+
 
         [HttpPut("LogIn")]
         public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)
@@ -222,6 +282,8 @@ namespace PawFinderAPI.Controllers
                 return Conflict();
             }
         }
+
+
 
 
 

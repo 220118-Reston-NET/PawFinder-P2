@@ -109,13 +109,13 @@ public class SQLRepository : IRepository
 
             while (reader.Read())
             {
-                if(reader.GetInt32(1) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(2));
-                }
-                else if(reader.GetInt32(2) == UserID)
+                if(reader.GetInt32(0) == UserID)
                 {
                     listOfMatchedUserID.Add(reader.GetInt32(1));
+                }
+                else if(reader.GetInt32(1) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(0));
                 }
             }
             
@@ -128,10 +128,33 @@ public class SQLRepository : IRepository
         }
     }
 
+    public List<int> GetPassedUsersID(int UserID)
+    {
+        List<int> listOfPassedUsersID = new List<int>();
+        
+        string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listOfPassedUsersID.Add(reader.GetInt32(1));
+            }
+
+            return listOfPassedUsersID;
+        }
+
+    }
+
     public List<Message> GetConversation(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE userID1 = @userID1 or userID2 = @userID1 or userID1 = @userID2 or userID2 = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 or senderUserID = @userID2 or receiverID  = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
@@ -196,7 +219,7 @@ public class SQLRepository : IRepository
     public Message AddMessage(Message message)
     {
         string sqlQuery = @"INSERT INTO ChatMessage
-                            VALUES(@senderID,@receiverID,@messageText, @messageTimeStamp)";
+                            VALUES(@senderID,@receiverID, @message, @messageTimeStamp)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -205,8 +228,8 @@ public class SQLRepository : IRepository
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@senderID", message.SenderID);
             command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
-            command.Parameters.AddWithValue("@messagetext", message.messageText);
-            command.Parameters.AddWithValue("@messagetext", DateTime.Now);
+            command.Parameters.AddWithValue("@message", message.messageText);
+            command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
 
             command.ExecuteNonQuery();
 
@@ -215,7 +238,29 @@ public class SQLRepository : IRepository
         return message;
     }
 
+    public int AddPassedUserID(int passerID, int passeeID)
+    {
+        string sqlQuery = @"INSERT INTO PassedUsers
+                            VALUES(@passerID, @passeeID)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@passerID", passerID);
+            command.Parameters.AddWithValue("@passeeID", passeeID);
+
+            command.ExecuteNonQuery();
+        }
+
+        return passeeID;
+    }
+
     //Async versions of functions=================================================================
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public async Task<User> RegisterUserAsync(User p_user)
     {
         string sqlQuery = @"INSERT INTO Users
@@ -316,13 +361,13 @@ public class SQLRepository : IRepository
 
             while (reader.Read())
             {
-                if(reader.GetInt32(1) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(2));
-                }
-                else if(reader.GetInt32(2) == UserID)
+                if(reader.GetInt32(0) == UserID)
                 {
                     listOfMatchedUserID.Add(reader.GetInt32(1));
+                }
+                else if(reader.GetInt32(1) == UserID)
+                {
+                    listOfMatchedUserID.Add(reader.GetInt32(0));
                 }
             }
             
@@ -338,7 +383,7 @@ public class SQLRepository : IRepository
     public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE userID1 = @userID1 or userID2 = @userID1 or userID1 = @userID2 or userID2 = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 or senderUserID = @userID2 or receiverID  = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             await conn.OpenAsync();
@@ -403,7 +448,7 @@ public class SQLRepository : IRepository
     public async Task<Message> AddMessageAsync(Message message)
     {
         string sqlQuery = @"INSERT INTO ChatMessage
-                            VALUES(@senderID,@receiverID,@messageText, @messageTimeStamp)";
+                            VALUES(@senderID,@receiverID,@message, @messageTimeStamp)";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
@@ -412,8 +457,8 @@ public class SQLRepository : IRepository
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@senderID", message.SenderID);
             command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
-            command.Parameters.AddWithValue("@messagetext", message.messageText);
-            command.Parameters.AddWithValue("@messagetext", DateTime.Now);
+            command.Parameters.AddWithValue("@message", message.messageText);
+            command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
 
             await command.ExecuteNonQueryAsync();
 
@@ -467,6 +512,47 @@ public class SQLRepository : IRepository
             }
         }
         return listofPhoto;
+    }
+
+    public async Task<List<int>> GetPassedUsersIDAsync(int UserID)
+    {
+        List<int> listOfPassedUsersID = new List<int>();
+        
+        string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.OpenAsync();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                listOfPassedUsersID.Add(reader.GetInt32(1));
+            }
+
+            return listOfPassedUsersID;
+        }
+    }
+
+    public async Task<int> AddPassedUserIDAsync(int passerID, int passeeID)
+    {
+        string sqlQuery = @"INSERT INTO PassedUsers
+                            VALUES(@passerID, @passeeID)";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.OpenAsync();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@passerID", passerID);
+            command.Parameters.AddWithValue("@passeeID", passeeID);
+
+            command.ExecuteNonQueryAsync();
+        }
+
+        return passeeID;
     }
 }
 
