@@ -12,7 +12,7 @@ public class Message
     {
         SenderID = 0;
         ReceiverID = 0;
-        messageText = "";
-        messageTimeStamp = DateTime.UtcNow;
+        messageTimeStamp = new DateTime();
+
     }
 }
