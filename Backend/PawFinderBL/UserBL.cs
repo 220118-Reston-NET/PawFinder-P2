@@ -212,6 +212,32 @@ public class UserBL : IUserBL
                          .ToList();
     }
 
+    public async Task<List<User>> SearchPassedUserAsync(int passerID, int passeeID)
+    {
+        List<int> ListOfPassedUsers = await _repo.GetPassedUsersIDAsync(passerID);
+        List<User> Result = new List<User>();
+                
+        foreach(var item in ListOfPassedUsers)
+        {
+            Result.Add(await _repo.GetUserAsync(item));
+        }
+
+        return Result
+                .Where(user => user.UserID.Equals(passeeID))
+                .ToList();
+        
+    }
+
+    public async Task<List<Like>> SearchLikedUserAsync(int LikerID, int LikedID)
+    {
+        List<Like> ListOfLikedUsers = await _repo.GetLikedUserAsync(LikerID);
+
+        return ListOfLikedUsers
+                .Where(like => like.LikedID.Equals(LikedID))
+                .ToList();
+        
+    }
+
     public async Task<List<User>> ViewMatchedUserAsync(int userID)
     {
         return await _repo.ViewMatchedUserAsync(userID);

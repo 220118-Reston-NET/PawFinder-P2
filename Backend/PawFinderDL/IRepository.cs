@@ -74,4 +74,5 @@ public interface IRepository
     Task<List<int>> GetPassedUsersIDAsync(int UserID);
     Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
     Task<User> AddLikedUserAsync(int LikerID, int LikedID);
+    Task<List<Like>> GetLikedUserAsync(int UserID);
 }
