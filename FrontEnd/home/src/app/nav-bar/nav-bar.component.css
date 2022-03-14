@@ -1,0 +1,13 @@
+
+li:hover{
+  background-color: rgba(24, 27, 24, 0.719);
+  border-radius: 10%;
+ 
+}
+a:hover{
+      -webkit-background-composite: border;
+}
+  
+nav{
+    background-color: rgba(0, 0, 0, 0.582);
+}

@@ -1,26 +1,74 @@
 
-<h1>{{title}}</h1>
+<app-nav-bar></app-nav-bar>
 
-<!-- <img [src]="src1"> -->
-<div class=" ">
-    
-        <ul>
-            <li>userName</li>
-            <li>UserBio</li>
-            <li [ngStyle]="{color:isVisible ? 'black': 'red'}">
-                Image
-                <button (click)="changeVisible()" class="btn btn-primary">Hide</button>
-            </li>
-        </ul>
-    <div>
-        <ul *ngFor="let user of filteredListOfUser">
-            <li>{{user.userName}}</li>
-            <li>{{user.userName | uppercase}}</li>
-            <!-- <li>{{user.Bio}}</li> -->
-            <li><app-like></app-like></li>
-            <li>
-                <!-- <img *ngIf="isVisible" [src] = "user.sprites.front_default"> -->
-            </li>
-        </ul>
-    </div>
-</div>
+<ul *ngFor="let user of filteredListOfUser">
+    <li >
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="card">
+                <div class="profile">
+                    <div class="user text-center">
+                        <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
+                            class="rounded-rectangle" width="100%" alt="profile">
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h1><strong>Name:</strong> {{user.userName}}</h1>
+                    <h2><strong>Bio: </strong> {{user.userBio}}</h2>
+                    <h2><strong>Bread: </strong>{{user.userBreed}}</h2>
+                    <h2><strong>Size: </strong> {{user.userSize}}</h2>
+                    <div class="d-flex justify-content-between align-items-center mt-4 px-4 "
+                        style="margin-bottom:1.5rem;">
+                        <div class="stats">
+
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <button class="favorite styled btn-danger" type="button"
+                                                data-toggle="popover" title="Go-back" Back><i
+                                                    class="material-icons">arrow_back</i></button>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" routLink="/Chat" aria-label="Next">
+                                            <button class="favorite styled btn-success" type="button"
+                                                data-toggle="popover" title="Chat" chat><i
+                                                    class="material-icons">chat</i>
+                                            </button>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" routerLink="/Match" aria-label="Next">
+                                            <button class="favorite styled btn-primary" type="button"
+                                                data-toggle="popover" title="Match" match><i
+                                                    class="material-icons ">favorite</i>
+                                            </button>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" routerLink="/Users" styel="font-weight:">
+                                            <button type="button" class="btn btn-sm btn-danger">
+                                                <!--(click)="likeCliked(user)">{{}} -->
+                                                Like
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                            </button>
+                                        </a>
+                                    </li>
+
+                                    <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <button class="favorite styled btn-dark" type="button" data-toggle="popover"
+                                                title="Pass" pass><i class="material-icons">arrow_forward</i></button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </li>
+</ul>

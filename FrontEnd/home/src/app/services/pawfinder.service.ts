@@ -10,12 +10,18 @@ import { Users } from '../models/users.model';
 export class PawfinderService {
 
   constructor(private http:HttpClient) { }
-  getAllUsers()
+  getAllUsers(): Observable<Users[]>
   {
-    return this.http.get<Users[]>("Url");
+    return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers");
   }
-  getAllMatch()
+  getAllMatch():Observable<Match[]>
   {
-    return this.http.get<Match[]>("url");
+    return this.http.get<Match[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/ViewMatchedUser?userID=1");
   }
+   public uploadfile(file: File) 
+   {
+        let formParams = new FormData();
+        formParams.append('file', file)
+        return this.http.post('https://pawfinderwebapp.azurewebsites.net/api/PawFinder/RegisterUser', formParams)
+   }
 }

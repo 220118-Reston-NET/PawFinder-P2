@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http'
-
+import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -17,12 +17,15 @@ import { ChatComponent } from './chat/chat.component';
 import { UserComponent } from './user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundError } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomePageComponent,
     LoginComponent,
     ProfileComponent,
     NavBarComponent,
@@ -32,7 +35,7 @@ import { NotFoundError } from 'rxjs';
     PassComponent,
     ChatComponent,
     UserComponent,
-
+    HomePageComponent,
     NavBarComponent
   ],
   imports: [
@@ -41,11 +44,14 @@ import { NotFoundError } from 'rxjs';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
 
     
     RouterModule.forRoot([
       // { path: "", redirectTo: "/login", pathMatch: "full" },
+      {path: "HomePage", component: HomePageComponent}, 
       {path: "Profile", component: ProfileComponent}, 
+     {path: "Users", component: UserComponent},
       {path: "Match", component: MatchComponent}, 
       {path: "Pass", component:PassComponent},
       {path: "Chat", component:ChatComponent},
