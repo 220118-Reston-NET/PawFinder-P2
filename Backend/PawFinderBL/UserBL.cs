@@ -66,7 +66,6 @@ public class UserBL : IUserBL
              return ListOfUsers
                          .Where(user => user.UserName.Contains(p_name))
                          .ToList();
-        
     }
 
     public List<User> ViewMatchedUser(int userID)
@@ -78,24 +77,6 @@ public class UserBL : IUserBL
     {
         return _repo.GetConversation(UserID1, UserID2);
     }
-
-
-    // public string GenerateFileName(string fileName, string userName)
-    // {
-    //     try
-    //     {
-    //         string strFileName = string.Empty;
-    //         string[] strName = fileName.Split('.');
-    //         strFileName = userName + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd") + "/"
-    //             + DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." +
-    //             strName[strName.Length - 1];
-    //         return strFileName;
-    //     }
-    //     catch (Exception)
-    //     {
-    //         return fileName;
-    //     }
-    // }
 
     public User UpdateUser(User user)
     {
@@ -248,7 +229,6 @@ public class UserBL : IUserBL
         return Result
                 .Where(user => user.UserID.Equals(passeeID))
                 .ToList();
-        
     }
 
     public async Task<List<Like>> SearchLikedUserAsync(int LikerID, int LikedID)
@@ -258,7 +238,6 @@ public class UserBL : IUserBL
         return ListOfLikedUsers
                 .Where(like => like.LikedID.Equals(LikedID))
                 .ToList();
-        
     }
 
     public async Task<List<User>> ViewMatchedUserAsync(int userID)
@@ -336,5 +315,10 @@ public class UserBL : IUserBL
         }
 
         return await _repo.AddLikedUserAsync(LikerID, LikedID);
+    }
+
+    public async Task<List<Like>> GetLikedUserAsync(int UserID)
+    {
+        return await _repo.GetLikedUserAsync(UserID);
     }
 }

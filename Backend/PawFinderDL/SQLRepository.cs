@@ -303,7 +303,6 @@ public class SQLRepository : IRepository
         }
 
         return result;
-
     }
 
     public Match AddMatch(int p_UserID1, int p_UserID2)
