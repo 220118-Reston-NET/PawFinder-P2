@@ -11,7 +11,6 @@ export class LoginService {
 
   verifyUser(userNameLogin:string, userPasswordLogin:string)
   {
-
     return this.http.get("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/LogIn?UserNameInput="+userNameLogin+"&PasswordInput="+userPasswordLogin);
   }
 

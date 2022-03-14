@@ -155,6 +155,11 @@ public class UserBL : IUserBL
         return _repo.AddPassedUserID(passerID, passeeID);
     }
 
+    public User AddLikedUser(int LikerID, int LikedID)
+    {
+        return _repo.AddLikedUser(LikerID, LikedID);
+    }
+
     // Async Functions=======================================================================================
     public async Task<List<User>> GetAllUsersAsync()
     {
@@ -264,5 +269,10 @@ public class UserBL : IUserBL
     public async Task<int> AddPassedUserIDAsync(int passerID, int passeeID)
     {
         return await _repo.AddPassedUserIDAsync(passerID, passeeID);
+    }
+
+    public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
+    {
+        return await _repo.AddLikedUserAsync(LikerID, LikedID);
     }
 }
