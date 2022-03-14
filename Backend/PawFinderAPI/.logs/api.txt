@@ -38,3 +38,4 @@
 2022-03-14 15:07:50.881 -04:00 [INF] This user already liked the other user.
 2022-03-14 15:07:50.886 -04:00 [WRN] Error adding Liked User
 2022-03-14 15:08:38.637 -04:00 [INF] Successfully added liked user
+2022-03-14 13:48:59.410 -06:00 [INF] Successfully returned the user with username sdfsdf

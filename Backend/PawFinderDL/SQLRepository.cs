@@ -1,4 +1,4 @@
-using System.Data.SqlClient;
+ using System.Data.SqlClient;
 using PawFinderModel;
 
 namespace PawFinderDL;
@@ -366,6 +366,36 @@ public class SQLRepository : IRepository
         }
     }
 
+    public async Task<User> GetUserByUsernameAsync(string userName)
+    {
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userName", userName);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                    Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
+                });
+            }
+            return Result;
+
+        }
+    }
+
     public async Task<List<User>> ViewMatchedUserAsync(int UserID)
     {
         List<int> listOfMatchedUserID = new List<int>();
@@ -593,32 +623,6 @@ public class SQLRepository : IRepository
         }
         
         return result;
-    }
-
-    public async Task<List<Like>> GetLikedUserAsync(int UserID)
-    {
-        List<Like> listOfLikedUsers = new List<Like>();
-        
-        string sqlQuery = @"SELECT * FROM LikedUsers 
-                        where likerUserID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-            
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
-
-            while (reader.Read())
-            {
-                listOfLikedUsers.Add(new Like()
-                    {
-                        LikerID = reader.GetInt32(0),
-                        LikedID = reader.GetInt32(1),
-                    });
-            }
-            return listOfLikedUsers;
-        }
     }
 }
 

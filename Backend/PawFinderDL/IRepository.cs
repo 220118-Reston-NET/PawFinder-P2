@@ -41,6 +41,13 @@ public interface IRepository
     Task<User> GetUserAsync(int UserID);
 
     /// <summary>
+    /// This method returns a user with a specific user name
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <returns> Returns an individual user. </returns>
+    Task<User> GetUserByUsernameAsync(string userName);
+
+    /// <summary>
     /// Will give back matched user from userID.
     /// </summary>
     /// <param name="userID"></param>
@@ -74,5 +81,4 @@ public interface IRepository
     Task<List<int>> GetPassedUsersIDAsync(int UserID);
     Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
     Task<User> AddLikedUserAsync(int LikerID, int LikedID);
-    Task<List<Like>> GetLikedUserAsync(int UserID);
 }

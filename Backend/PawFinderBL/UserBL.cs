@@ -171,6 +171,7 @@ public class UserBL : IUserBL
         return await _repo.GetUserAsync(UserID);
     }
 
+
     public async Task<User> RegisterUserAsync(User p_user)
     {
         List<User> listOfAllUsers = _repo.GetAllUsers();
@@ -210,32 +211,6 @@ public class UserBL : IUserBL
              return ListOfUsers
                          .Where(user => user.UserName.Contains(p_name))
                          .ToList();
-    }
-
-    public async Task<List<User>> SearchPassedUserAsync(int passerID, int passeeID)
-    {
-        List<int> ListOfPassedUsers = await _repo.GetPassedUsersIDAsync(passerID);
-        List<User> Result = new List<User>();
-                
-        foreach(var item in ListOfPassedUsers)
-        {
-            Result.Add(await _repo.GetUserAsync(item));
-        }
-
-        return Result
-                .Where(user => user.UserID.Equals(passeeID))
-                .ToList();
-        
-    }
-
-    public async Task<List<Like>> SearchLikedUserAsync(int LikerID, int LikedID)
-    {
-        List<Like> ListOfLikedUsers = await _repo.GetLikedUserAsync(LikerID);
-
-        return ListOfLikedUsers
-                .Where(like => like.LikedID.Equals(LikedID))
-                .ToList();
-        
     }
 
     public async Task<List<User>> ViewMatchedUserAsync(int userID)
@@ -300,5 +275,20 @@ public class UserBL : IUserBL
     public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
     {
         return await _repo.AddLikedUserAsync(LikerID, LikedID);
+    }
+
+    public Task<List<User>> SearchPassedUserAsync(int passerID, int passeeID)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Like>> SearchLikedUserAsync(int LikerID, int LikedID)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<User> GetUserByUsernameAsync(string userName)
+    {
+        return await _repo.GetUserByUsernameAsync(userName);
     }
 }
