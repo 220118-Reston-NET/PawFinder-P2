@@ -23,6 +23,7 @@
 2022-03-11 12:49:58.164 -05:00 [INF] Successfully returned a list of all users
 2022-03-11 14:14:13.308 -05:00 [INF] Successfully returned a list of all users
 2022-03-11 15:57:57.535 -05:00 [INF] Successfully returned a list of all users
+2022-03-11 16:10:36.014 -05:00 [INF] Successfully returned a list of all users
 2022-03-11 17:38:04.350 -05:00 [INF] There is already an existing username in this app.
 2022-03-11 17:38:04.355 -05:00 [WRN] Could not add a user.
 2022-03-11 17:39:30.535 -05:00 [INF] Logged in as user: 18
