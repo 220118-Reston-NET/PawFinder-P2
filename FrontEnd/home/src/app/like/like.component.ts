@@ -20,7 +20,7 @@ export class LikeComponent implements OnInit {
     
     this.nav.show();
 
-    this.userService.getAllUsers().subscribe(result => {this.listOfUsers = result});
+    this.userService.getAllUsers().subscribe(result => {console.log(result); this.listOfUsers = result});
 
     this.sizeOfUsersList = this.listOfUsers.length;
 
