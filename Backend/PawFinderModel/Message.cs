@@ -14,7 +14,7 @@ public class Message
         SenderID = 0;
         ReceiverID = 0;
         messageTimeStamp = new DateTime();
-
+        messageText = "";
     }
 }
 }

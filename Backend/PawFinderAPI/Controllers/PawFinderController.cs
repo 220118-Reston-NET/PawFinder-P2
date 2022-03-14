@@ -101,8 +101,9 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+        // GET: api/PawFinder/4
         [HttpGet("GetPassedUsers")]
-        public async Task<IActionResult> GetPassedUserAsync(int UserID)
+        public async Task<IActionResult> GetPassedUserAsync([FromQuery] int UserID)
         {
             try
             {
@@ -123,7 +124,7 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-        // GET: api/PawFinder/4
+        // GET: api/PawFinder/5
         [HttpGet("GetConversation")]
         public async Task<IActionResult> GetConversationAsync([FromQuery] int UserID1, int UserID2)
         {
@@ -139,7 +140,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
-        // GET: api/PawFinder/4
+        // GET: api/PawFinder/6
         [HttpGet("GetPotentialMatch")]
         public async Task<IActionResult> GetPotentialMatchAsync(int UserID)
         {
@@ -155,6 +156,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+    
         // POST: api/PawFinder
         [HttpPost("RegisterUser")]
         public async Task<IActionResult> RegisterUserAsync([FromBody] User p_user)
