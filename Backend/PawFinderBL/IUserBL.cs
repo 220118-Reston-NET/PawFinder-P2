@@ -91,6 +91,8 @@ public interface IUserBL
 
     Task<int> AddPassedUserIDAsync(int passerID, int passeeID);
     Task<User> AddLikedUserAsync(int LikerID, int LikedID);
+    Task<List<User>> SearchPassedUserAsync(int passerID, int passeeID);
+    Task<List<Like>> SearchLikedUserAsync(int LikerID, int LikedID);
 
 
 

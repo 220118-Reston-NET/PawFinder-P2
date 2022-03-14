@@ -34,3 +34,7 @@
 2022-03-12 20:45:51.454 -05:00 [INF] Logged in as user: 18
 2022-03-14 11:17:36.242 -04:00 [INF] Successfully returned a list of all users
 2022-03-14 11:30:22.843 -04:00 [INF] Successfully added liked user
+2022-03-14 15:02:48.373 -04:00 [WRN] Error adding Liked User
+2022-03-14 15:07:50.881 -04:00 [INF] This user already liked the other user.
+2022-03-14 15:07:50.886 -04:00 [WRN] Error adding Liked User
+2022-03-14 15:08:38.637 -04:00 [INF] Successfully added liked user

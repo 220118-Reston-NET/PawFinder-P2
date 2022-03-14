@@ -97,7 +97,7 @@ namespace PawFinderAPI.Controllers
                 
                 foreach(var ID in listOfPassedUsersID)
                 {
-                    Result.Add(_userBL.GetUser(ID));
+                    Result.Add(await _userBL.GetUserAsync(ID));
                 }
                 return Ok(Result);
             }
@@ -168,6 +168,13 @@ namespace PawFinderAPI.Controllers
         {
             try
             {
+                List<Like> likedUser = await _userBL.SearchLikedUserAsync(LikerID, LikedID);
+
+                if(likedUser.Count() > 1)
+                {
+                    Log.Information("This user already liked the other user.");
+                    throw new Exception("You already liked this user!");
+                }
                 Log.Information("Successfully added liked user");
                 return Ok(await _userBL.AddLikedUserAsync(LikerID, LikedID));
             }
@@ -216,7 +223,14 @@ namespace PawFinderAPI.Controllers
         {
             try
             {
-                
+                List<User> user = await _userBL.SearchPassedUserAsync(passerID, passeeID);
+
+                if (user.Count() > 1)
+                {
+                    Log.Information("The user already passed on the passee.");
+                    throw new Exception("You already passed on this user!");
+                }
+
                 int ID = await _userBL.AddPassedUserIDAsync(passerID,passeeID);
                 Log.Information("Added user to passed users list");
                 return Ok(_userBL.GetUser(ID));
