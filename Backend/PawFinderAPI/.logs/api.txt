@@ -38,4 +38,7 @@
 2022-03-14 15:07:50.881 -04:00 [INF] This user already liked the other user.
 2022-03-14 15:07:50.886 -04:00 [WRN] Error adding Liked User
 2022-03-14 15:08:38.637 -04:00 [INF] Successfully added liked user
-2022-03-14 15:48:33.988 -04:00 [INF] Successfully returned conversation between users.
+2022-03-14 14:28:49.953 -06:00 [WRN] Could not find a list of users.
+2022-03-14 14:29:40.658 -06:00 [INF] Successfully returned the user with userID
+2022-03-14 14:29:46.698 -06:00 [WRN] Could not find user in the database.
+2022-03-14 16:56:52.910 -04:00 [INF] Successfully returned the user with userID
