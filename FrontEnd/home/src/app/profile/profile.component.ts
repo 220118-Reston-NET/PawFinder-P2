@@ -13,9 +13,14 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
- userName:string | null = "No users Selected";
+  userName:string | null = "so user selected";
+  userDOB:Date = new Date;
+  userBio:string = "no user selected";
+  userSize:string = "no user selected";
+  userBreed:string = "no user selected";
 
- show:boolean = true;
+  show:boolean = true;
+
 
  userGroup= new FormGroup({
   userName: new FormControl(""),
@@ -27,22 +32,48 @@ export class ProfileComponent implements OnInit {
 });
 
 // Users:PawfinderApi;
- Users: any;
+  myUserID:number = 2;
+  sizeOfUsersList:number = 0;
 
   constructor(private router:ActivatedRoute, private PawService:PawfinderService, public nav: NavbarService, private userService: UserService) {
+  
   //   this.Users={ sprites: {
   //     back_default:"",
   //     back_shiny:"",
   //     front_default:"",
   //     front_shiny:""
-
   //   }};
-  //   this.listOfUsers = [];
+  
   //       this.filteredListOfUser = [];
 }
 
   ngOnInit(): void {
     this.nav.show();
+
+    this.userService.getUserByUserID(this.myUserID).subscribe(result => 
+
+    {console.log(result);
+
+      let user:Users=
+      {
+        userID: result.userID,
+        userName:result.userName,
+        userPassword:"",
+        userDBO: result.userDBO,
+        userBio:result.userBio,
+        userBreed:result.userBreed,
+        userSize:result.userSize,
+        userImg:""
+      }
+      
+      this.userName = user.userName;
+      this.userDOB = user.userDBO;
+      this.userBio= user.userBio;
+      this.userSize = user.userSize;
+      this.userBreed = user.userBreed;
+
+    });
+    
     // this.userName = this.router.snapshot.paramMap.get("userName");
     // this.service.getAllUsers().subscribe(result=>{
     //   this.Users=result;
@@ -60,12 +91,12 @@ export class ProfileComponent implements OnInit {
 
     let user:Users=
     {
-      userID: 0,
-      userName:p_userGroup.get("userName")?.value,
-      userPassword:p_userGroup.get("userPassword")?.value,
-      userDBO:p_userGroup.get("userDBO")?.value,
+      userID: this.myUserID,
+      userName:"",
+      userPassword:"",
+      userDBO: new Date,
       userBio:p_userGroup.get("userBio")?.value,
-      userBreed:p_userGroup.get("userBreed")?.value,
+      userBreed:"",
       userSize:p_userGroup.get("userSize")?.value,
       userImg:""
     }

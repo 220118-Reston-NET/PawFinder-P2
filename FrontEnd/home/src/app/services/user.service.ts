@@ -30,4 +30,9 @@ export class UserService {
     return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers");
   }
 
+  getUserByUserID(p_userID:number): Observable<Users>
+  {
+    return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUser?userID="+p_userID);
+  }
+
 }

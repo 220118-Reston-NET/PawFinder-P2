@@ -1,4 +1,4 @@
-<ul>
+<li>
 <div class="container d-flex justify-content-center align-items-center" style="margin-top: 4rem;">
     <div class="card">
         <div class="upper">
@@ -11,18 +11,20 @@
             </div>
         </div>
         <div class="mt-5 text-center">
-            <h2 class="mb-0">User Name: </h2>
-            <h4>DOB: </h4>
-            <h4>Breed: </h4>
+            <h2 class="mb-0">User Name: {{userName}}</h2>
+            <h4>DOB: {{userDOB}}</h4>
+            <h4>Breed: {{userBreed}}</h4>
             <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
                 <form [formGroup]="userGroup" style="margin-left: 3rem">
                     <div>
                     <label for="userBio">Bio:</label><br>
-                    <input type="text" placeholder={{Users.Bio}}  formControlName="userBio" /><br />
+                    <h4>{{userBio}}</h4>
+                    <input type="text" placeholder="write new bio"  formControlName="userBio" /><br />
                     </div>
                     <div>
                     <label for="userSize">Size:</label><br>
-                    <input type="text" placeholder={{Users.Size}} formControlName="userSize" /><br />
+                    <h4>{{userSize}}</h4>
+                    <input type="text" placeholder="change size" formControlName="userSize" /><br />
                     </div>
                     <button class="btn btn-primary" style="margin-top: 1rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" (click)="updateUserInfo(userGroup)">Update info</button> 
                 </form>  
@@ -34,3 +36,4 @@
 <div class="switch-login-to-signup" style="margin-top: 3rem;">
     <a routerLink="/Login" class="paw-finder-login-signup-button">Logout</a>
 </div>
+</li>
