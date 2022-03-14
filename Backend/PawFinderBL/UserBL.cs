@@ -162,6 +162,19 @@ public class UserBL : IUserBL
 
     public User AddLikedUser(int LikerID, int LikedID)
     {
+        List<Like> ListOfLikedOfLikee = _repo.GetLikedUser(LikedID);
+        foreach(var pair in ListOfLikedOfLikee)
+        {
+            if(pair.LikedID == LikerID)
+            {
+                _repo.AddMatch(LikerID,LikedID);
+            }
+            else
+            {
+                continue;
+            }
+        }
+
         return _repo.AddLikedUser(LikerID, LikedID);
     }
 
@@ -309,6 +322,19 @@ public class UserBL : IUserBL
 
     public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
     {
+        List<Like> ListOfLikedOfLikee = await _repo.GetLikedUserAsync(LikedID);
+        foreach(var pair in ListOfLikedOfLikee)
+        {
+            if(pair.LikedID == LikerID)
+            {
+                await _repo.AddMatchAsync(LikerID,LikedID);
+            }
+            else
+            {
+                continue;
+            }
+        }
+
         return await _repo.AddLikedUserAsync(LikerID, LikedID);
     }
 }
