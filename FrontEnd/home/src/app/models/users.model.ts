@@ -1,13 +1,11 @@
 export interface Users
 {
-    // userID:number;
+    userID:number;
     userName:string;
-    userPassword:number;
-    userDOB:Date;
+    userPassword:string;
+    userDBO:Date;
     userBio:string;
     userBreed:string;
     userSize:string;
-    photo:string;
-    // like?:number;
-
+    userImg:string;
 }

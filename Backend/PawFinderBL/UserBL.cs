@@ -146,6 +146,19 @@ public class UserBL : IUserBL
 
         return listOfAllUsers;
     }
+    public List<int> GetPassedUsersID(int UserID)
+    {
+        return _repo.GetPassedUsersID(UserID);
+    }
+    public int AddPassedUserID(int passerID, int passeeID)
+    {
+        return _repo.AddPassedUserID(passerID, passeeID);
+    }
+
+    public User AddLikedUser(int LikerID, int LikedID)
+    {
+        return _repo.AddLikedUser(LikerID, LikedID);
+    }
 
     // Async Functions=======================================================================================
     public async Task<List<User>> GetAllUsersAsync()
@@ -168,7 +181,6 @@ public class UserBL : IUserBL
                 throw new Exception("UserName already exist.");
             }
         }
-
         if (p_user.UserName is null)
         {
             throw new Exception("User Name is empty");
@@ -223,45 +235,20 @@ public class UserBL : IUserBL
     public async Task<List<User>> GetPotentialMatchAsync(User p_user)
     {
         List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
-        DateTime zeroTime = new DateTime(1, 1, 1);
+        List<int> listOfPassedUsersID = await _repo.GetPassedUsersIDAsync(p_user.UserID);
         List<User> Result = new List<User>();
+
 
         foreach(var U in listOfAllUsers)
         {
-            if(p_user.UserDOB > U.UserDOB)
-            {
-                TimeSpan ageSpan = (p_user.UserDOB - U.UserDOB);
-                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
-                if(AgeDifferencesInYears> 5)
-                {
-                    continue;
-                }
-                else if(AgeDifferencesInYears <= 5)
-                {
-                    Result.Add(U);
-                }
-            }
-            else if (U.UserDOB < p_user.UserDOB)
-            {
-                TimeSpan ageSpan = (U.UserDOB-p_user.UserDOB);
-                int AgeDifferencesInYears = (zeroTime + ageSpan).Year - 1;
-                if(AgeDifferencesInYears> 5)
-                {
-                    continue;
-                }
-                else if(AgeDifferencesInYears <= 5)
-                {
-                    Result.Add(U);
-                }
-                
-            }
-            else if (U.UserDOB == p_user.UserDOB)
+            bool passed = listOfPassedUsersID.Contains(U.UserID);
+            double ageDifferenceInDays = Math.Abs(p_user.UserDOB.Subtract(U.UserDOB).TotalDays);
+            if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID && passed == false)
             {
                 Result.Add(U);
             }
         }
-
-        return listOfAllUsers;
+        return Result;
     }
 
     public async Task<Photo> AddPhotoAsync(Photo p_photo)
@@ -274,4 +261,18 @@ public class UserBL : IUserBL
         return await _repo.GetPhotobyUserIDAsync(p_userID);
     }
 
+    public async Task<List<int>> GetPassedUsersIDAsync(int UserID)
+    {
+        return await _repo.GetPassedUsersIDAsync(UserID);
+    }
+
+    public async Task<int> AddPassedUserIDAsync(int passerID, int passeeID)
+    {
+        return await _repo.AddPassedUserIDAsync(passerID, passeeID);
+    }
+
+    public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
+    {
+        return await _repo.AddLikedUserAsync(LikerID, LikedID);
+    }
 }

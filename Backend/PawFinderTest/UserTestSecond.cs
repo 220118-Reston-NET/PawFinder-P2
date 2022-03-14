@@ -22,7 +22,7 @@ public class UserTestSecond
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
+
 
 
         User expectedUser = new User()
@@ -55,13 +55,12 @@ public class UserTestSecond
     {
         //Arrange
         int userID = 1111;
-        string userName = null;
+        string? userName = null;
         string userPassword = "E132456";
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -88,6 +87,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public void RegisterUserBreedNull()
     {
         //Arrange
@@ -96,9 +96,8 @@ public class UserTestSecond
         string userPassword = "E132456";
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
-        string userBreed = null;
+        string? userBreed = null;
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -125,17 +124,17 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public void RegisterUserPasswordNull()
     {
         //Arrange
         int userID = 1111;
         string userName = "Elk";
-        string userPassword = null;
+        string? userPassword = null;
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -162,6 +161,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public void RegisterUserSizeNull()
     {
         //Arrange
@@ -171,7 +171,7 @@ public class UserTestSecond
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
-        string userSize = null;
+        string? userSize = null;
 
 
         User expectedUser = new User()
@@ -241,13 +241,12 @@ public class UserTestSecond
     {
         //Arrange
         int userID = 1111;
-        string userName = null;
+        string? userName = null;
         string userPassword = "E132456";
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -274,6 +273,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public async Task RegisterUserBreedNullAsync()
     {
         //Arrange
@@ -282,9 +282,8 @@ public class UserTestSecond
         string userPassword = "E132456";
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
-        string userBreed = null;
+        string? userBreed = null;
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -311,17 +310,17 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public async Task RegisterUserPasswordNullAsync()
     {
         //Arrange
         int userID = 1111;
         string userName = "Elk";
-        string userPassword = null;
+        string? userPassword = null;
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
         string userSize = "Big";
-        string photoURL = "test.com";
 
 
         User expectedUser = new User()
@@ -348,6 +347,7 @@ public class UserTestSecond
 
     }
 
+    [Fact]
     public async Task RegisterUserSizeNullAsync()
     {
         //Arrange
@@ -357,8 +357,7 @@ public class UserTestSecond
         DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
         string userBreed = "Spitz";
-        string userSize = null;
-        string photoURL = "test.com";
+        string? userSize = null;
 
 
         User expectedUser = new User()
@@ -374,6 +373,7 @@ public class UserTestSecond
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
         List<User> newList = new List<User>();
+        
 
         mockRepo.Setup(repo => repo.RegisterUserAsync(expectedUser)).ReturnsAsync(expectedUser);
         mockRepo.Setup(repo => repo.GetAllUsers()).Returns(newList);

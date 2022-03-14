@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-// using AzureBlob.Api.Logics;
 using AzureBlob.Api.Models;
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +38,12 @@ namespace AzureBlob.Api.Controllers
                     fileURL = blobClient.Uri.AbsoluteUri;
 
                     List<User> user = await _userBL.SearchUserAsync(UserName);
+                    if (user.Count() == 0)
+                    {
+                        Log.Information("Failed to find a user.");
+                        throw new Exception("User could not be found.");
+                    }
+
                     Photo _photo = new Photo();
 
                     foreach (var item in user)

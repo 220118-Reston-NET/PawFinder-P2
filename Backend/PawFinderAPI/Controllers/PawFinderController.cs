@@ -50,41 +50,8 @@ namespace PawFinderAPI.Controllers
                 Log.Warning("Could not find a list of users.");
                 return NotFound();
             }
-            
         }
 
-        // // POST: api/PawFinder
-        // [HttpPost("UploadPhoto")]
-        // public async Task<IActionResult> UploadPhoto(string UserName, [FromForm] string p_filename, IFormFile file)
-        // {
-        //     try
-        //     {
-        //         var filename = _userBL.GenerateFileName(p_filename, UserName);
-        //         var fileUrl = "";
-        //         BlobContainerClient container = new BlobContainerClient("ConnectionString", "ContainerName");
-            
-        //         BlobClient blob = container.GetBlobClient(filename);
-        //         using (Stream stream = file.OpenReadStream())
-        //         {
-        //             blob.Upload(stream);
-        //         }
-        //         fileUrl = blob.Uri.AbsoluteUri;
-                
-        //         List<User> user = await _userBL.SearchUserAsync(UserName);
-        //         Photo _photo = new Photo();
-        //         foreach (var item in user)
-        //         {
-        //             _photo.userID = item.UserID;
-        //             _photo.fileName = fileUrl;
-        //         }
-        //         return Created("Successfully added photo", _userBL.AddPhoto(_photo));
-                
-        //     }
-        //     catch (System.Exception ex)
-        //     { 
-        //        return StatusCode(422, ex.Message);
-        //     }
-        // }
 
         // GET: api/PawFinder/2
         [HttpGet("GetUser")]
@@ -102,6 +69,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+
         // GET: api/PawFinder/3
         [HttpGet("ViewMatchedUser")]
         public async Task<IActionResult> ViewMatchedUserAsync([FromQuery] int userID)
@@ -116,6 +84,28 @@ namespace PawFinderAPI.Controllers
                 Log.Warning("Could not find the matched user.");
                 return NotFound();
             } 
+        }
+
+        [HttpGet("GetPassedUsers")]
+        public async Task<IActionResult> GetPassedUserAsync(int UserID)
+        {
+            try
+            {
+                Log.Information("Getting List of passed User of user " + UserID);
+                List<int> listOfPassedUsersID = await _userBL.GetPassedUsersIDAsync(UserID);
+                List<User> Result = new List<User>();
+                
+                foreach(var ID in listOfPassedUsersID)
+                {
+                    Result.Add(_userBL.GetUser(ID));
+                }
+                return Ok(Result);
+            }
+            catch(System.Exception ex)
+            {   
+                Log.Warning("Error occured getting list of Passed users");
+                return Conflict(ex.Message);
+            }
         }
 
         // GET: api/PawFinder/4
@@ -136,17 +126,17 @@ namespace PawFinderAPI.Controllers
 
         // GET: api/PawFinder/4
         [HttpGet("GetPotentialMatch")]
-        public async Task<IActionResult> GetPotentialMatchAsync([FromBody] User p_user)
+        public async Task<IActionResult> GetPotentialMatchAsync(int UserID)
         {
             try
             {
-                Log.Information("Successfully returned conversation between users.");
-                return Ok(await _userBL.GetPotentialMatchAsync(p_user));
+                Log.Information("Successfully returned list of potential matches");
+                return Ok(await _userBL.GetPotentialMatchAsync(await _userBL.GetUserAsync(UserID)));
             }
-            catch (SqlException)
+            catch (System.Exception ex)
             {
-                Log.Warning("Could not find an existing conversation between users.");
-                return NotFound();
+                Log.Warning("Failed to return list of potential matches");
+                return Conflict(ex.Message);
             } 
         }
 
@@ -172,6 +162,22 @@ namespace PawFinderAPI.Controllers
             }
         }
 
+        // POST: api/PawFinder
+        [HttpPost("AddLikedUser")]
+        public async Task<IActionResult> AddLikedUserAsync(int LikerID, int LikedID)
+        {
+            try
+            {
+                Log.Information("Successfully added liked user");
+                return Ok(await _userBL.AddLikedUserAsync(LikerID, LikedID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Error adding Liked User");
+                return Conflict(ex.Message);
+            }
+        }
+
         // POST: api/PawFinder/2
         [HttpPost("AddMessage")]
         public async Task<IActionResult> AddMessageAsync([FromBody] Message message)
@@ -180,6 +186,39 @@ namespace PawFinderAPI.Controllers
             {
                 Log.Information("Successfully added a new message.");
                 return Created("Successfully added a message", await _userBL.AddMessageAsync(message));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
+
+        // POST: api/PawFinder/2
+        [HttpPost("Chat")]
+        public async Task<IActionResult> ChatAsync(int SenderID,int ReceiverUserID, Message message)
+        {
+            try
+            {
+                Log.Information("Successfully added a new message.");
+                await _userBL.AddMessageAsync(message);
+                return Ok(await _userBL.GetConversationAsync(SenderID,ReceiverUserID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not add a message.");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPost("AddPassedUserID")]
+        public async Task<IActionResult> AddPassedUserID(int passerID,int passeeID)
+        {
+            try
+            {
+                int ID = await _userBL.AddPassedUserIDAsync(passerID,passeeID);
+                Log.Information("Added user to passed users list");
+                return Ok(_userBL.GetUser(ID));
             }
             catch (System.Exception ex)
             {
@@ -214,6 +253,32 @@ namespace PawFinderAPI.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        [HttpGet("LogIn")]
+        public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)
+        {
+            List<User> ListOfAllUsers = await _userBL.GetAllUsersAsync();
+            foreach(var User in ListOfAllUsers)
+            {
+                if(User.UserName == UserNameInput)
+                {
+                    if(User.UserPassword == PasswordInput)
+                    {
+                        Log.Information("Logged in as user: " + User.UserID);
+                        return Ok(User);
+                    }
+                    else
+                    {
+                        Log.Warning("Incorrect password");
+                        return Conflict();
+                    }
+                }
+            }
+            Log.Warning("Incorrect username");
+            return Conflict();
+        }
+
+
     }
 }
 

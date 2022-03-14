@@ -13,16 +13,17 @@ import { UserService } from '../services/user.service';
 })
 export class RegistorComponent implements OnInit{
   
+  myResult:any;
+
   userGroup= new FormGroup({
     userName: new FormControl(""),
     userPassword:new FormControl(""),
     userDBO: new FormControl(""),
     userBio:new FormControl(""),
     userBreed:new FormControl(""),
-    userSize:new FormControl("")
-    
-   });
-  file:any ;
+    userSize:new FormControl("")    
+  });
+
   show:boolean = false;
   
   constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) {
@@ -38,19 +39,18 @@ export class RegistorComponent implements OnInit{
   }
 
   addUser(p_userGroup:FormGroup){
-    // if(p_userGroup.valid){
 
-    // }
     let user:Users=
     {
-      // userID:p_userGroup.get("userID")?.value,
+      userID:0,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("userPassword")?.value,
       userDOB:p_userGroup.get("userDOB")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
-      photo:p_userGroup.get("photo")?.value
+
+      photo:p_userGroup.get("userImg")?.value
     }
     
     this.userService.addUser(user).subscribe();
@@ -73,6 +73,16 @@ export class RegistorComponent implements OnInit{
         else {
           alert("Please select a file first")
         }
+      userImg:""
+    }
+  
+    this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
+
+  }
+
+  Registor() 
+  {
+    this.router.navigate(["/Registor"]);
   }
 
 }

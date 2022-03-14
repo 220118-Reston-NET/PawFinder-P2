@@ -3,6 +3,8 @@ import { PawfinderService } from './../services/pawfinder.service';
 import { Users } from './../models/users.model';
 import { ActivatedRoute} from '@angular/router';
 import { NavbarService } from '../services/navbar.service';
+import { UserService } from '../services/user.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -12,16 +14,28 @@ import { NavbarService } from '../services/navbar.service';
 })
 export class ProfileComponent implements OnInit {
  userName:string | null = "No users Selected";
+
+ show:boolean = true;
+
+ userGroup= new FormGroup({
+  userName: new FormControl(""),
+  userPassword:new FormControl(""),
+  userDBO: new FormControl(""),
+  userBio:new FormControl(""),
+  userBreed:new FormControl(""),
+  userSize:new FormControl("")    
+});
+
 // Users:PawfinderApi;
  Users: any;
-  filteredName:string = "";
-    listOfUsers:Users[];
-    filteredListOfUser:Users[];
-  constructor(private router:ActivatedRoute , private service:PawfinderService, public nav: NavbarService) {
-    this.Users={ photo: {
-      photoID:"",
-      fileName:"",
-      userID:""
+
+  constructor(private router:ActivatedRoute, private PawService:PawfinderService, public nav: NavbarService, private userService: UserService) {
+    this.Users={ sprites: {
+      back_default:"",
+      back_shiny:"",
+      front_default:"",
+      front_shiny:""
+
     }};
     this.listOfUsers = [];
         this.filteredListOfUser = [];
@@ -41,21 +55,23 @@ export class ProfileComponent implements OnInit {
         });
     
   }
-   public set FilteredName(s1:string)
+
+  updateUserInfo(p_userGroup:FormGroup){
+
+    let user:Users=
     {
-        this.filteredName = s1;
-        this.filteredListOfUser = this.filteredName ? this.performFilter(this.filteredName) : this.listOfUsers;
+      userID: 0,
+      userName:p_userGroup.get("userName")?.value,
+      userPassword:p_userGroup.get("userPassword")?.value,
+      userDBO:p_userGroup.get("userDBO")?.value,
+      userBio:p_userGroup.get("userBio")?.value,
+      userBreed:p_userGroup.get("userBreed")?.value,
+      userSize:p_userGroup.get("userSize")?.value,
+      userImg:""
     }
+    
+    this.userService.updateUser(user).subscribe();
 
-    performFilter(filter:string):Users[]
-    {
-        filter = filter.toLowerCase();
-
-        let tempListOfUsers:Users[]
-
-        tempListOfUsers = this.listOfUsers.filter((Users:Users) => Users.userName.toLowerCase().indexOf(filter) != -1);
-
-        return tempListOfUsers;
-    }
+  }
 
 }
