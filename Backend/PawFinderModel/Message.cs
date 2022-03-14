@@ -1,5 +1,6 @@
-namespace PawFinderModel;
+namespace PawFinderModel
 
+{
 public class Message
 {
     public int messageID { get; set; }
@@ -15,4 +16,5 @@ public class Message
         messageTimeStamp = new DateTime();
         messageText = "";
     }
+}
 }

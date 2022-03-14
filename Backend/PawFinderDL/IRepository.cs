@@ -15,6 +15,8 @@ public interface IRepository
     List<int> GetPassedUsersID(int UserID);
     int AddPassedUserID(int passerID, int passeeID);
     User AddLikedUser(int LikerID, int LikedID);
+    List<Like> GetLikedUser(int UserID);
+    Match AddMatch(int p_UserID1, int p_UserID2);
 
 
     //Async version functions
@@ -115,4 +117,6 @@ public interface IRepository
     /// <param name="UserID"></param>
     /// <returns> Returns a list of liked users. </returns>
     Task<List<Like>> GetLikedUserAsync(int UserID);
+
+    Task<Match> AddMatchAsync(int p_UserID1, int p_UserID2);
 }
