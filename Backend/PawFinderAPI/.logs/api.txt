@@ -32,3 +32,5 @@
 2022-03-11 18:02:41.674 -05:00 [WRN] Incorrect password
 2022-03-11 18:06:11.218 -05:00 [INF] Logged in as user: 18
 2022-03-12 20:45:51.454 -05:00 [INF] Logged in as user: 18
+2022-03-14 11:17:36.242 -04:00 [INF] Successfully returned a list of all users
+2022-03-14 11:30:22.843 -04:00 [INF] Successfully added liked user
