@@ -216,7 +216,7 @@ namespace PawFinderAPI.Controllers
         {
             try
             {
-                int ID = _userBL.AddPassedUserID(passerID,passeeID);
+                int ID = await _userBL.AddPassedUserIDAsync(passerID,passeeID);
                 Log.Information("Added user to passed users list");
                 return Ok(_userBL.GetUser(ID));
             }

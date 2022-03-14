@@ -542,7 +542,7 @@ public class SQLRepository : IRepository
         string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            conn.OpenAsync();
+            await conn.OpenAsync();
             
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@userID", UserID);
@@ -564,13 +564,13 @@ public class SQLRepository : IRepository
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            conn.OpenAsync();
+            await conn.OpenAsync();
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@passerID", passerID);
             command.Parameters.AddWithValue("@passeeID", passeeID);
 
-            command.ExecuteNonQueryAsync();
+            await command.ExecuteNonQueryAsync();
         }
 
         return passeeID;
@@ -584,12 +584,12 @@ public class SQLRepository : IRepository
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            conn.OpenAsync();
+            await conn.OpenAsync();
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@LikerID", LikerID);
             command.Parameters.AddWithValue("@LikedID", LikedID);
-            command.ExecuteNonQueryAsync();
+            await command.ExecuteNonQueryAsync();
         }
         
         return result;
