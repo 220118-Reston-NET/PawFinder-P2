@@ -11,9 +11,9 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   show:boolean = false;
   trySubmit:String = "";
+  isValid:boolean=true;
 
   loginGroup= new FormGroup({
     userName: new FormControl(""),
@@ -49,9 +49,10 @@ export class LoginComponent implements OnInit {
       userSize: "",
       userImg:""
     }
+   }
+
 
     this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
 
   }
 
-}

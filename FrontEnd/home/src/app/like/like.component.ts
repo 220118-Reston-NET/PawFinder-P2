@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Users } from '../models/users.model';
 import { LikeService } from '../services/like.service';
 import { NavbarService } from '../services/navbar.service';
-import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-like',
   templateUrl: './like.component.html',
   styleUrls: ['./like.component.css']
 })
+
 export class LikeComponent implements OnInit {
   @Input()Like:number | undefined;
   
@@ -38,6 +39,9 @@ export class LikeComponent implements OnInit {
   dislikeUser(p_passeeID:number, p_passerID:number)
   {
     this.likeService.DislikeAUser(p_passeeID, p_passerID).subscribe();
+
   }
 
 }
+
+

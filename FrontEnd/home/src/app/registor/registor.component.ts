@@ -1,3 +1,4 @@
+import { PawfinderService } from './../services/pawfinder.service';
 import { Users } from './../models/users.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit} from '@angular/core';
@@ -25,7 +26,7 @@ export class RegistorComponent implements OnInit{
 
   show:boolean = false;
   
-  constructor(private router: Router, private userService: UserService, public nav: NavbarService) {
+  constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) {
   }
 
   ngOnInit(): void {
@@ -44,10 +45,34 @@ export class RegistorComponent implements OnInit{
       userID:0,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("userPassword")?.value,
-      userDBO:p_userGroup.get("userDBO")?.value,
+      userDOB:p_userGroup.get("userDOB")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
+
+      photo:p_userGroup.get("userImg")?.value
+    }
+    
+    this.userService.addUser(user).subscribe();
+    this.router.navigate(["/Profile"]);
+
+  }
+   onFilechange(event: any)
+    {
+   console.log(event.target.files[0])
+   this.file = event.target.files[0]
+   }
+ 
+ upload() 
+ {
+      if (this.file) {
+        this.service.uploadfile(this.file).subscribe(resp => {
+          alert("Uploaded")
+        })
+      } 
+        else {
+          alert("Please select a file first")
+        }
       userImg:""
     }
   

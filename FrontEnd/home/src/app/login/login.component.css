@@ -1,71 +1,46 @@
-.paw-finder-heading
-{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 5rem;
-    text-align: center;
-    margin-top: 5rem;
-}
 
-.pawfinder-image
-{
-    margin-top: 1rem;
-    margin-left: 52rem;
-    align-items: center;
+label{
+    color:rgb(255, 255, 235);
+    font-size: large;
 }
-
-.loginHeading
-{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    text-align: center;
+.paw-finder-login-signup-button:hover{
+  background-color: rgb(245, 35, 63);
 }
-
-.informationForm
-{
-    margin-left: 10rem;
-    margin-right: 10rem;
-}
-
-.email-and-pw-label
-{
-    margin: 0.5rem;
-}
-
-.email-and-pw-textbox-div
-{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.5rem;
-    margin-left: 30rem;
-    margin-right: 30rem;
-}
-
-.password-check-box
-{
-    margin-left: 29rem;
-}
+.form:hover{
+      border-style: groove;
+      background-color: aqua;
+      
+  
+ }
 
 .paw-finder-login-signup-button
 {
     background-color: #940132;
-    border-radius: 0.5rem;
     margin-top: 1rem;
     margin-left: 1rem;
     text-align: center;
     text-decoration: none;
-    color: white; 
-    border: none;
+    color: white;
+    border-radius: 15%;
 }
 
-.switch-login-to-signup
+/* .switch-login-to-signup
 {
     font-size: 2rem;
     text-align: center;
-}
+} */
 
 .login-footer
 {
     text-align: right;
     margin-top: 1rem;
     margin-right: 1rem;
+} 
+.email-and-pw-textbox-div{
+  padding:2rem;
+  background-color: rgba(80, 80, 74, 0.616);
+}
+
+.email-and-pw-textbox-div:hover{
+    background-color: rgba(62, 62, 65, 0.637);
 }

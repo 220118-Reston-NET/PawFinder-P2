@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-match',
@@ -8,10 +7,10 @@ import { NavbarService } from '../services/navbar.service';
 })
 export class MatchComponent implements OnInit {
 
-  constructor(public nav: NavbarService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.nav.show();
+    // this.nav.show();
   }
 
 }

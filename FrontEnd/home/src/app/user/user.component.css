@@ -1,0 +1,21 @@
+
+
+li { list-style-type: none; 
+}
+img:hover{
+    border-style: groove;
+    background-color: rgb(216, 128, 12);
+}
+img{
+    border-color: black;
+}
+.like-button {
+    font-size: 1rem;
+        padding: 5px 10px;
+    color:  #00ff80;
+}
+
+.liked {
+        font-weight: bold;
+    color: #c01540;
+}

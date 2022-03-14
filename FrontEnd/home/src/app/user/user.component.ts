@@ -1,13 +1,13 @@
 import { PawfinderService } from './../services/pawfinder.service';
 import { Users } from './../models/users.model';
 import { Component, OnInit } from '@angular/core';
-
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   title:string = "List of Users";
     src1:string = "https://upload.wikimedia.org/wikipedia/commons/6/6a/Door_Tree_1898.png";
     isVisible:boolean = true;
@@ -16,19 +16,28 @@ export class UserComponent {
 
     listOfUsers:Users[];
     filteredListOfUser:Users[];
+    // "photo": [
+    //   {
+    //     "photoID": 1,
+    //     "fileName": "https://p0teststorage.blob.core.windows.net/p0testcontainer/portrait-dog-on-black-background-600w-1936666948.jpeg",
+    //     "userID": 1
+    //   }
+    // ]
+  
 
     constructor(private service: PawfinderService){
         this.listOfUsers = [];
         this.filteredListOfUser = [];
-
-        this.service.getAllUsers().subscribe(result => {
-            console.log(result);
+    }
+    
+    ngOnInit(): void {
+          this.service.getAllUsers().subscribe(result => {
             this.listOfUsers = result;
-            // result.forEach(Users=>Users.UserSize);
             this.filteredListOfUser = result;
+             // result.forEach(Users=>Users.userName);
         });
     }
-
+      
     changeTitle()
     {
         this.title = "title has been changed!";
@@ -41,21 +50,19 @@ export class UserComponent {
         this.isVisible = !this.isVisible;
     }
 
-    public set FilteredName(s1:string)
-    {
-        this.filteredName = s1;
-        this.filteredListOfUser = this.filteredName ? this.performFilter(this.filteredName) : this.listOfUsers;
+   
+   
+    
+//   userID:number=0;
+   isSelected:boolean=true;
+  
+   likeCliked(Users:any){    
+       Users.like++
+        this.isSelected != this.isSelected ;
+
     }
 
-    performFilter(filter:string):Users[]
-    {
-        filter = filter.toLowerCase();
-
-        let tempListOfUsers:Users[]
-
-        tempListOfUsers = this.listOfUsers.filter((Users:Users) => Users.userName.toLowerCase().indexOf(filter) != -1);
-
-        return tempListOfUsers;
-    }
 
 }
+
+    

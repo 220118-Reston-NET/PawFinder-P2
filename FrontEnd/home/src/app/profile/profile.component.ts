@@ -28,21 +28,32 @@ export class ProfileComponent implements OnInit {
 
 // Users:PawfinderApi;
  Users: any;
+
   constructor(private router:ActivatedRoute, private PawService:PawfinderService, public nav: NavbarService, private userService: UserService) {
     this.Users={ sprites: {
       back_default:"",
       back_shiny:"",
       front_default:"",
       front_shiny:""
+
     }};
+    this.listOfUsers = [];
+        this.filteredListOfUser = [];
    }
 
   ngOnInit(): void {
-    // this.userName = this.router.snapshot.paramMap.get("userName");
-    // this.PawService.getAllUsers(this.userName).subscribe(result=>{
-    //   this.Users=result;
-    // });
+    this.userName = this.router.snapshot.paramMap.get("userName");
+    this.service.getAllUsers().subscribe(result=>{
+      this.Users=result;
+    });
     this.nav.show();
+      this.service.getAllUsers().subscribe(result => {
+            console.log(result);
+            this.listOfUsers = result;
+            this.filteredListOfUser = result;
+             // result.forEach(Users=>Users.userName);
+        });
+    
   }
 
   updateUserInfo(p_userGroup:FormGroup){
@@ -61,11 +72,6 @@ export class ProfileComponent implements OnInit {
     
     this.userService.updateUser(user).subscribe();
 
-  }
-
-  matchColorPinck()
-  {
-    return 
   }
 
 }

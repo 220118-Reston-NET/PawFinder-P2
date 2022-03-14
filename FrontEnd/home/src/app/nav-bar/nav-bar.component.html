@@ -1,5 +1,5 @@
-<nav *ngIf="nav.visible" class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid" style="background-color: rgba(4, 94, 75, 0.329);">
+<nav class="navbar navbar-expand-lg  ">
+    <div class="container-fluid" style="background-color: rgba(8, 83, 117, 0.747);margin-top: 0%;">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -7,15 +7,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="navbar-brand">
+                
+                    <a class="nav-link active" aria-current="page" routerLink="/HomePage" style="color: white;"><span
+                            class="material-icons"></span> Home</a>
+                </li>
+                <li class="navbar-brand">
 
                     <a class="nav-link active" aria-current="page" routerLink="/Profile" style="color: white;"><span class="material-icons">account_circle</span> profile</a>
                 </li>
                 <li class="navbar-brand">
-                    <a class="nav-link active" aria-current="page" routerLink="/Match" style="color: white;"><span class="material-icons">groups</span> Match</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/Match" style="color: white;"><span class="material-icons">favorite</span> Match</a>
                 </li>
                 <li class="navbar-brand">
-                    <a class="nav-link active" aria-current="page" routerLink="/Like" style="color: white;"><span class="material-icons">favorite</span> like</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/Users" style="color: white;"><span class="material-icons">groups</span> Users</a>
+                            
                 </li>
+            
+                <!-- <li class="navbar-brand">
+                    <a class="nav-link active" aria-current="page" routerLink="/Like" style="color: white;"><span class="material-icons">favorite</span> like</a>
+                </li> -->
                 <li class="navbar-brand">
                     
                     <a class="nav-link active" aria-current="page" routerLink="/Chat"  style="color: white;"><i class="material-icons">chat</i> Chat</a>
