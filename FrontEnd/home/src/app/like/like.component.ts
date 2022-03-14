@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GlobalComponent } from '../global/global.component';
 import { Users } from '../models/users.model';
 import { LikeService } from '../services/like.service';
 import { NavbarService } from '../services/navbar.service';
@@ -14,7 +15,7 @@ import { UserService } from '../services/user.service';
 export class LikeComponent implements OnInit {
   @Input()Like:number | undefined;
   
-  myUserID:number = 2;
+  myUserID:number = GlobalComponent.loggedInUserID;
   
   listOfUsers:Users[];
   sizeOfUsersList:number = 0;

@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       userImg:""
     }
    
-    this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"]); GlobalComponent.loggedInUserName = loginGroup.userName;}});
+    this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/HomePage"]); GlobalComponent.loggedInUserName = loginGroup.userName;}});
   
   }
 
