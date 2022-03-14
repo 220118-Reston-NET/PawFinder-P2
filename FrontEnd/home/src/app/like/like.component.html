@@ -23,11 +23,11 @@
                             <ul class="pagination">
                                 <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
                                         <button class="favorite styled btn-danger" type="button" data-toggle="popover"
-                                            title="Dislike" chat><i class="material-icons">thumb_down</i></button>
+                                            title="Dislike" chat><i class="material-icons" (click)="dislikeUser(users.userID, myUserID)">thumb_down</i></button>
                                 </li>
                                 <li class="page-item" style="list-style-type: none; padding-left: 3rem;">
                                         <button class="favorite styled btn-success" type="button" data-toggle="popover"
-                                            title="Like" match><i class="material-icons ">thumb_up</i></button>
+                                            title="Like" match><i class="material-icons" (click)="likeUser(users.userID, myUserID)">thumb_up</i></button>
                                 </li>
                             </ul>
                         </nav>
