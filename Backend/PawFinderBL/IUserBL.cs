@@ -6,6 +6,7 @@ public interface IUserBL
 {
     List<User> GetAllUsers();
     User GetUser(int UserID);
+    User GetUserByUsername(string p_userName);
     User RegisterUser(User p_user);
     List<User> SearchUser(string p_name);
     List<User> ViewMatchedUser(int userID);
@@ -35,6 +36,8 @@ public interface IUserBL
     /// <returns> Returns an individual user. </returns>
     Task<User> GetUserAsync(int UserID);
 
+    Task<User> GetUserByUsernameAsync(string userName);
+
     /// <summary>
     /// Adds a user to the database.
     /// </summary>
@@ -48,6 +51,8 @@ public interface IUserBL
     /// <param name="p_name"></param>
     /// <returns> Returns a user that was searched. </returns>
     Task<List<User>> SearchUserAsync(string p_name);
+
+    
 
     /// <summary>
     /// Will give back matched user from userID.

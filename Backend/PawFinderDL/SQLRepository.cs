@@ -93,6 +93,35 @@ public class SQLRepository : IRepository
         }
     }
 
+    public User GetUserByUsername(string userName)
+    {
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userName", userName);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+
+        }
+    }
+
     public List<User> ViewMatchedUser(int UserID)
     {
         List<int> listOfMatchedUserID = new List<int>();
@@ -365,6 +394,38 @@ public class SQLRepository : IRepository
 
         }
     }
+
+    public async Task<User> GetUserByUsernameAsync(string userName)
+    {
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userName", userName);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                    Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
+                });
+            }
+            return Result;
+
+        }
+    }
+
+    
 
     public async Task<List<User>> ViewMatchedUserAsync(int UserID)
     {
