@@ -29,7 +29,7 @@ namespace AzureBlob.Api.Controllers
             {
                 if (model.PhotoFile != null)
                 {
-                    var blobContainer = _blobServiceClient.GetBlobContainerClient("p0testcontainer");
+                    var blobContainer = _blobServiceClient.GetBlobContainerClient("pawfindercontainer");
                     var blobClient = blobContainer.GetBlobClient(model.PhotoFile?.FileName);
 
                     await blobClient.UploadAsync(model.PhotoFile?.OpenReadStream());
