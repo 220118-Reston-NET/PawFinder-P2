@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
 
       let user:Users=
       {
-        userID: result.userID,
+        userID: this.myUserID,
         userName:result.userName,
         userPassword:"",
         userDBO: result.userDBO,
