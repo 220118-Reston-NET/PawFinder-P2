@@ -277,6 +277,54 @@ public class SQLRepository : IRepository
 
     }
 
+    public Match AddMatch(int p_UserID1, int p_UserID2)
+    {
+        Match result = new Match();
+        result.MatcherOneID = p_UserID1;
+        result.MatcherTwoID = p_UserID2;
+
+        string sqlQuery = "Insert Into MatchedUsers Values(@UserID1, @UserID2);";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@UserID1", p_UserID1);
+            command.Parameters.AddWithValue("@UserID2", p_UserID2);
+            command.ExecuteNonQuery();
+        }
+
+        return result;
+
+    }
+
+
+    public List<Like> GetLikedUser(int UserID)
+    {
+        List<Like> listOfLikedUsers = new List<Like>();
+        
+        string sqlQuery = @"SELECT * FROM LikedUsers 
+                        where likerUserID = @userID";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listOfLikedUsers.Add(new Like()
+                    {
+                        LikerID = reader.GetInt32(0),
+                        LikedID = reader.GetInt32(1),
+                    });
+            }
+            return listOfLikedUsers;
+        }
+    }
+
 
     //Async versions of functions=================================================================
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -619,6 +667,26 @@ public class SQLRepository : IRepository
             }
             return listOfLikedUsers;
         }
+    }
+
+    public async Task<Match> AddMatchAsync(int p_UserID1, int p_UserID2)
+    {
+        Match result = new Match();
+        result.MatcherOneID = p_UserID1;
+        result.MatcherTwoID = p_UserID2;
+
+        string sqlQuery = "Insert Into MatchedUsers Values(@UserID1, @UserID2);";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@UserID1", p_UserID1);
+            command.Parameters.AddWithValue("@UserID2", p_UserID2);
+            await command.ExecuteNonQueryAsync();
+        }
+
+        return result;
     }
 }
 

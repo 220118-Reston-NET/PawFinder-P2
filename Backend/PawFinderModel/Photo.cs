@@ -1,5 +1,5 @@
-namespace PawFinderModel;
-
+namespace PawFinderModel
+{
 public class Photo 
 {
     public int photoID { get; set; }
@@ -11,4 +11,5 @@ public class Photo
         fileName = "";
         userID = 0;
     }
+}
 }
