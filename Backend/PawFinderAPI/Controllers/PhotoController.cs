@@ -51,6 +51,7 @@ namespace AzureBlob.Api.Controllers
                         _photo.userID = item.UserID;
                         _photo.fileName = fileURL;
                     }
+                    Log.Information("Successfully uploaded photo for a user.");
                     return Created("Successfully added photo", await _userBL.AddPhotoAsync(_photo));
                 }
                 else
@@ -60,9 +61,39 @@ namespace AzureBlob.Api.Controllers
             }
             catch (System.Exception ex)
             {
+                Log.Warning("Failed to upload a photo.");
                 return StatusCode(422, ex.Message);
             }
             
+        }
+
+        // Get: api/Photo
+        [HttpGet("GetPhoto")]
+        public async Task<IActionResult> GetPhotobyUserIDAsync([FromQuery] string UserName)
+        {
+            try
+            {
+                List<User> user = await _userBL.SearchUserAsync(UserName);
+
+                if (user.Count() == 0)
+                {
+                    Log.Information("Failed to find a user in database.");
+                    throw new Exception("User could not be found.");
+                }
+
+                var p_userId = 0;
+                foreach (var item in user)
+                {
+                    p_userId = item.UserID;
+                }
+                Log.Information("Successfully returned conversation between users.");
+                return Ok(await _userBL.GetPhotobyUserIDAsync(p_userId));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Failed to get back user's photo.");
+                return StatusCode(422, ex.Message);
+            }
         }
     }
 }
