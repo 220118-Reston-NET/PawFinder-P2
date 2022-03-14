@@ -7,6 +7,7 @@ public interface IRepository
     User RegisterUser(User p_user);
     List<User> GetAllUsers();
     User GetUser(int UserID);
+    User GetUserByUsername(string userName);
     List<User> ViewMatchedUser(int UserID);
     List<Message> GetConversation(int UserID1, int UserID2);
     User UpdateUser(User p_user);
@@ -39,6 +40,8 @@ public interface IRepository
     /// <param name="UserID"></param>
     /// <returns> Returns an individual user. </returns>
     Task<User> GetUserAsync(int UserID);
+
+    Task<User> GetUserByUsernameAsync(string userName);
 
     /// <summary>
     /// Will give back matched user from userID.

@@ -69,6 +69,21 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+        [HttpGet("GetUserByUsername")]
+        public async Task<IActionResult> GetUserByUsernameAsync([FromQuery] string userName)
+        {
+            try
+            {
+                Log.Information("Successfully returned the user with userID");
+                return Ok(await _userBL.GetUserByUsernameAsync(userName));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find user in the database.");
+                return NotFound();
+            } 
+        }
+
 
         // GET: api/PawFinder/3
         [HttpGet("ViewMatchedUser")]
