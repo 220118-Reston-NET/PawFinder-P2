@@ -49,12 +49,14 @@ export class ProfileComponent implements OnInit {
 
     let user:Users=
     {
+      userID: 0,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("userPassword")?.value,
       userDBO:p_userGroup.get("userDBO")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
+      userImg:""
     }
     
     this.userService.updateUser(user).subscribe();

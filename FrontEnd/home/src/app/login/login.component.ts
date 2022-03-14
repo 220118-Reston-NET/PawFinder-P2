@@ -40,12 +40,14 @@ export class LoginComponent implements OnInit {
     
     let loginGroup:Users =
     {
+      userID: 0,
       userName:p_loginGroup.get("userName")?.value,
       userPassword:p_loginGroup.get("userPassword")?.value,
       userDBO: new Date,
       userBio: "",
       userBreed: "",
       userSize: "",
+      userImg:""
     }
 
     this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Users } from '../models/users.model';
 
 @Injectable({
@@ -24,7 +25,7 @@ export class UserService {
     return this.http.get("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetPotentialMatch?UserID=" + p_userID)
   }
 
-  getAllUsers()
+  getAllUsers(): Observable<Users[]>
   {
     return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers");
   }
