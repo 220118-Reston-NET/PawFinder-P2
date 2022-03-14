@@ -4,6 +4,7 @@ import { Users } from '../models/users.model';
 import { NavbarService } from '../services/navbar.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
+import { GlobalComponent } from '../global/global.component';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
       userImg:""
     }
    
-    this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
+    this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"]); GlobalComponent.loggedInUserName = loginGroup.userName;}});
   
   }
 

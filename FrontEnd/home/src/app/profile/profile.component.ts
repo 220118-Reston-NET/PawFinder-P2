@@ -5,6 +5,7 @@ import { ActivatedRoute} from '@angular/router';
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from '../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { GlobalComponent } from '../global/global.component';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  userID:number = 0;
   userName:string | null = "so user selected";
   userDOB:Date = new Date;
   userBio:string = "no user selected";
@@ -32,7 +34,6 @@ export class ProfileComponent implements OnInit {
 });
 
 // Users:PawfinderApi;
-  myUserID:number = 2;
   sizeOfUsersList:number = 0;
 
   constructor(private router:ActivatedRoute, private PawService:PawfinderService, public nav: NavbarService, private userService: UserService) {
@@ -50,13 +51,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.nav.show();
 
-    this.userService.getUserByUserID(this.myUserID).subscribe(result => 
+    this.userService.getUserByUserName(GlobalComponent.loggedInUserName).subscribe(result => 
 
-    {console.log(result);
+    {GlobalComponent.loggedInUserID = result.userID;
 
       let user:Users=
       {
-        userID: this.myUserID,
+        userID: result.userID,
         userName:result.userName,
         userPassword:"",
         userDBO: result.userDBO,
@@ -66,6 +67,7 @@ export class ProfileComponent implements OnInit {
         userImg:""
       }
       
+      this.userID = user.userID;
       this.userName = user.userName;
       this.userDOB = user.userDBO;
       this.userBio= user.userBio;
@@ -91,7 +93,7 @@ export class ProfileComponent implements OnInit {
 
     let user:Users=
     {
-      userID: this.myUserID,
+      userID: this.userID,
       userName:"",
       userPassword:"",
       userDBO: new Date,

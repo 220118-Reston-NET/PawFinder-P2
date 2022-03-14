@@ -35,4 +35,9 @@ export class UserService {
     return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUser?userID="+p_userID);
   }
 
+  getUserByUserName(p_userName:string): Observable<Users>
+  {
+    return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUserByUsername?userName="+p_userName);
+  }
+
 }
