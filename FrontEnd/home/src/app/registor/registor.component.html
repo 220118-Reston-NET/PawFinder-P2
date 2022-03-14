@@ -1,8 +1,8 @@
-<div class="container d-flex justify-content-center align-items-center">
+<div class="container d-flex justify-content-center align-items-center" style="margin-top: 4rem;">
 
     <div class="card">
         <div class="head">
-            <h1 style="font-weight: bold; text-align:center">Sign Up:</h1>
+            <h1 style="margin-top: 1rem; font-weight: bold; text-align:center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 1.5rem; color: white;">Sign Up:</h1>
         </div>
         <div class="upper">
             <div class="user text-center">
@@ -11,10 +11,6 @@
                 <button (click)="this.upload()" type="button" class="btn btn-dark mt-2">Upload Picture</button>
             </div>
             <form [formGroup]="userGroup" style="justify-content:center; text-align:center">
-                <!-- <div>
-                <label for="userID">UserID</label><br>
-                <input type="number" placeholder="ID" formControlName="userID"  required/><br />
-                </div> -->
                 <div>
                     <label for="userName">UserName</label><br>
                     <input type="text" placeholder="userName" formControlName="userName" /><br>
@@ -59,7 +55,7 @@
                     <li>
                         <div>
                             <label class="form-check-label" style="margin-top: 1rem;">Already have an account?</label>
-                            <a routerLink="/HomePage" class="btn-sm btn-danger"
+                            <a routerLink="/Login" class="btn-sm btn-danger"
                                 style="padding: 0.5rem;">Login</a>
                         </div>
                     </li>
@@ -67,7 +63,7 @@
             </form>
         </div>
     </div>
-    <div>
+    <!-- <div>
     <label for="userPassword">Password</label><br>
     <input [type]="show ? 'text' : 'password'" type="password" placeholder="password" formControlName="userPassword" /><br />
     </div>
@@ -95,9 +91,7 @@
     <div>
         <label class="form-check-label" style="margin-top: 1rem;">Already have an account?</label>  
         <a routerLink="/Login" class="paw-finder-login-signup-button" style="padding: 0.5rem;">Login</a> 
-    </div>
-    
-</form>
+    </div> -->
 </div>
 
 

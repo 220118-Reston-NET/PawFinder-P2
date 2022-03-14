@@ -45,39 +45,34 @@ export class RegistorComponent implements OnInit{
       userID:0,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("userPassword")?.value,
-      userDOB:p_userGroup.get("userDOB")?.value,
+      userDBO:p_userGroup.get("userDOB")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
 
-      photo:p_userGroup.get("userImg")?.value
+      userImg:p_userGroup.get("userImg")?.value
     }
     
-    this.userService.addUser(user).subscribe();
-    this.router.navigate(["/Profile"]);
+    this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
 
   }
    onFilechange(event: any)
     {
-   console.log(event.target.files[0])
-   this.file = event.target.files[0]
+  //  console.log(event.target.files[0])
+  //  this.file = event.target.files[0]
    }
  
  upload() 
  {
-      if (this.file) {
-        this.service.uploadfile(this.file).subscribe(resp => {
-          alert("Uploaded")
-        })
-      } 
-        else {
-          alert("Please select a file first")
-        }
-      userImg:""
-    }
-  
-    this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
-
+      // if (this.file) {
+      //   this.service.uploadfile(this.file).subscribe(resp => {
+      //     alert("Uploaded")
+      //   })
+      // } 
+      // else {
+      //   alert("Please select a file first")
+      // }
+      // userImg:""
   }
 
   Registor() 

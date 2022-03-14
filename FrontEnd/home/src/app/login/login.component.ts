@@ -49,10 +49,9 @@ export class LoginComponent implements OnInit {
       userSize: "",
       userImg:""
     }
-   }
-
-
+   
     this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
-
+  
   }
 
+}

@@ -1,3 +1,10 @@
+.loginHeading
+{
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3rem;
+    text-align: center;
+}
 
 label{
     color:rgb(255, 255, 235);
@@ -9,8 +16,6 @@ label{
 .form:hover{
       border-style: groove;
       background-color: aqua;
-      
-  
  }
 
 .paw-finder-login-signup-button
@@ -24,11 +29,11 @@ label{
     border-radius: 15%;
 }
 
-/* .switch-login-to-signup
+.switch-login-to-signup
 {
     font-size: 2rem;
     text-align: center;
-} */
+}
 
 .login-footer
 {

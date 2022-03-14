@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Users } from '../models/users.model';
 import { LikeService } from '../services/like.service';
 import { NavbarService } from '../services/navbar.service';
+import { UserService } from '../services/user.service';
 
 
 @Component({

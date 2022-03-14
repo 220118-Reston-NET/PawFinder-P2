@@ -15,8 +15,15 @@
     color: white; 
     border: none;
 }
+
+.paw-finder-login-signup-button:hover
+{
+    cursor: pointer;
+}
+
 li { list-style-type: none; 
 }
+
 img:hover{
     border-style: groove;
     background-color: rgb(216, 128, 12);
