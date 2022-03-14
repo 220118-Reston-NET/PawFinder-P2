@@ -76,6 +76,8 @@ public interface IUserBL
     /// <returns> Returns updated user information. </returns>
     Task<User> UpdateUserAsync(User user);
 
+    Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize);
+
     /// <summary>
     /// Adds a new message between sender and receiver.
     /// </summary>
