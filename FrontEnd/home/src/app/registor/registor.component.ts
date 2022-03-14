@@ -5,6 +5,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from '../services/user.service';
+import { GlobalComponent } from '../global/global.component';
 
 @Component({
   selector: 'app-registor',
@@ -53,7 +54,8 @@ export class RegistorComponent implements OnInit{
       userImg:p_userGroup.get("userImg")?.value
     }
     
-    this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
+    this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.userID;
+      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/Profile"]);}});
 
   }
    onFilechange(event: any)

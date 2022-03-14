@@ -18,6 +18,7 @@ import { UserComponent } from './user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundError } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GlobalComponent } from './global/global.component';
 
 
 
@@ -36,7 +37,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ChatComponent,
     UserComponent,
     HomePageComponent,
-    NavBarComponent
+    NavBarComponent,
+    GlobalComponent
   ],
   imports: [
     BrowserModule,
