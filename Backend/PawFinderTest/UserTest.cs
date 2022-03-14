@@ -167,7 +167,7 @@ public class UserTest
     }
 
     [Fact]
-    public void GetUserByName()
+    public void GetUserByUsernameList()
     {
         //Arrange
         int userID = 1111;
@@ -206,6 +206,45 @@ public class UserTest
 
         //Assert
         Assert.Equal(expectedList, actualList);
+    }
+
+    [Fact]
+    public void GetUserByUsername()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+
+
+        };
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.GetUserByUsername("Elk")).Returns(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = userBL.GetUserByUsername("Elk");
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
     }
 
     [Fact]
@@ -573,6 +612,44 @@ public class UserTest
 
         //Act
         User actualUser = await userBL.GetUserAsync(1111);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+     [Fact]
+    public async Task GetUserByUsernameAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userName = "Elk";
+        string userPassword = "E132456";
+        DateTime userDOB = DateTime.Today;
+        string userBio = "Bio testing string";
+        string userBreed = "Spitz";
+        string userSize = "Big";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserName = userName,
+            UserPassword = userPassword,
+            UserDOB = userDOB,
+            UserBio = userBio,
+            UserBreed = userBreed,
+            UserSize = userSize,
+
+
+        };
+        
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.GetUserByUsernameAsync("Elk")).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.GetUserByUsernameAsync("Elk");
 
         //Assert
         Assert.Equal(expectedUser, actualUser);
