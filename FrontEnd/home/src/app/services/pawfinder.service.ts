@@ -7,7 +7,7 @@ import { Users } from '../models/users.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PawfinderService {
+export class PawfinderService{
 
   constructor(private http:HttpClient) { }
   getAllUsers(): Observable<Users[]>
@@ -16,7 +16,7 @@ export class PawfinderService {
   }
   getAllMatch():Observable<Match[]>
   {
-    return this.http.get<Match[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/ViewMatchedUser?userID=1");
+    return this.http.get<Match[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/ViewMatchedUser?userID");
   }
    public uploadfile(file: File) 
    {
@@ -24,4 +24,8 @@ export class PawfinderService {
         formParams.append('file', file)
         return this.http.post('https://pawfinderwebapp.azurewebsites.net/api/PawFinder/RegisterUser', formParams)
    }
+   getUserByUserName()
+   {  
+     return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUser");
+  }
 }
