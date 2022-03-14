@@ -21,6 +21,11 @@ public class UserBL : IUserBL
         return _repo.GetUser(UserID);
     }
 
+    public User GetUserByUsername(string userName)
+    {
+        return _repo.GetUserByUsername(userName);
+    }
+
     public User RegisterUser(User p_user)
     {
         List<User> listOfAllUsers = _repo.GetAllUsers();
@@ -169,6 +174,11 @@ public class UserBL : IUserBL
     public async Task<User> GetUserAsync(int UserID)
     {
         return await _repo.GetUserAsync(UserID);
+    }
+
+    public async Task<User> GetUserByUsernameAsync(string userName)
+    {
+        return await _repo.GetUserByUsernameAsync(userName);
     }
 
     public async Task<User> RegisterUserAsync(User p_user)
