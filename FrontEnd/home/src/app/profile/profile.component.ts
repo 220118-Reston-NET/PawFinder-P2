@@ -103,7 +103,17 @@ export class ProfileComponent implements OnInit {
       userImg:""
     }
     
-    this.userService.updateUser(user).subscribe(result => {if(result){this.userBio = result.userBio; this.userSize = result.userSize}});
+    if(user.userBio == "")
+    {
+      user.userBio = this.userBio;
+    }
+
+    if(user.userSize == "")
+    {
+      user.userSize = this.userSize;
+    }
+
+    this.userService.updateUser(user).subscribe();
 
   }
 
