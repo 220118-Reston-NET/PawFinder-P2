@@ -900,22 +900,14 @@ public class UserTest
     {
         //Arrange
         int userID = 1111;
-        string userName = "Elk";
-        string userPassword = "E132456";
-        DateTime userDOB = DateTime.Today;
         string userBio = "Bio testing string";
-        string userBreed = "Spitz";
         string userSize = "Big";
 
 
         User expectedUser = new User()
         {
             UserID = userID,
-            //UserName = userName,
-            //UserPassword = userPassword,
-            //UserDOB = userDOB,
             UserBio = userBio,
-            //UserBreed = userBreed,
             UserSize = userSize,
         };
 
@@ -932,4 +924,66 @@ public class UserTest
         //Assert
         Assert.Equal(expectedUser, actualUser);
     }
+
+     [Fact]
+    public async Task UpdateUserBioAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userBio = "Bio testing string";
+        string userSize = null;
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserBio = userBio,
+            UserSize = userSize,
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.UpdateUserBioAsync(expectedUser.UserID, expectedUser.UserBio)).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.UpdateUserBioSizeAsync(expectedUser.UserID, expectedUser.UserBio, expectedUser.UserSize);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+
+     [Fact]
+    public async Task UpdateUserSizeAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userBio = null;
+        string userSize = "Big";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserBio = userBio,
+            UserSize = userSize,
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.UpdateUserSizeAsync(expectedUser.UserID, expectedUser.UserSize)).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.UpdateUserBioSizeAsync(expectedUser.UserID, expectedUser.UserBio, expectedUser.UserSize);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+
+
 }
