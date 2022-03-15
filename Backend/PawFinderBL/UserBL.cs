@@ -244,11 +244,6 @@ public class UserBL : IUserBL
         return await _repo.GetConversationAsync(UserID1, UserID2);
     }
 
-    // public async Task<User> UpdateUserAsync(User user)
-    // {
-    //     return await _repo.UpdateUserAsync(user);
-    // }
-
     public async Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
     {
         if (p_userBio!= null && p_userSize != null)
