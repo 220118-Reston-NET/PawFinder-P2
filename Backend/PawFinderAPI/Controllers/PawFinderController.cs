@@ -293,7 +293,7 @@ namespace PawFinderAPI.Controllers
             try
             {
                 Log.Information("Successfully updated user information.");
-                return Ok(await _userBL.UpdateUserBioSizeAsync(p_user.userID, p_user.userBio, p_user.userSize));
+                return Ok(await _userBL.UpdateUserBioSizeAsync(p_user.UserID, p_user.UserBio, p_user.UserSize));
             }
             catch (System.Exception ex)
             {
