@@ -259,41 +259,41 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-        // PUT: api/PawFinder
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
-        {
-            try
-            {
-                List<User> user = await _userBL.SearchUserAsync(p_user.UserName);
-                if (user.Count() == 0)
-                {
-                    Log.Information("Failed to find a user to update.");
-                    throw new Exception("User Not Found");
-                }
-                else if (user.Count() > 1)
-                {
-                    Log.Information("The usernames in this app should all be unique.");
-                    throw new Exception("This username is already taken!");
-                }
-                Log.Information("Successfully updated user information.");
-                return Ok(await _userBL.UpdateUserAsync(p_user));
-            }
-            catch (System.Exception ex)
-            {
-                Log.Warning("Could not update user information.");
-                return Conflict(ex.Message);
-            }
-        }
+        // // PUT: api/PawFinder
+        // [HttpPut("UpdateUser")]
+        // public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
+        // {
+        //     try
+        //     {
+        //         List<User> user = await _userBL.SearchUserAsync(p_user.UserName);
+        //         if (user.Count() == 0)
+        //         {
+        //             Log.Information("Failed to find a user to update.");
+        //             throw new Exception("User Not Found");
+        //         }
+        //         else if (user.Count() > 1)
+        //         {
+        //             Log.Information("The usernames in this app should all be unique.");
+        //             throw new Exception("This username is already taken!");
+        //         }
+        //         Log.Information("Successfully updated user information.");
+        //         return Ok(await _userBL.UpdateUserAsync(p_user));
+        //     }
+        //     catch (System.Exception ex)
+        //     {
+        //         Log.Warning("Could not update user information.");
+        //         return Conflict(ex.Message);
+        //     }
+        // }
 
         
         [HttpPut("UpdateUserBioSize")]
-        public async Task<IActionResult> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
+        public async Task<IActionResult> UpdateUserBioSizeAsync([FromBody] User p_user)
         {
             try
             {
                 Log.Information("Successfully updated user information.");
-                return Ok(await _userBL.UpdateUserBioSizeAsync(p_userID, p_userBio, p_userSize));
+                return Ok(await _userBL.UpdateUserBioSizeAsync(p_user.userID, p_user.userBio, p_user.userSize));
             }
             catch (System.Exception ex)
             {
