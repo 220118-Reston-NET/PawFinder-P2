@@ -286,6 +286,22 @@ namespace PawFinderAPI.Controllers
             }
         }
 
+        
+        [HttpPut("UpdateUserBioSize")]
+        public async Task<IActionResult> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
+        {
+            try
+            {
+                Log.Information("Successfully updated user information.");
+                return Ok(await _userBL.UpdateUserBioSizeAsync(p_userID, p_userBio, p_userSize));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Could not update user information.");
+                return Conflict(ex.Message);
+            }
+        }
+
         [HttpGet("LogIn")]
         public async Task<IActionResult> LoginAsync(string UserNameInput, string PasswordInput)
         {
