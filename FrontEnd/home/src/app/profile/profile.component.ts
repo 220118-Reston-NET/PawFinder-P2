@@ -7,7 +7,6 @@ import { UserService } from '../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GlobalComponent } from '../global/global.component';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -51,30 +50,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.nav.show();
 
-    this.userService.getUserByUserName(GlobalComponent.loggedInUserName).subscribe(result => 
-
-    {GlobalComponent.loggedInUserID = result.userID;
-
-      let user:Users=
-      {
-        userID: result.userID,
-        userName:result.userName,
-        userPassword:"",
-        userDOB: result.userDOB,
-        userBio:result.userBio,
-        userBreed:result.userBreed,
-        userSize:result.userSize,
-        userImg:""
-      }
-      
-      this.userID = user.userID;
-      this.userName = user.userName;
-      this.userDOB = user.userDOB;
-      this.userBio= user.userBio;
-      this.userSize = user.userSize;
-      this.userBreed = user.userBreed;
-
-    });
+    this.loadUser();
     
     // this.userName = this.router.snapshot.paramMap.get("userName");
     // this.service.getAllUsers().subscribe(result=>{
@@ -103,17 +79,48 @@ export class ProfileComponent implements OnInit {
       userImg:""
     }
     
-    if(user.userBio == "")
+    if(user.userBio === "")
     {
       user.userBio = this.userBio;
     }
 
-    if(user.userSize == "")
+    if(user.userSize === "")
     {
       user.userSize = this.userSize;
     }
 
-    this.userService.updateUser(user).subscribe();
+    this.userService.updateUser(user).subscribe( () => { this.loadUser(); });
+
+    this.userGroup.reset({userBio:"", userSize:""});
+
+  }
+
+  loadUser()
+  {
+    this.userService.getUserByUserName(GlobalComponent.loggedInUserName).subscribe(result => 
+
+      {GlobalComponent.loggedInUserID = result.userID;
+  
+        let user:Users=
+        {
+          userID: result.userID,
+          userName:result.userName,
+          userPassword:"",
+          userDOB: result.userDOB,
+          userBio:result.userBio,
+          userBreed:result.userBreed,
+          userSize:result.userSize,
+          userImg:""
+        }
+        
+        this.userID = user.userID;
+        this.userName = user.userName;
+        this.userDOB = user.userDOB;
+        this.userBio= user.userBio;
+        this.userSize = user.userSize;
+        this.userBreed = user.userBreed;
+  
+      });
 
   }
 
