@@ -275,14 +275,21 @@ public class UserBL : IUserBL
     {
         List<User> listOfAllUsers = await _repo.GetAllUsersAsync();
         List<int> listOfPassedUsersID = await _repo.GetPassedUsersIDAsync(p_user.UserID);
+        List<Like> listOfLiked = await _repo.GetLikedUserAsync(p_user.UserID);
+        List<int> listOfLikedUserID = new List<int>();
         List<User> Result = new List<User>();
 
+        foreach(var L in listOfLiked)
+        {
+            listOfLikedUserID.Add(L.LikedID);
+        }
 
         foreach(var U in listOfAllUsers)
         {
             bool passed = listOfPassedUsersID.Contains(U.UserID);
+            bool liked = listOfLikedUserID.Contains(U.UserID);
             double ageDifferenceInDays = Math.Abs(p_user.UserDOB.Subtract(U.UserDOB).TotalDays);
-            if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID && passed == false)
+            if(ageDifferenceInDays < 365*5 && U.UserID != p_user.UserID && passed == false && liked == false)
             {
                 Result.Add(U);
             }
