@@ -15,7 +15,7 @@ import { GlobalComponent } from '../global/global.component';
 })
 export class ProfileComponent implements OnInit {
   userID:number = 0;
-  userName:string | null = "so user selected";
+  userName:string= "so user selected";
   userDOB:Date = new Date;
   userBio:string = "no user selected";
   userSize:string = "no user selected";
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
  userGroup= new FormGroup({
   userName: new FormControl(""),
   userPassword:new FormControl(""),
-  userDBO: new FormControl(""),
+  userDOB: new FormControl(""),
   userBio:new FormControl(""),
   userBreed:new FormControl(""),
   userSize:new FormControl("")    
@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
         userID: result.userID,
         userName:result.userName,
         userPassword:"",
-        userDBO: result.userDBO,
+        userDOB: result.userDOB,
         userBio:result.userBio,
         userBreed:result.userBreed,
         userSize:result.userSize,
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
       
       this.userID = user.userID;
       this.userName = user.userName;
-      this.userDOB = user.userDBO;
+      this.userDOB = user.userDOB;
       this.userBio= user.userBio;
       this.userSize = user.userSize;
       this.userBreed = user.userBreed;
@@ -94,16 +94,16 @@ export class ProfileComponent implements OnInit {
     let user:Users=
     {
       userID: this.userID,
-      userName:"",
+      userName:this.userName,
       userPassword:"",
-      userDBO: new Date,
+      userDOB: new Date,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:"",
       userSize:p_userGroup.get("userSize")?.value,
       userImg:""
     }
     
-    this.userService.updateUser(user).subscribe();
+    this.userService.updateUser(user).subscribe(result => {if(result){this.userBio = result.userBio; this.userSize = result.userSize}});
 
   }
 

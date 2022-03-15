@@ -27,7 +27,7 @@
                     <label class="form-check-label" for="exampleCheck1">Show Password</label>
                 </div>
                 <div>
-                    <label for="userDBO">DBO</label><br>
+                    <label for="userDOB">DOB</label><br>
                     <input type="date" placeholder="DBO" formControlName="userDBO" /><br />
                 </div>
                 <div>
@@ -44,6 +44,7 @@
                 </div><br>
                 <ul  style="list-style-type: none; ">
                     <li>
+                        <label *ngIf="isRegisterConflict" style="color: red; margin-right: 1.5rem; margin-bottom: 1rem;">User Name already exists or a field isn't filled out.</label>
                         <div>
                             <button class="btn btn-primary"
                                 style=" background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"
@@ -54,9 +55,9 @@
                     
                     <li>
                         <div>
-                            <label class="form-check-label" style="margin-top: 1rem;">Already have an account?</label>
+                            <label class="form-check-label" style="margin-top: 1rem; margin-right: 1rem;">Already have an account?</label>
                             <a routerLink="/Login" class="btn-sm btn-danger"
-                                style="padding: 0.5rem;">Login</a>
+                                style="padding: 0.5rem; text-decoration: none;">Login</a>
                         </div>
                     </li>
                 </ul>

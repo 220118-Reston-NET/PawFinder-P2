@@ -15,11 +15,12 @@ import { GlobalComponent } from '../global/global.component';
 export class RegistorComponent implements OnInit{
   
   myResult:any;
+  isRegisterConflict:boolean;
 
   userGroup= new FormGroup({
     userName: new FormControl(""),
     userPassword:new FormControl(""),
-    userDBO: new FormControl(""),
+    userDOB: new FormControl(""),
     userBio:new FormControl(""),
     userBreed:new FormControl(""),
     userSize:new FormControl("")    
@@ -27,8 +28,7 @@ export class RegistorComponent implements OnInit{
 
   show:boolean = false;
   
-  constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) {
-  }
+  constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) { this.isRegisterConflict = false; }
 
   ngOnInit(): void {
     this.nav.hide();
@@ -46,7 +46,7 @@ export class RegistorComponent implements OnInit{
       userID:0,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("userPassword")?.value,
-      userDBO:p_userGroup.get("userDOB")?.value,
+      userDOB:p_userGroup.get("userDOB")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
@@ -55,7 +55,7 @@ export class RegistorComponent implements OnInit{
     }
     
     this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.userID;
-      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/HomePage"]);}});
+      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/HomePage"]);}}, error => {this.isRegisterConflict = true;});
 
   }
    onFilechange(event: any)

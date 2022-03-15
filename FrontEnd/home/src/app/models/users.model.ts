@@ -3,7 +3,7 @@ export interface Users
     userID:number;
     userName:string;
     userPassword:string;
-    userDBO:Date;
+    userDOB:Date;
     userBio:string;
     userBreed:string;
     userSize:string;
