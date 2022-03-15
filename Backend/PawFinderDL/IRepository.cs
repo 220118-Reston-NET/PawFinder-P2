@@ -10,7 +10,6 @@ public interface IRepository
     User GetUserByUsername(string userName);
     List<User> ViewMatchedUser(int UserID);
     List<Message> GetConversation(int UserID1, int UserID2);
-    //User UpdateUser(User p_user);
     Message AddMessage(Message message);
     List<int> GetPassedUsersID(int UserID);
     int AddPassedUserID(int passerID, int passeeID);
