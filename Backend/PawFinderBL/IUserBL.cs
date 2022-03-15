@@ -11,7 +11,6 @@ public interface IUserBL
     List<User> SearchUser(string p_name);
     List<User> ViewMatchedUser(int userID);
     List<Message> GetConversation(int UserID1, int UserID2);
-    User UpdateUser(User user);
     Message AddMessage(Message message);
     List<User> GetPotentialMatch(User p_user);
 
