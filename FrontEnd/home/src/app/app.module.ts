@@ -60,7 +60,7 @@ import { GlobalComponent } from './global/global.component';
       {path: "Like", component: LikeComponent},
       {path: "Login", component: LoginComponent},
       {path: "Registor", component: RegistorComponent},
-      {path: "", component:ProfileComponent}, 
+      {path: "", component:LoginComponent}, 
       {path: "**", component:NotFoundError} 
     ]),
 

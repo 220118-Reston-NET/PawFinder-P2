@@ -5,8 +5,6 @@ import { NavbarService } from '../services/navbar.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { GlobalComponent } from '../global/global.component';
-import { catchError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',

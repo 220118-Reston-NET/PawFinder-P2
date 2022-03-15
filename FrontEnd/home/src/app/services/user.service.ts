@@ -20,9 +20,9 @@ export class UserService {
     return this.http.put<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/UpdateUserBioSize", user);
   }
 
-  getPotentialMatch(p_userID:number)
+  getPotentialMatch(p_userID:number): Observable<Users[]>
   {
-    return this.http.get("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetPotentialMatch?UserID=" + p_userID)
+    return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetPotentialMatch?UserID=" + p_userID)
   }
 
   getAllUsers(): Observable<Users[]>

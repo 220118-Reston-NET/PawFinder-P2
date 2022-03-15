@@ -50,8 +50,7 @@ export class RegistorComponent implements OnInit{
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
-
-      userImg:p_userGroup.get("userImg")?.value
+      userImg:""
     }
     
     this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.userID;
