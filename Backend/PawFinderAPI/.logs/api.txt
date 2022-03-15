@@ -43,3 +43,5 @@
 2022-03-14 14:29:46.698 -06:00 [WRN] Could not find user in the database.
 2022-03-14 16:56:52.910 -04:00 [INF] Successfully returned the user with userID
 2022-03-15 15:34:30.321 -04:00 [INF] Successfully added a new user.
+2022-03-15 11:15:00.499 -04:00 [INF] Successfully returned conversation between users.
+2022-03-15 11:16:38.992 -04:00 [INF] Successfully returned conversation between users.

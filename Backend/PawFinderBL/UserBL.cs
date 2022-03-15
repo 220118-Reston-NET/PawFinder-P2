@@ -77,12 +77,6 @@ public class UserBL : IUserBL
     {
         return _repo.GetConversation(UserID1, UserID2);
     }
-
-    public User UpdateUser(User user)
-    {
-        return _repo.UpdateUser(user);
-    }
-
     public Message AddMessage(Message message)
     {
         return _repo.AddMessage(message);
@@ -250,9 +244,22 @@ public class UserBL : IUserBL
         return await _repo.GetConversationAsync(UserID1, UserID2);
     }
 
-    public async Task<User> UpdateUserAsync(User user)
+    public async Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
     {
-        return await _repo.UpdateUserAsync(user);
+        if (p_userBio!= null && p_userSize != null)
+        {
+            return await _repo.UpdateUserBioSizeAsync(p_userID, p_userBio, p_userSize);
+
+        }
+        else if (p_userBio!= null && p_userSize == null)
+        {
+            return await _repo.UpdateUserBioAsync(p_userID, p_userBio);
+
+        }
+        else
+        {
+            return await _repo.UpdateUserSizeAsync(p_userID, p_userSize);
+        }
     }
 
     public async Task<Message> AddMessageAsync(Message message)

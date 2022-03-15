@@ -259,25 +259,14 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-        // PUT: api/PawFinder
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
+        
+        [HttpPut("UpdateUserBioSize")]
+        public async Task<IActionResult> UpdateUserBioSizeAsync([FromBody] User p_user)
         {
             try
             {
-                List<User> user = await _userBL.SearchUserAsync(p_user.UserName);
-                if (user.Count() == 0)
-                {
-                    Log.Information("Failed to find a user to update.");
-                    throw new Exception("User Not Found");
-                }
-                else if (user.Count() > 1)
-                {
-                    Log.Information("The usernames in this app should all be unique.");
-                    throw new Exception("This username is already taken!");
-                }
                 Log.Information("Successfully updated user information.");
-                return Ok(await _userBL.UpdateUserAsync(p_user));
+                return Ok(await _userBL.UpdateUserBioSizeAsync(p_user.UserID, p_user.UserBio, p_user.UserSize));
             }
             catch (System.Exception ex)
             {

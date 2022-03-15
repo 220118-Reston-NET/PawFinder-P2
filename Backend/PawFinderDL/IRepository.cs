@@ -10,7 +10,6 @@ public interface IRepository
     User GetUserByUsername(string userName);
     List<User> ViewMatchedUser(int UserID);
     List<Message> GetConversation(int UserID1, int UserID2);
-    User UpdateUser(User p_user);
     Message AddMessage(Message message);
     List<int> GetPassedUsersID(int UserID);
     int AddPassedUserID(int passerID, int passeeID);
@@ -65,7 +64,13 @@ public interface IRepository
     /// </summary>
     /// <param name="user"></param>
     /// <returns> Returns updated user information. </returns>
-    Task<User> UpdateUserAsync(User p_user);
+    // Task<User> UpdateUserAsync(User p_user);
+
+    Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize);
+    Task<User> UpdateUserBioAsync(int p_userID, string p_userBio);
+
+    Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize);
+
 
     /// <summary>
     /// Adds a new message between sender and receiver.

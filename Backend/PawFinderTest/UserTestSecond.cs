@@ -384,4 +384,5 @@ public class UserTestSecond
         await Assert.ThrowsAsync<Exception>(async () => await userBL.RegisterUserAsync(expectedUser));
 
     }
+
 }

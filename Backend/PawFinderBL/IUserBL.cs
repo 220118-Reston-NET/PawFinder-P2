@@ -11,7 +11,6 @@ public interface IUserBL
     List<User> SearchUser(string p_name);
     List<User> ViewMatchedUser(int userID);
     List<Message> GetConversation(int UserID1, int UserID2);
-    User UpdateUser(User user);
     Message AddMessage(Message message);
     List<User> GetPotentialMatch(User p_user);
 
@@ -74,7 +73,7 @@ public interface IUserBL
     /// </summary>
     /// <param name="user"></param>
     /// <returns> Returns updated user information. </returns>
-    Task<User> UpdateUserAsync(User user);
+    Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize);
 
     /// <summary>
     /// Adds a new message between sender and receiver.

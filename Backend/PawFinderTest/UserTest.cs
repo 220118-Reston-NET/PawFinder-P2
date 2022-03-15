@@ -75,6 +75,9 @@ public class UserTest
         //Arrange
         User newUser = new User();
         DateTime userDOB = DateTime.Today;
+        List<Photo> photoList = new List<Photo>();
+        Photo newPhoto = new Photo();
+        photoList.Add(newPhoto);
 
         //Act
         newUser.UserDOB = userDOB;
@@ -82,6 +85,8 @@ public class UserTest
         //Assert
         Assert.NotNull(newUser.UserDOB);
         Assert.Equal(userDOB, newUser.UserDOB);
+
+        Assert.Equal(photoList[0], newPhoto);
 
     }
 
@@ -325,43 +330,43 @@ public class UserTest
         Assert.Equal(expectedList, actualList);
     }
 
-    [Fact]
-    public void UpdateUser()
-    {
-        //Arrange
-        int userID = 1111;
-        string userName = "Elk";
-        string userPassword = "E132456";
-        DateTime userDOB = DateTime.Today;
-        string userBio = "Bio testing string";
-        string userBreed = "Spitz";
-        string userSize = "Big";
+    // [Fact]
+    // public void UpdateUser()
+    // {
+    //     //Arrange
+    //     int userID = 1111;
+    //     string userName = "Elk";
+    //     string userPassword = "E132456";
+    //     DateTime userDOB = DateTime.Today;
+    //     string userBio = "Bio testing string";
+    //     string userBreed = "Spitz";
+    //     string userSize = "Big";
 
 
-        User expectedUser = new User()
-        {
-            UserID = userID,
-            UserName = userName,
-            UserPassword = userPassword,
-            UserDOB = userDOB,
-            UserBio = userBio,
-            UserBreed = userBreed,
-            UserSize = userSize,
-        };
+    //     User expectedUser = new User()
+    //     {
+    //         UserID = userID,
+    //         UserName = userName,
+    //         UserPassword = userPassword,
+    //         UserDOB = userDOB,
+    //         UserBio = userBio,
+    //         UserBreed = userBreed,
+    //         UserSize = userSize,
+    //     };
 
 
-        Mock<IRepository> mockRepo = new Mock<IRepository>();
+    //     Mock<IRepository> mockRepo = new Mock<IRepository>();
 
-        mockRepo.Setup(repo => repo.UpdateUser(expectedUser)).Returns(expectedUser);
+    //     mockRepo.Setup(repo => repo.UpdateUser(expectedUser)).Returns(expectedUser);
 
-        IUserBL userBL = new UserBL(mockRepo.Object);
+    //     IUserBL userBL = new UserBL(mockRepo.Object);
 
-        //Act
-        User actualUser = userBL.UpdateUser(expectedUser);
+    //     //Act
+    //     User actualUser = userBL.UpdateUser(expectedUser);
 
-        //Assert
-        Assert.Equal(expectedUser, actualUser);
-    }
+    //     //Assert
+    //     Assert.Equal(expectedUser, actualUser);
+    // }
 
     [Fact]
     public void GetConversation()
@@ -432,69 +437,7 @@ public class UserTest
         Assert.Equal(expectedMessage, actualMessage);
     }
 
-    [Fact]
-    public void GetPotentialMatch()
-    {
-        //Arrange
-        int userID = 1111;
-        string userName = "Elk";
-        string userPassword = "E132456";
-        DateTime userDOB = DateTime.Today;
-        string userBio = "Bio testing string";
-        string userBreed = "Spitz";
-        string userSize = "Big";
-
-
-        User newUser = new User()
-        {
-            UserID = userID,
-            UserName = userName,
-            UserPassword = userPassword,
-            UserDOB = userDOB,
-            UserBio = userBio,
-            UserBreed = userBreed,
-            UserSize = userSize,
-
-
-        };
-
-        int userIDTwo = 2222;
-        string userNameTwo = "Nancy";
-        string userPasswordTwo = "N132456";
-        DateTime userDOBTwo = DateTime.Today;
-        string userBioTwo = "Bio testing string";
-        string userBreedTwo = "Spitz";
-        string userSizeTwo = "Big";
-
-
-        User newUserTwo = new User()
-        {
-            UserID = userIDTwo,
-            UserName = userNameTwo,
-            UserPassword = userPasswordTwo,
-            UserDOB = userDOBTwo,
-            UserBio = userBioTwo,
-            UserBreed = userBreedTwo,
-            UserSize = userSizeTwo,
-
-
-        };
-
-        List<User> expectedList = new List<User>();
-        expectedList.Add(newUser);
-
-        Mock<IRepository> mockRepo = new Mock<IRepository>();
-        
-        mockRepo.Setup(repo => repo.GetAllUsers()).Returns(expectedList);
-
-        IUserBL userBL = new UserBL(mockRepo.Object);
-
-        //Act
-        List<User> actualList = userBL.GetPotentialMatch(newUser);
-
-        //Assert
-        Assert.Equal(expectedList, actualList);
-    }
+    
 
     [Fact]
     public void GetPassedUsersID()
@@ -537,6 +480,34 @@ public class UserTest
         //Assert
         Assert.Equal(expectedResult, actualResult);
     }
+
+        [Fact]
+    public async Task SearchLikedUserAsync()
+    {
+        //Arrange
+        int likerID = 11111;
+        int likedID = 22222;
+
+        Like newLike = new Like();
+        newLike.LikerID = likerID;
+        newLike.LikedID = likedID;
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        List<Like> newLikeList = new List<Like>();
+        newLikeList.Add(newLike);
+        
+        
+        mockRepo.Setup(repo => repo.GetLikedUserAsync(likerID)).ReturnsAsync(newLikeList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //ActexpectedList
+        List<Like> actualList = await userBL.SearchLikedUserAsync(likerID,likedID);
+
+        //Assert
+        Assert.Equal(newLikeList, actualList);
+    }
+
 
     [Fact]
     public async Task GetAllUsersAsync()
@@ -733,43 +704,43 @@ public class UserTest
         Assert.Equal(expectedList, actualList);
     }
 
-    [Fact]
-    public async Task UpdateUserAsync()
-    {
-        //Arrange
-        int userID = 1111;
-        string userName = "Elk";
-        string userPassword = "E132456";
-        DateTime userDOB = DateTime.Today;
-        string userBio = "Bio testing string";
-        string userBreed = "Spitz";
-        string userSize = "Big";
+    // [Fact]
+    // public async Task UpdateUserAsync()
+    // {
+    //     //Arrange
+    //     int userID = 1111;
+    //     string userName = "Elk";
+    //     string userPassword = "E132456";
+    //     DateTime userDOB = DateTime.Today;
+    //     string userBio = "Bio testing string";
+    //     string userBreed = "Spitz";
+    //     string userSize = "Big";
 
 
-        User expectedUser = new User()
-        {
-            UserID = userID,
-            UserName = userName,
-            UserPassword = userPassword,
-            UserDOB = userDOB,
-            UserBio = userBio,
-            UserBreed = userBreed,
-            UserSize = userSize,
-        };
+    //     User expectedUser = new User()
+    //     {
+    //         UserID = userID,
+    //         UserName = userName,
+    //         UserPassword = userPassword,
+    //         UserDOB = userDOB,
+    //         UserBio = userBio,
+    //         UserBreed = userBreed,
+    //         UserSize = userSize,
+    //     };
 
 
-        Mock<IRepository> mockRepo = new Mock<IRepository>();
+    //     Mock<IRepository> mockRepo = new Mock<IRepository>();
 
-        mockRepo.Setup(repo => repo.UpdateUserAsync(expectedUser)).ReturnsAsync(expectedUser);
+    //     mockRepo.Setup(repo => repo.UpdateUserAsync(expectedUser)).ReturnsAsync(expectedUser);
 
-        IUserBL userBL = new UserBL(mockRepo.Object);
+    //     IUserBL userBL = new UserBL(mockRepo.Object);
 
-        //Act
-        User actualUser = await userBL.UpdateUserAsync(expectedUser);
+    //     //Act
+    //     User actualUser = await userBL.UpdateUserAsync(expectedUser);
 
-        //Assert
-        Assert.Equal(expectedUser, actualUser);
-    }
+    //     //Assert
+    //     Assert.Equal(expectedUser, actualUser);
+    // }
 
     [Fact]
     public async Task GetConversationAsync()
@@ -923,5 +894,96 @@ public class UserTest
         //Assert
         Assert.Equal(expectedResult, actualResult);
     }
-    
+
+    [Fact]
+    public async Task UpdateUserBioSizeAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userBio = "Bio testing string";
+        string userSize = "Big";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserBio = userBio,
+            UserSize = userSize,
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.UpdateUserBioSizeAsync(expectedUser.UserID, expectedUser.UserBio, expectedUser.UserSize)).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.UpdateUserBioSizeAsync(expectedUser.UserID, expectedUser.UserBio, expectedUser.UserSize);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+
+     [Fact]
+    public async Task UpdateUserBioAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userBio = "Bio testing string";
+        string userSize = null;
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserBio = userBio,
+            UserSize = userSize,
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.UpdateUserBioAsync(expectedUser.UserID, expectedUser.UserBio)).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.UpdateUserBioSizeAsync(expectedUser.UserID, expectedUser.UserBio, expectedUser.UserSize);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+
+     [Fact]
+    public async Task UpdateUserSizeAsync()
+    {
+        //Arrange
+        int userID = 1111;
+        string userBio = null;
+        string userSize = "Big";
+
+
+        User expectedUser = new User()
+        {
+            UserID = userID,
+            UserBio = userBio,
+            UserSize = userSize,
+        };
+
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.UpdateUserSizeAsync(expectedUser.UserID, expectedUser.UserSize)).ReturnsAsync(expectedUser);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        User actualUser = await userBL.UpdateUserBioSizeAsync(expectedUser.UserID, expectedUser.UserBio, expectedUser.UserSize);
+
+        //Assert
+        Assert.Equal(expectedUser, actualUser);
+    }
+
+
 }
