@@ -574,6 +574,104 @@ public class SQLRepository : IRepository
         }
     }
 
+    public async Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
+    {
+        User Result = new User();
+        string sqlQuery = @"Update Users 
+                        set userBio = @userBio, userSize = @userSize 
+                        where userID = @userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userBio", p_userBio);
+            command.Parameters.AddWithValue("@userSize", p_userSize);
+
+            command.Parameters.AddWithValue("@userID", p_userID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+        }
+    }
+
+    public async Task<User> UpdateUserBioAsync(int p_userID, string p_userBio)
+    {
+        User Result = new User();
+        string sqlQuery = @"Update Users 
+                        set userBio = @userBio 
+                        where userID = @userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userBio", p_userBio);
+
+            command.Parameters.AddWithValue("@userID", p_userID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+        }
+    }
+
+    public async Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize)
+    {
+        User Result = new User();
+        string sqlQuery = @"Update Users 
+                        set userSize = @userSize 
+                        where userID = @userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userSize", p_userSize);
+
+            command.Parameters.AddWithValue("@userID", p_userID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+        }
+    }
+ 
+
     public async Task<Message> AddMessageAsync(Message message)
     {
         string sqlQuery = @"INSERT INTO ChatMessage
