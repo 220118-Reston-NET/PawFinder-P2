@@ -212,7 +212,7 @@ public class UserBL : IUserBL
         List<User> ListOfUsers = await _repo.GetAllUsersAsync();
 
              return ListOfUsers
-                         .Where(user => user.UserName.Contains(p_name))
+                         .Where(user => user.UserName.Equals(p_name))
                          .ToList();
     }
 
