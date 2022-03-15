@@ -69,23 +69,23 @@ namespace AzureBlob.Api.Controllers
 
         // Get: api/Photo
         [HttpGet("GetPhoto")]
-        public async Task<IActionResult> GetPhotobyUserIDAsync([FromQuery] string UserName)
+        public async Task<IActionResult> GetPhotobyUserIDAsync([FromQuery] int p_userId)
         {
             try
             {
-                List<User> user = await _userBL.SearchUserAsync(UserName);
+                // List<User> user = await _userBL.SearchUserAsync(UserName);
 
-                if (user.Count() == 0)
-                {
-                    Log.Information("Failed to find a user in database.");
-                    throw new Exception("User could not be found.");
-                }
+                // if (user.Count() == 0)
+                // {
+                //     Log.Information("Failed to find a user in database.");
+                //     throw new Exception("User could not be found.");
+                // }
 
-                var p_userId = 0;
-                foreach (var item in user)
-                {
-                    p_userId = item.UserID;
-                }
+                // var p_userId = 0;
+                // foreach (var item in user)
+                // {
+                //     p_userId = item.UserID;
+                // }
                 Log.Information("Successfully returned conversation between users.");
                 return Ok(await _userBL.GetPhotobyUserIDAsync(p_userId));
             }
