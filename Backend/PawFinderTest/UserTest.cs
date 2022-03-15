@@ -985,5 +985,51 @@ public class UserTest
         Assert.Equal(expectedUser, actualUser);
     }
 
+    [Fact]
+    public async Task AddPhotoAsync()
+    {
+        //Arrange
+        Photo expectedPhoto = new Photo();
+
+        
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.AddPhotoAsync(expectedPhoto)).ReturnsAsync(expectedPhoto);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        Photo actualPhoto = await userBL.AddPhotoAsync(expectedPhoto);
+
+        //Assert
+        Assert.Equal(expectedPhoto, actualPhoto);
+    }
+
+    [Fact]
+    public async Task GetPhotobyUserIDAsync()
+    {
+        //Arrange
+        Photo expectedPhoto = new Photo();
+        int userId = 11111;
+
+        List<Photo> expectedPhotoList = new List<Photo>();
+        expectedPhotoList.Add(expectedPhoto);
+
+        
+
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+
+        mockRepo.Setup(repo => repo.GetPhotobyUserIDAsync(userId)).ReturnsAsync(expectedPhotoList);
+
+        IUserBL userBL = new UserBL(mockRepo.Object);
+
+        //Act
+        List<Photo> actualPhotoList = await userBL.GetPhotobyUserIDAsync(userId);
+
+        //Assert
+        Assert.Equal(expectedPhotoList, actualPhotoList);
+    }
+
 
 }
