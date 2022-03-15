@@ -19,6 +19,9 @@
           (click)="showPassword()" required.value>
         <label class="form-check-label" for="exampleCheck1">Show Password</label>
       </div>
+      <div>
+        <label *ngIf="isloginConflict" style="color: red; margin-left: 52.5rem;">Incorrect User Name or Password.</label>
+      </div>
       <button type="submit" class="btn btn-primary" class="paw-finder-login-signup-button" style="font-size: 3rem; margin-left: 55rem; padding: 0.75rem;" (click)="checkUser(loginGroup)" >Submit</button>
     <div class="switch-login-to-signup" style="margin-top: 2rem;">
       <label class="form-check-label">Don't have an account?</label>

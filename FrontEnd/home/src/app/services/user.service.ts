@@ -17,7 +17,7 @@ export class UserService {
 
   updateUser(user: Users)
   {
-    return this.http.put<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/UpdateUser", user);
+    return this.http.put<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/UpdateUserBioSize", user);
   }
 
   getPotentialMatch(p_userID:number)
