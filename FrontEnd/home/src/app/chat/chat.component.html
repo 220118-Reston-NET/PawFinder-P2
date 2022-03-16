@@ -6,7 +6,8 @@
 
             <div class="container">
                 <div *ngFor="let message in listofMessages">
-                    <p>{{message.messageText}}</p>
+                    <p *ngIF="message.SenderID === myUserID" style="text-align: right;">{{message.messageText}}</p>
+                    <p *ngIF="message.ReceiverID === chattingUserID" style="text-align: left;">{{message.messageText}}</p>
                 </div>
             </div>
 
