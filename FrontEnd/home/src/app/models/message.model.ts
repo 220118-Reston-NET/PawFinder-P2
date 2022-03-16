@@ -1,8 +1,8 @@
 export interface Message
 {
     messageID:number;
-    SenderID:number;
-    ReceiverID:number;
+    senderID:number;
+    receiverID:number;
     messageText:string;
     messageTimeStamp: Date;
 }

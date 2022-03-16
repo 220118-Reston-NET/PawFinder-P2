@@ -4,21 +4,33 @@
 
         <div class="row px-lg-2 px-2">
 
-            <div class="container">
+            <div class="container" style="margin-left: 30rem;">
                 <ul *ngFor = "let message of listOfMessages">
-
-                    <p>{{message.messageText}}</p>
-                    <!-- <li *ngIf="message.SenderID === myUserID">
-                            <p style="text-align: right;">{{message.messageText}}</p>
+                    <div style="border: 1rem black;">
+                        <li *ngIf = "message.senderID === myUserID">
+                            <div style="background-color: blue; padding: 1rem; margin-right: 60rem; color: white;">
+                                <h3 style="font-weight: bold;">{{myUserName}}</h3>
+                                <p style="margin-left: 1rem;">{{message.messageText}}</p>
+                            </div>
                         </li>
-                        <li *ngIf="message.ReceiverID === chattingUserID">
-                            <p  style="text-align: left;">{{message.messageText}}</p>
-                        </li> -->
-
+                        <li *ngIf = "message.senderID === chattingUserID">
+                            <div style="background-color: white; padding: 1rem; margin-right: 60rem;">
+                                <h3 style="font-weight: bold;">{{chattingUserName}}</h3>                        
+                                <p style="margin-left: 1rem;">{{message.messageText}}</p>
+                            </div>
+                        </li>
+                        <!-- <li *ngIf="message.SenderID === myUserID">
+                                <p style="text-align: right;">{{message.messageText}}</p>
+                            </li>
+                            <li *ngIf="message.ReceiverID === chattingUserID">
+                                <p  style="text-align: left;">{{message.messageText}}</p>
+                            </li> -->
+                    </div>
                 </ul>
+                        
             </div>
 
-            <div class="col-md-6 col-xl-4 px-0">
+            <div class="col-md-6 col-xl-4 px-0" style="margin-left: 40rem;">
                     <div class="white">
                         <div class="form-group basic-textarea">
                             <form [formGroup]="messageGroup">
@@ -28,7 +40,7 @@
                         </div>
                     </div>
                     <button type="button" mdbBtn color="pink" outline="true" rounded="true" size="sm"
-                        class="waves-effect waves-dark float-right" (click)="sendMessage(messageGroup)">Send</button>
+                        class="waves-effect waves-dark float-right" class="btn btn-primary" style="margin-bottom: 3rem;" (click)="sendMessage(messageGroup)">Send</button>
                 </div>
 
             </div>

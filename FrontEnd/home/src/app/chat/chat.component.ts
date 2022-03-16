@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit {
 
   listOfMessages:Message[];
   myUserID = GlobalComponent.loggedInUserID;
+  myUserName = GlobalComponent.loggedInUserName;
   chattingUserID = 0;
   chattingUserName = "";
 
@@ -51,7 +52,7 @@ export class ChatComponent implements OnInit {
           
           this.chattingUserName = user.userName;
 
-          this.chatService.getConveration(this.myUserID, this.chattingUserID).subscribe(result => {this.listOfMessages = result});
+          this.chatService.getConveration(this.myUserID, this.chattingUserID).subscribe(result => {console.log(result); this.listOfMessages = result});
 
         });
 
@@ -68,8 +69,8 @@ export class ChatComponent implements OnInit {
       let messageGroup:Message = 
       {
         messageID: 0,
-        SenderID: this.myUserID,
-        ReceiverID: this.chattingUserID,
+        senderID: this.myUserID,
+        receiverID: this.chattingUserID,
         messageText: p_messageGroup.get("messageText")?.value,
         messageTimeStamp: new Date
       }
