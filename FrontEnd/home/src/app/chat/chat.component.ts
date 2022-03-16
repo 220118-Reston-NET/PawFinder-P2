@@ -57,6 +57,11 @@ export class ChatComponent implements OnInit {
 
     }
 
+    loadConveration()
+    {
+      this.chatService.getConveration(this.myUserID, this.chattingUserID).subscribe(result => {this.listOfMessages = result});
+    }
+
     sendMessage(p_messageGroup:FormGroup)
     {
 
@@ -69,7 +74,9 @@ export class ChatComponent implements OnInit {
         messageTimeStamp: new Date
       }
 
-      this.chatService.sendMessage(messageGroup).subscribe();
+      this.chatService.sendMessage(messageGroup).subscribe( () => {this.loadConveration()} );
+      this.messageGroup.reset({messageText: ""})
+
     }
 
 }

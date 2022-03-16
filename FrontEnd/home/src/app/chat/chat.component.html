@@ -5,10 +5,17 @@
         <div class="row px-lg-2 px-2">
 
             <div class="container">
-                <div *ngFor="let message in listofMessages">
-                    <p *ngIF="message.SenderID === myUserID" style="text-align: right;">{{message.messageText}}</p>
-                    <p *ngIF="message.ReceiverID === chattingUserID" style="text-align: left;">{{message.messageText}}</p>
-                </div>
+                <ul *ngFor = "let message of listOfMessages">
+
+                    <p>{{message.messageText}}</p>
+                    <!-- <li *ngIf="message.SenderID === myUserID">
+                            <p style="text-align: right;">{{message.messageText}}</p>
+                        </li>
+                        <li *ngIf="message.ReceiverID === chattingUserID">
+                            <p  style="text-align: left;">{{message.messageText}}</p>
+                        </li> -->
+
+                </ul>
             </div>
 
             <div class="col-md-6 col-xl-4 px-0">
@@ -16,7 +23,7 @@
                         <div class="form-group basic-textarea">
                             <form [formGroup]="messageGroup">
                                 <textarea class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3"
-                                    placeholder="Type your message here..."></textarea>
+                                    placeholder="Type your message here..." formControlName="messageText"></textarea>
                             </form>
                         </div>
                     </div>

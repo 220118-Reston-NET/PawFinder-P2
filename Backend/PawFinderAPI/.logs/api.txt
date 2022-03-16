@@ -45,3 +45,4 @@
 2022-03-15 15:34:30.321 -04:00 [INF] Successfully added a new user.
 2022-03-15 11:15:00.499 -04:00 [INF] Successfully returned conversation between users.
 2022-03-15 11:16:38.992 -04:00 [INF] Successfully returned conversation between users.
+2022-03-16 16:00:08.944 -04:00 [INF] Successfully returned a list of all users
