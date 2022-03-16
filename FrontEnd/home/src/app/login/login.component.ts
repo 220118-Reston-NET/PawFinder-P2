@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   isloginConflict: boolean;
   responseMsg:string = "";
 
-  loginGroup= new FormGroup({
+  loginGroup = new FormGroup({
     userName: new FormControl(""),
     userPassword:new FormControl(""),
     userDOB: new FormControl(""),

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GlobalComponent } from '../global/global.component';
 import { Users } from '../models/users.model';
 import { MatchService } from '../services/match.service';
@@ -14,18 +15,25 @@ export class MatchComponent implements OnInit {
   
   listOfUsers:Users[];
   sizeOfUsersList:number = 0;
- 
+  myUserID = GlobalComponent.loggedInUserID;
+  chattingWithUserID = 0;
 
-  constructor(public nav: NavbarService, private userService: UserService, private matchservice: MatchService) { this.listOfUsers = []; }
+  constructor(private router: Router, public nav: NavbarService, private userService: UserService, private matchservice: MatchService) { this.listOfUsers = []; }
 
   ngOnInit(): void {
     
     this.nav.show();
 
-    this.matchservice.getMatches(GlobalComponent.loggedInUserID).subscribe(result => {console.log(result); this.listOfUsers = result});
+    this.matchservice.getMatches(this.myUserID).subscribe(result => {console.log(result); this.listOfUsers = result});
 
     this.sizeOfUsersList = this.listOfUsers.length;
 
+  }
+
+  chatwithUser(p_userID:number)
+  {
+    GlobalComponent.chattingUserID = p_userID;
+    this.router.navigate(["/Chat"]);
   }
 
 }

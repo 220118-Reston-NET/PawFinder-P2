@@ -9,6 +9,8 @@ export class GlobalComponent implements OnInit {
 
   public static loggedInUserID:number = 0;
   public static loggedInUserName: string = "";
+  
+  public static chattingUserID:number = 0;
 
   constructor() { }
 
