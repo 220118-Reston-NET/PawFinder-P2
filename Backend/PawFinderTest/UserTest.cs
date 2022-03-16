@@ -81,12 +81,13 @@ public class UserTest
 
         //Act
         newUser.UserDOB = userDOB;
+        newUser.Photo = photoList;
 
         //Assert
         Assert.NotNull(newUser.UserDOB);
         Assert.Equal(userDOB, newUser.UserDOB);
 
-        Assert.Equal(photoList[0], newPhoto);
+        Assert.Equal(photoList, newUser.Photo);
 
     }
 
@@ -480,38 +481,6 @@ public class UserTest
         Assert.Equal(expectedResult, actualResult);
     }
 
-    // [Fact]
-    // public void AddLikedUser()
-    // {
-    //     //Arrange
-    //     int likerID = 11111;
-    //     int likedID = 22222;
-
-    //     Like newLike = new Like();
-    //     newLike.LikerID = likerID;
-    //     newLike.LikedID = likedID;
-
-    //     PawFinderModel.Match newMatch = new PawFinderModel.Match();
-    //     newMatch.MatcherOneID = likerID;
-    //     newMatch.MatcherTwoID = likedID;
-
-    //     List<Like> newLikeList = new List<Like>();
-    //     newLikeList.Add(newLike);
-
-    //     Mock<IRepository> mockRepo = new Mock<IRepository>();
-        
-    //     mockRepo.Setup(repo => repo.GetLikedUser(likedID)).Returns(newLikeList);
-    //     mockRepo.Setup(repo => repo.AddMatch(likerID,likedID)).Returns(newMatch);
-
-    //     IUserBL userBL = new UserBL(mockRepo.Object);
-
-    //     //Act
-    //     User actualResult = userBL.AddLikedUser(likerID,likedID);
-
-    //     //Assert
-    //     Assert.Equal(newLike.LikedID, actualResult.UserID);
-
-    // }
 
     [Fact]
     public async Task SearchLikedUserAsync()
