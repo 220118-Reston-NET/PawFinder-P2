@@ -183,7 +183,7 @@ public class SQLRepository : IRepository
     public List<Message> GetConversation(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 or senderUserID = @userID2 or receiverID  = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 and senderUserID = @userID2 or receiverID  = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
