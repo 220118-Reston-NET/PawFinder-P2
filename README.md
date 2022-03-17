@@ -117,10 +117,3 @@ Things to do in each section
 Database
 Way to save pictures
 Way to save chats
-
-Backend C#
-
-API
-
-Angular
-
