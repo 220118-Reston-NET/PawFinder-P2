@@ -15,107 +15,169 @@ Overview
 Tables
 
 User
-UserID
-Username
-Password
-Name
-DOB
-Bio
-Breed
-Size (small, med, large)
+
+-serID
+
+-sername
+
+-assword
+
+-Name
+
+-DOB
+
+-Bio
+
+-Breed
+
+-Size (small, med, large)
+
 UserPicture
-UserID (foreign key UserID)
-PictureID
+
+-UserID (foreign key UserID)
+
+-PictureID
 	
 Like
-LikerUserID (foreign key UserID)
-LikedUserID (foreign key UserID)
+
+-LikerUserID (foreign key UserID)
+
+-LikedUserID (foreign key UserID)
+
 Pass
-PassedByUserID (foreign key UserID)
-PasseeUserID (foreign key UserID)
-    - 	Match
-    -MatchedUserID (foreign key UserID)
-  	    -MatcheeUserID (foreign key UserID)
+
+-PassedByUserID (foreign key UserID)
+
+-PasseeUserID (foreign key UserID)
+
+Match
+
+-MatchedUserID (foreign key UserID)
+
+-MatcheeUserID (foreign key UserID)
 
 
 User Stories
-As a user, I would like to be able to have a way to login with my credentials to see my own profile information.
 
-As a user, if I do not have an account already, I would like a way to register for one.
+-As a user, I would like to be able to have a way to login with my credentials to see my own profile information.
 
-As a user, I would like to have a way of viewing other dogs' profiles.
+-As a user, if I do not have an account already, I would like a way to register for one.
 
-As a user, I would like a way to “like” or “dislike” them.
+-As a user, I would like to have a way of viewing other dogs' profiles.
 
-As a user, I would like to be able to change my profile whenever I want to. 
+-As a user, I would like a way to “like” or “dislike” them.
 
-As a user, I would like to be able to view all the user’s I have matched with on a chat screen.
+-As a user, I would like to be able to change my profile whenever I want to. 
 
-As a user, I would like to be able to chat with whoever I match with.
+-As a user, I would like to be able to view all the user’s I have matched with on a chat screen.
 
-As a user, I would like a nice UI to be able to view all the functionalities of the app.
+-As a user, I would like to be able to chat with whoever I match with.
 
-As a user, I would like to filter the profiles I can view based on my preferences (breed, age range, and size).
+-As a user, I would like a nice UI to be able to view all the functionalities of the app.
 
-As a user, I would not like to see profiles I have already matched with, liked, or passed. 
+-As a user, I would like to filter the profiles I can view based on my preferences (breed, age range, and size).
+
+-As a user, I would not like to see profiles I have already matched with, liked, or passed. 
 
 
 Scope Goals
+
 Adding better security/security to the user login
+
 Add a friend list.
-Add a more advanced filtering algorithm to view and match dogs based on similar interests (favorite activities, treats, etc).
+
+Add a more advanced filtering algorithm to view and match dogs based on similar interests and prefferences (age, breed, key words in bio, etc)
 
 
 Tech Stack
+
 Backend
-C#
-LINQ
-JSON
-ADO.NET
-Xunit
-Serilog
-Azure DevOps
-ASP.NET WebAPI
-ASP.NET SignalR
-Swagger/ThunderClient
-Moq
+
+-C#
+
+-LINQ
+
+-JSON
+
+-ADO.NET
+
+-Xunit
+
+-Serilog
+
+-Azure DevOps
+
+-ASP.NET WebAPI
+
+-ASP.NET SignalR
+
+-Swagger/ThunderClient
+
+-Moq
 
 
 Frontend
-HTML
-CSS
-JavaScript
-Typescript
-Bootstrap
-JSON
-Angular
+
+-TML
+
+-cSS
+
+-javaScript
+
+-typescript
+
+-bootstrap
+
+-JSON
+
+-Angular
+
 Others
-VS Code
-DBeaver
-Git
-GitHub
-SonarCloud
+
+-VS Code
+
+-DBeaver
+
+-Git
+
+-GitHub
+
+-SonarCloud
 
 
 Methods for Backend
-(all methods will be asynchronous)
-(Business layers: UserBL, ChatMessageBL, 
 
-DL Methods
-GetAllUsers (Done)
-GetUser (Done)
-RegisterUsers (Done)
-UpdateUsers (Done)
-ViewMatchedUsers (Done)
-CreateUserID (Done)
-CreatePictureID (not needed)
-CreateConversationID (not needed)
-GetChatHistory (Done)
-AddMessage (Done)
+-(all methods will be asynchronous)
+
+-(Business layers: UserBL, ChatMessageBL, 
+
+-DL Methods
+
+-GetAllUsers (Done)
+
+-GetUser (Done)
+
+-RegisterUsers (Done)
+
+-UpdateUsers (Done)
+
+-ViewMatchedUsers (Done)
+
+-CreateUserID (Done)
+
+-CreatePictureID (not needed)
+
+-CreateConversationID (not needed)
+
+-GetChatHistory (Done)
+
+-AddMessage (Done)
 
 BL Methods
-FindUserByUsername(Done)
-RegisterUser (Done)
+
+-FindUserByUsername(Done)
+
+-RegisterUser (Done)
 
 Repository Methods
 
