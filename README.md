@@ -43,14 +43,23 @@ Database ER Diagram
 
 User Stories
 As a user, I would like to be able to have a way to login with my credentials to see my own profile information.
+
 As a user, if I do not have an account already, I would like a way to register for one.
+
 As a user, I would like to have a way of viewing other dogs' profiles.
+
 As a user, I would like a way to “like” or “dislike” them.
+
 As a user, I would like to be able to change my profile whenever I want to. 
+
 As a user, I would like to be able to view all the user’s I have matched with on a chat screen.
+
 As a user, I would like to be able to chat with whoever I match with.
+
 As a user, I would like a nice UI to be able to view all the functionalities of the app.
+
 As a user, I would like to filter the profiles I can view based on my preferences (breed, age range, and size).
+
 As a user, I would not like to see profiles I have already matched with, liked, or passed. 
 
 
