@@ -16,11 +16,11 @@ Tables
 
 User
 
--serID
+-userID
 
--sername
+-username
 
--assword
+-uassword
 
 -Name
 
