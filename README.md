@@ -37,9 +37,6 @@ PasseeUserID (foreign key UserID)
     -MatchedUserID (foreign key UserID)
   	    -MatcheeUserID (foreign key UserID)
 
-Database ER Diagram
-
-
 
 User Stories
 As a user, I would like to be able to have a way to login with my credentials to see my own profile information.
