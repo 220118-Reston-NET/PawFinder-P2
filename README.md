@@ -1,15 +1,15 @@
 # PawFinder-P2
 
-Team Members:
+## Team Members:
 Abdulkerim Metenea, Andrew DeMarco, Dat Vo, Nicolas Colorado, and Roberto Sandoval
 
-Team Name: 
+## Team Name: 
 DAARN
 
-Project Name: 
+## Project Name: 
 PawFinder
 
-Overview
+## Overview
 	A place for dogs to meet and chat via instant messaging. Dogs will have their own profile with image(s) and a bio that they upload from their profile screen. They will be able to like other dogs and if both like each other, they “match.” Matched dogs can then message each other. 
 
 Tables
@@ -57,7 +57,7 @@ Match
 -MatcheeUserID (foreign key UserID)
 
 
-User Stories
+## User Stories
 
 -As a user, I would like to be able to have a way to login with my credentials to see my own profile information.
 
@@ -80,7 +80,7 @@ User Stories
 -As a user, I would not like to see profiles I have already matched with, liked, or passed. 
 
 
-Scope Goals
+## Scope Goals
 
 Adding better security/security to the user login
 
@@ -89,7 +89,7 @@ Add a friend list.
 Add a more advanced filtering algorithm to view and match dogs based on similar interests and prefferences (age, breed, key words in bio, etc)
 
 
-Tech Stack
+## Tech Stack
 
 Backend
 
