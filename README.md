@@ -185,3 +185,27 @@ Things to do in each section
 Database
 Way to save pictures
 Way to save chats
+
+## Usage
+
+# Backend:
+Clone the repo.
+
+cd into the projects API folder and run the cli command: dotnet run
+
+Test the project in a local host: http://localhost:{yourport}/swagger/index.html
+
+can run tests using dotnet test in the project's test folder.
+
+Link to backend api: http://pawfinderwebapp.azurewebsites.net
+Link to backend api with getallusers method: http://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers
+
+# Frontend:
+Clone the repo.
+
+CD into project foldr and Run npm install in terminal.
+
+Test project in local host by using command: ng serve and click on the local host link your terminal gives you for project.
+
+Link to deployed app: https://pawfinderwebappfe.azurewebsites.net/
+From there, you can signup or login to test other functionalities.
