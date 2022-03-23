@@ -73,48 +73,6 @@ Others
 
 -SonarCloud
 
-
-Methods for Backend
-
--(all methods will be asynchronous)
-
--(Business layers: UserBL, ChatMessageBL, 
-
--DL Methods
-
--GetAllUsers (Done)
-
--GetUser (Done)
-
--RegisterUsers (Done)
-
--UpdateUsers (Done)
-
--ViewMatchedUsers (Done)
-
--CreateUserID (Done)
-
--CreatePictureID (not needed)
-
--CreateConversationID (not needed)
-
--GetChatHistory (Done)
-
--AddMessage (Done)
-
-BL Methods
-
--FindUserByUsername(Done)
-
--RegisterUser (Done)
-
-Repository Methods
-
-Things to do in each section
-Database
-Way to save pictures
-Way to save chats
-
 ## Usage
 
 # Backend:
