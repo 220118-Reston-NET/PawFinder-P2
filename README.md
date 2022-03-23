@@ -7,7 +7,7 @@ Abdulkerim Metenea, Andrew DeMarco, Dat Vo, Nicolas Colorado, and Roberto Sandov
 PawFinder
 
 ## Overview
-	A place for dogs to meet and chat via instant messaging. Dogs will have their own profile with image(s) and a bio that they upload from their profile screen. They will be able to like other dogs and if both like each other, they “match.” Matched dogs can then message each other. 
+A place for dogs to meet and chat via instant messaging. Dogs will have their own profile with image(s) and a bio that they upload from their profile screen. They will be able to like other dogs and if both like each other, they “match.” Matched dogs can then message each other. 
 
 ## Features
 -Login/signup to create your own profile.
