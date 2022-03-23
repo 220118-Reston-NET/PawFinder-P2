@@ -11,8 +11,11 @@ A place for dogs to meet and chat via instant messaging. Dogs will have their ow
 
 ## Features
 -Login/signup to create your own profile.
+
 -Change your bio and size in the profile screen whenever you want to.
+
 -Look at other user profiles in the like page and like/dislike them using the buttons at the bottom of their profile (Liking them will allow you two to match it they also like you back. Pressing either button will make them disappear from your like screen since you already did one of the two actions. You must wait to see if they end up liking you and you will match if that is the case).
+
 -If you match with someone, they will showup in your matches page and you can then hit the button to chat with them. 
 
 ## Tech Stack
