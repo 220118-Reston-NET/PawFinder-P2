@@ -47,15 +47,15 @@ Backend
 
 Frontend
 
--TML
+-HTML
 
--cSS
+-CSS
 
--javaScript
+-JavaScript
 
--typescript
+-TypeScript
 
--bootstrap
+-Bootstrap
 
 -JSON
 
