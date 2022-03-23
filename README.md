@@ -3,9 +3,6 @@
 ## Team Members:
 Abdulkerim Metenea, Andrew DeMarco, Dat Vo, Nicolas Colorado, and Roberto Sandoval
 
-## Team Name: 
-DAARN
-
 ## Project Name: 
 PawFinder
 
