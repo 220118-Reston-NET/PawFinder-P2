@@ -96,3 +96,9 @@ Test project in local host by using command: ng serve and click on the local hos
 
 Link to deployed app: https://pawfinderwebappfe.azurewebsites.net/
 From there, you can signup or login to test other functionalities.
+
+## Future Implementations
+-Change the messaging to instant messaging using SignalR (in progress).
+-Add a way to upload user images to their profile (in progress).
+-Update the way users can find matches (make them able to select the way they find users. ex: by age, similar interests, breed, size, etc).
+-Update styling to make pages more appealing.
