@@ -1,51 +1,121 @@
+.imagediv 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -1
+}
+
+.image 
+{
+    width: 75%;
+}
+
+.button 
+{
+    margin-top: 75%;
+    position: absolute;
+}
+
+.text 
+{
+    padding-right: 18%;
+    padding-top: 15%;
+    font-size: 28px;
+}
+
+.textdiv 
+{
+    display: flex;
+    justify-content: right;
+    z-index: 1;
+    margin-top: -10rem;
+}
+
+.flex-wrapper 
+{
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+}
+
+.form-outline 
+{
+    margin-top: .5rem;
+}
+  
+.form-control 
+{
+    margin-top: .5rem;
+}
+  
+button 
+{
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+  
+.form-check 
+{
+    font-size: .7rem;
+}
+  
+.span-text 
+{
+    color: white;
+    font-size: 1rem;
+}
+
 .loginHeading
 {
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 3rem;
     text-align: center;
+    padding-top: 5%;
+    padding-bottom: 1.5rem
 }
 
 label{
     color:rgb(255, 255, 235);
-    font-size: large;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.paw-finder-login-signup-button:hover{
-  background-color: rgb(245, 35, 63);
-}
-.form:hover{
-      border-style: groove;
-      background-color: aqua;
- }
 
 .paw-finder-login-signup-button
 {
     background-color: #940132;
-    margin-top: 1rem;
-    margin-left: 1rem;
     text-align: center;
     text-decoration: none;
     color: white;
     border-radius: 15%;
+    border-color: black;
 }
 
-.switch-login-to-signup
+.paw-finder-login-signup-button:hover{
+  background-color: rgb(245, 35, 63);
+}
+
+.login-conflict
 {
-    font-size: 2rem;
-    text-align: center;
+    color: #940132;
 }
 
-.login-footer
+.password-eye
+{   
+    padding-top: 50%;
+    z-index: 1;
+    cursor: pointer;
+    color: #940132;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.password-eye:hover
 {
-    text-align: right;
-    margin-top: 1rem;
-    margin-right: 1rem;
-} 
-.email-and-pw-textbox-div{
-  padding:2rem;
-  background-color: rgba(80, 80, 74, 0.616);
-}
-
-.email-and-pw-textbox-div:hover{
-    background-color: rgba(62, 62, 65, 0.637);
+    color:rgb(245, 35, 63);
 }
