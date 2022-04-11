@@ -27,7 +27,8 @@ export class RegistorComponent implements OnInit{
   });
 
   show:boolean = false;
-  
+  passwordVisibility: string = "visibility";
+
   constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) { this.isRegisterConflict = false; }
 
   ngOnInit(): void {
@@ -37,9 +38,18 @@ export class RegistorComponent implements OnInit{
   showPassword()
   {
     this.show = !this.show;
+
+    if(this.passwordVisibility === "visibility")
+    {
+      this.passwordVisibility = "visibility_off";
+    }
+    else
+    {
+      this.passwordVisibility = "visibility";
+    }
   }
 
-  addUser(p_userGroup:FormGroup){
+  Register(p_userGroup:FormGroup){
 
     let user:Users=
     {

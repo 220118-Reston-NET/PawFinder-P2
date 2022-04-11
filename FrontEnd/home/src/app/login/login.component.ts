@@ -13,6 +13,7 @@ import { GlobalComponent } from '../global/global.component';
 })
 export class LoginComponent implements OnInit {
   show:boolean = false;
+  passwordVisibility: string ="visibility";
   trySubmit:String = "";
   isloginConflict: boolean;
   responseMsg:string = "";
@@ -35,9 +36,18 @@ export class LoginComponent implements OnInit {
   showPassword()
   {
     this.show = !this.show;
+    
+    if(this.passwordVisibility === "visibility")
+    {
+      this.passwordVisibility = "visibility_off";
+    }
+    else
+    {
+      this.passwordVisibility = "visibility";
+    }
   } 
 
-  checkUser(p_loginGroup:FormGroup)
+  login(p_loginGroup:FormGroup)
   {
     
     let loginGroup:Users =

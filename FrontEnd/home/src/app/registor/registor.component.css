@@ -1,24 +1,129 @@
+.imagediv 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -1
+}
+
+.image 
+{
+    width: 75%;
+}
+
+.button 
+{
+    margin-top: 75%;
+    position: absolute;
+}
+
+.text 
+{
+    padding-right: 18%;
+    padding-top: 15%;
+    font-size: 28px;
+}
+
+.textdiv 
+{
+    display: flex;
+    justify-content: right;
+    z-index: 1;
+    margin-top: -10rem;
+}
+
+.flex-wrapper 
+{
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+}
+
+.form-outline 
+{
+    margin-top: .5rem;
+}
+  
+.form-control 
+{
+    margin-top: .5rem;
+}
+  
+button 
+{
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+  
+.form-check 
+{
+    font-size: .7rem;
+}
+  
+.span-text 
+{
+    color: white;
+    font-size: 1rem;
+}
+
+.loginHeading
+{
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3rem;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 1.5rem
+}
+
+label
+{
+    color:rgb(255, 255, 235);
+    font-size: 1.5rem;
+    padding-top: 0.3rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.dob-input
+{
+    color: gray;
+    
+}
+
 .paw-finder-login-signup-button
 {
     background-color: #940132;
-    border-radius: 0.5rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    font-size: 1.5rem;
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: white; 
-    border: none;
     text-decoration: none;
-}
-.card{
-    background-color: rgba(0, 0, 0, 0.11);
-}
-label{
-    color:rgb(0, 0, 0)
+    color: white;
+    border-radius: 15%;
+    border-color: black;
 }
 
 .paw-finder-login-signup-button:hover
 {
+  background-color: rgb(245, 35, 63);
+}
+
+.login-conflict
+{
+    color: #940132;
+}
+
+.password-eye
+{   
+    z-index: 1;
+    padding-top: 50%;
     cursor: pointer;
+    color: #940132;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.password-eye:hover
+{
+    color: rgb(245, 35, 63);
 }
