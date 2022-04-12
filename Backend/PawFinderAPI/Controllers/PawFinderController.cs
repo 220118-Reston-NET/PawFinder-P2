@@ -293,6 +293,14 @@ namespace PawFinderAPI.Controllers
             return Conflict();
         }
 
+        [HttpGet("GetLikeToDislikeRatio")]
+        public IActionResult GetLikeToDislikeRatio(int userID)
+        {
+            return Ok(_userBL.GetLikeandDislike(userID));
+        }
+
+
+
 
     }
 }

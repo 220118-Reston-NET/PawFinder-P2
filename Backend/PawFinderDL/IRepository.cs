@@ -16,6 +16,8 @@ public interface IRepository
     User AddLikedUser(int LikerID, int LikedID);
     List<Like> GetLikedUser(int UserID);
     Match AddMatch(int p_UserID1, int p_UserID2);
+    int GetLike(int UserID);
+    int GetDislike(int UserID);
 
 
     //Async version functions

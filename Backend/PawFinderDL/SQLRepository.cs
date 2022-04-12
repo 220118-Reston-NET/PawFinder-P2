@@ -325,6 +325,50 @@ public class SQLRepository : IRepository
         }
     }
 
+    public int GetLike(int UserID)
+    {
+        int result = 0;
+        string sqlQuery = @"Select Count(likedUserID) from LikedUsers Where likedUserID = @UserID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@UserID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result = reader.GetInt32(0);
+            }
+        }
+
+        return result;
+    }
+
+    public int GetDislike(int UserID)
+    {
+        int result = 0;
+        string sqlQuery = @"Select Count(passeeID) from PassedUsers Where passeeID = @UserID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@UserID", UserID);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result = reader.GetInt32(0);
+            }
+        }
+
+        return result;       
+    }
+
 
     //Async versions of functions=================================================================
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -452,7 +496,7 @@ public class SQLRepository : IRepository
     public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 or senderUserID = @userID2 or receiverID  = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 and senderUserID = @userID2 or receiverID  = @userID2";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             await conn.OpenAsync();
