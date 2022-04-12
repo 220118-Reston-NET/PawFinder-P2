@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundError } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalComponent } from './global/global.component';
+import { LikeDislikeRatioGraphComponent } from './like-dislike-ratio-graph/like-dislike-ratio-graph.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -38,7 +40,8 @@ import { GlobalComponent } from './global/global.component';
     UserComponent,
     HomePageComponent,
     NavBarComponent,
-    GlobalComponent
+    GlobalComponent,
+    LikeDislikeRatioGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,10 @@ import { GlobalComponent } from './global/global.component';
     ]),
 
     
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

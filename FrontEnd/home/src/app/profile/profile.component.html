@@ -1,39 +1,42 @@
-<li>
-<div class="container d-flex justify-content-center align-items-center" style="margin-top: 4rem;">
-    <div class="card">
-        <div class="upper">
-            <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
-        </div>
-        <div class="profile">
-            <div class="user text-center">
-                <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
-                    class="rounded-circle" width="220" alt="profile">
+<div class="flex-row">
+    <li>
+        <div class="container d-flex justify-content-center align-items-center" style="margin-top: 4rem;">
+            <div class="card">
+                <div class="upper">
+                    <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
+                </div>
+                <div class="profile">
+                    <div class="user text-center">
+                        <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
+                            class="rounded-circle" width="220" alt="profile">
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <h2 class="mb-0">User Name: {{userName}}</h2>
+                    <h4>DOB: {{userDOB}}</h4>
+                    <h4>Breed: {{userBreed}}</h4>
+                    <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
+                        <form [formGroup]="userGroup" style="margin-left: 3rem">
+                            <div>
+                            <label for="userBio">Bio:</label><br>
+                            <h4>{{userBio}}</h4>
+                            <input type="text" placeholder="write new bio"  formControlName="userBio" /><br />
+                            </div>
+                            <div>
+                            <label for="userSize">Size:</label><br>
+                            <h4>{{userSize}}</h4>
+                            <input type="text" placeholder="change size" formControlName="userSize" /><br />
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: 1rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" (click)="updateUserInfo(userGroup)">Update info</button> 
+                        </form>  
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="mt-5 text-center">
-            <h2 class="mb-0">User Name: {{userName}}</h2>
-            <h4>DOB: {{userDOB}}</h4>
-            <h4>Breed: {{userBreed}}</h4>
-            <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
-                <form [formGroup]="userGroup" style="margin-left: 3rem">
-                    <div>
-                    <label for="userBio">Bio:</label><br>
-                    <h4>{{userBio}}</h4>
-                    <input type="text" placeholder="write new bio"  formControlName="userBio" /><br />
-                    </div>
-                    <div>
-                    <label for="userSize">Size:</label><br>
-                    <h4>{{userSize}}</h4>
-                    <input type="text" placeholder="change size" formControlName="userSize" /><br />
-                    </div>
-                    <button class="btn btn-primary" style="margin-top: 1rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" (click)="updateUserInfo(userGroup)">Update info</button> 
-                </form>  
-            </div>
-        </div>
-    </div>
+    </li>
+    <app-like-dislike-ratio-graph></app-like-dislike-ratio-graph>
 </div>
 
 <div class="switch-login-to-signup" style="margin-top: 3rem;">
     <a routerLink="/Login" class="paw-finder-login-signup-button">Logout</a>
 </div>
-</li>
