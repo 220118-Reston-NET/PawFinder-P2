@@ -18,6 +18,7 @@ export class LikeDislikeRatioGraphComponent implements OnInit
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   likeDislikeRatio:number[] = [ 0, 0 ];
+  noInfoToDisplayOnChart: boolean = true;
 
   constructor(private userService: UserService) { }
 
@@ -74,15 +75,23 @@ export class LikeDislikeRatioGraphComponent implements OnInit
     let likedAmount:number = this.likeDislikeRatio[0];
     let dislikedAmount:number = this.likeDislikeRatio[1];
 
-    // Takes old data out of the chart
-    this.pieChartData.datasets[0].data.pop();
-    this.pieChartData.datasets[0].data.pop();
-  
-    //puts new data onto the chart
-    this.pieChartData.datasets[0].data.push(likedAmount, dislikedAmount);
+    if((likedAmount === 0) && (dislikedAmount === 0))
+    {
+      this.noInfoToDisplayOnChart = true;
+    }
+    else
+    {
+      // Takes old data out of the chart
+      this.pieChartData.datasets[0].data.pop();
+      this.pieChartData.datasets[0].data.pop();
+    
+      //puts new data onto the chart and shows the chart
+      this.pieChartData.datasets[0].data.push(likedAmount, dislikedAmount);
 
-    this.chart?.update();
-    this.chart?.render();
+      this.chart?.update();
+      this.chart?.render();
+    }
+
 
   }
 

@@ -28,7 +28,8 @@ export class LikeComponent implements OnInit {
   userSize:string = "";
   userBreed:string = "";
   userImg:string = "";
-
+  
+  showNextProfile: boolean = true;
   i:number = 0;
 
   constructor(public nav: NavbarService, private likeService: LikeService, private userService: UserService, private matchservice: MatchService) { 
@@ -39,13 +40,21 @@ export class LikeComponent implements OnInit {
     this.nav.show();
 
     this.userService.getPotentialMatch(GlobalComponent.loggedInUserID).subscribe(result => {console.log(result); this.listOfUsers = result;
-      this.userID = result[0].userID;
-      this.userName = result[0].userName;
-      this.userDOB = result[0].userDOB;
-      this.userBio= result[0].userBio;
-      this.userSize = result[0].userSize;
-      this.userBreed = result[0].userBreed;
-      this.userImg = result[0].userImg;
+      if(this.listOfUsers.length === 0)
+      {
+        this.showNextProfile = false;
+      }
+      else
+      {
+        this.userID = result[0].userID;
+        this.userName = result[0].userName;
+        this.userDOB = result[0].userDOB;
+        this.userBio= result[0].userBio;
+        this.userSize = result[0].userSize;
+        this.userBreed = result[0].userBreed;
+        this.userImg = result[0].userImg;
+      }
+
     });
 
     this.sizeOfUsersList = this.listOfUsers.length;
@@ -57,26 +66,33 @@ export class LikeComponent implements OnInit {
     this.likeService.likeAUser(p_likeeID, p_likerID).subscribe();
     
     this.i = this.i + 1;
-
-    let currentUser:Users=
+    if(this.i > this.sizeOfUsersList)
     {
-      userID: this.listOfUsers[this.i].userID,
-      userName:this.listOfUsers[this.i].userName,
-      userPassword:"",
-      userDOB: this.listOfUsers[this.i].userDOB,
-      userBio:this.listOfUsers[this.i].userBio,
-      userBreed:this.listOfUsers[this.i].userBreed,
-      userSize:this.listOfUsers[this.i].userSize,
-      userImg:""
+      this.showNextProfile = false;
+    }
+    else
+    {
+      let currentUser:Users=
+      {
+        userID: this.listOfUsers[this.i].userID,
+        userName:this.listOfUsers[this.i].userName,
+        userPassword:"",
+        userDOB: this.listOfUsers[this.i].userDOB,
+        userBio:this.listOfUsers[this.i].userBio,
+        userBreed:this.listOfUsers[this.i].userBreed,
+        userSize:this.listOfUsers[this.i].userSize,
+        userImg:""
+      }
+      
+      this.userID = currentUser.userID;
+      this.userName = currentUser.userName;
+      this.userDOB = currentUser.userDOB;
+      this.userBio= currentUser.userBio;
+      this.userSize = currentUser.userSize;
+      this.userBreed = currentUser.userBreed;
+      this.userImg = currentUser.userImg;
     }
 
-    this.userID = currentUser.userID;
-    this.userName = currentUser.userName;
-    this.userDOB = currentUser.userDOB;
-    this.userBio= currentUser.userBio;
-    this.userSize = currentUser.userSize;
-    this.userBreed = currentUser.userBreed;
-    this.userImg = currentUser.userImg;
     
   }
 
@@ -85,26 +101,32 @@ export class LikeComponent implements OnInit {
     this.likeService.DislikeAUser(p_passeeID, p_passerID).subscribe();
 
     this.i = this.i + 1;
-
-    let currentUser:Users=
+    if(this.i > this.sizeOfUsersList)
     {
-      userID: this.listOfUsers[this.i].userID,
-      userName:this.listOfUsers[this.i].userName,
-      userPassword:"",
-      userDOB: this.listOfUsers[this.i].userDOB,
-      userBio:this.listOfUsers[this.i].userBio,
-      userBreed:this.listOfUsers[this.i].userBreed,
-      userSize:this.listOfUsers[this.i].userSize,
-      userImg:""
+      this.showNextProfile = false;
     }
-
-    this.userID = currentUser.userID;
-    this.userName = currentUser.userName;
-    this.userDOB = currentUser.userDOB;
-    this.userBio= currentUser.userBio;
-    this.userSize = currentUser.userSize;
-    this.userBreed = currentUser.userBreed;
-    this.userImg = currentUser.userImg;
+    else
+    {
+      let currentUser:Users=
+      {
+        userID: this.listOfUsers[this.i].userID,
+        userName:this.listOfUsers[this.i].userName,
+        userPassword:"",
+        userDOB: this.listOfUsers[this.i].userDOB,
+        userBio:this.listOfUsers[this.i].userBio,
+        userBreed:this.listOfUsers[this.i].userBreed,
+        userSize:this.listOfUsers[this.i].userSize,
+        userImg:""
+      }
+    
+      this.userID = currentUser.userID;
+      this.userName = currentUser.userName;
+      this.userDOB = currentUser.userDOB;
+      this.userBio= currentUser.userBio;
+      this.userSize = currentUser.userSize;
+      this.userBreed = currentUser.userBreed;
+      this.userImg = currentUser.userImg;
+    }
 
   }
 
