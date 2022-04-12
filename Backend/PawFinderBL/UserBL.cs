@@ -153,6 +153,16 @@ public class UserBL : IUserBL
         return _repo.AddLikedUser(LikerID, LikedID);
     }
 
+    public List<int> GetLikeandDislike(int UserID)
+    {
+        List<int> result = new List<int>();
+        result.Add(_repo.GetLike(UserID));
+        result.Add(_repo.GetDislike(UserID));
+        
+        return result;
+    }
+
+
     // Async Functions=======================================================================================
     public async Task<List<User>> GetAllUsersAsync()
     {
@@ -335,4 +345,5 @@ public class UserBL : IUserBL
     {
         return await _repo.GetLikedUserAsync(UserID);
     }
+
 }

@@ -20,6 +20,9 @@ public interface IUserBL
 
     User AddLikedUser(int LikerID, int LikedID);
 
+    List<int> GetLikeandDislike(int UserID);
+    
+
     //Async version functions
 
     /// <summary>
