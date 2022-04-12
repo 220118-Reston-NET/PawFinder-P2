@@ -1,0 +1,42 @@
+name: .NET
+
+on:
+  push:
+    branches: [ Main ]
+  pull_request:
+    branches: [ Main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./Backend"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Test
+      run: dotnet test --no-build
+      
+    - name: Publish
+      run: dotnet publish PawFinderAPI/ -c Release -o ./publish
+    
+    - name: Deploy
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: PawFinderWebApp
+        publish-profile: $${{secrets.PAWFINDER_WEB_APP_PUBLISH_PROFILE}}
+        package: ./Backend/publish
+      

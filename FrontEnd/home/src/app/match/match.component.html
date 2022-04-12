@@ -1,3 +1,5 @@
+<h1 class="loginHeading">Your Matches:</h1>
+
 <li *ngFor = "let users of listOfUsers">
     <div class="container d-flex justify-content-center align-items-center" style="margin-top: 5rem;">
         <div class="card">
@@ -13,7 +15,7 @@
             <div class="mt-5 text-center">
                 <h2 class="mb-0">User Name: {{users.userName}}</h2>
                 <h4>Bio: {{users.userBio}}</h4>
-                <h4>DOB: {{users.userDBO}}</h4>
+                <h4>DOB: {{users.userDOB}}</h4>
                 <h4>Breed: {{users.userBreed}}</h4>
                 <h4>Size: {{users.userSize}}</h4>
                 <div class="d-flex justify-content-between align-items-center" style="margin-bottom:1.5rem; margin-left: 4.5rem;">
@@ -24,7 +26,7 @@
                                 <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
                                     Send Message:    
                                     <button class="favorite styled btn-primary" type="button" data-toggle="popover"
-                                            title="chat" style="margin-left: 1rem;" chat><i class="material-icons" >chat</i></button>
+                                            title="chat" style="margin-left: 1rem;" chat><i class="material-icons" (click)="chatwithUser(users.userID)">chat</i></button>
                                 </li>
                             </ul>
                         </nav>

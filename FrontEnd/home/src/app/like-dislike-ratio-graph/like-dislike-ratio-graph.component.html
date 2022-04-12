@@ -1,0 +1,19 @@
+<div class="ratio-pie-chart">
+  <h3 class="ratio-chart-heading">Like/Dislike Ratio <span>
+  <div class="tooltip">ⓘ
+    <div class="right">
+      <p>This graph shows your like to dislike ratio. To increase your likes try adding more to your profile!</p>
+      <i></i>
+    </div>
+  </div>
+  </span>
+  </h3>
+<div class="chart">
+  <canvas baseChart
+          [data]="pieChartData"
+          [type]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins">
+  </canvas>
+</div>
+</div>

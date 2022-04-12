@@ -93,6 +93,35 @@ public class SQLRepository : IRepository
         }
     }
 
+    public User GetUserByUsername(string userName)
+    {
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userName", userName);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+
+        }
+    }
+
     public List<User> ViewMatchedUser(int UserID)
     {
         List<int> listOfMatchedUserID = new List<int>();
@@ -154,7 +183,7 @@ public class SQLRepository : IRepository
     public List<Message> GetConversation(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 and senderUserID = @userID2 or receiverID  = @userID2";
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE (senderUserID = @userID1 or receiverID = @userID1) and (senderUserID = @userID2 or receiverID  = @userID2)";
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
@@ -176,43 +205,6 @@ public class SQLRepository : IRepository
             }
 
         return Result;
-        }
-    }
-
-    public User UpdateUser(User p_user)
-    {
-        User Result = new User();
-        string sqlQuery = @"Update Users 
-                        set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize 
-                        where userID = @userID";
-
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userName", p_user.UserName);
-            command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
-            command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
-            command.Parameters.AddWithValue("@userBio", p_user.UserBio);
-            command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
-            command.Parameters.AddWithValue("@userSize", p_user.UserSize);
-
-            command.Parameters.AddWithValue("@userID", p_user.UserID);
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-            return Result;
         }
     }
 
@@ -274,7 +266,6 @@ public class SQLRepository : IRepository
         }
 
         return result;
-
     }
 
     public Match AddMatch(int p_UserID1, int p_UserID2)
@@ -458,6 +449,38 @@ public class SQLRepository : IRepository
         }
     }
 
+    public async Task<User> GetUserByUsernameAsync(string userName)
+    {
+        User Result = new User();
+        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userName", userName);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                    Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
+                });
+            }
+            return Result;
+
+        }
+    }
+
+    
+
     public async Task<List<User>> ViewMatchedUserAsync(int UserID)
     {
         List<int> listOfMatchedUserID = new List<int>();
@@ -496,7 +519,9 @@ public class SQLRepository : IRepository
     public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
     {
         List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 and senderUserID = @userID2 or receiverID  = @userID2";
+
+        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE (senderUserID = @userID1 or receiverID = @userID1) and (senderUserID = @userID2 or receiverID  = @userID2)";
+
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             await conn.OpenAsync();
@@ -521,25 +546,21 @@ public class SQLRepository : IRepository
         }
     }
 
-    public async Task<User> UpdateUserAsync(User p_user)
+    public async Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
     {
         User Result = new User();
         string sqlQuery = @"Update Users 
-                        set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize 
+                        set userBio = @userBio, userSize = @userSize 
                         where userID = @userID";
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             await conn.OpenAsync();
             SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userName", p_user.UserName);
-            command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
-            command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
-            command.Parameters.AddWithValue("@userBio", p_user.UserBio);
-            command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
-            command.Parameters.AddWithValue("@userSize", p_user.UserSize);
+            command.Parameters.AddWithValue("@userBio", p_userBio);
+            command.Parameters.AddWithValue("@userSize", p_userSize);
 
-            command.Parameters.AddWithValue("@userID", p_user.UserID);
+            command.Parameters.AddWithValue("@userID", p_userID);
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
             while (reader.Read())
@@ -557,6 +578,71 @@ public class SQLRepository : IRepository
             return Result;
         }
     }
+
+    public async Task<User> UpdateUserBioAsync(int p_userID, string p_userBio)
+    {
+        User Result = new User();
+        string sqlQuery = @"Update Users 
+                        set userBio = @userBio 
+                        where userID = @userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userBio", p_userBio);
+
+            command.Parameters.AddWithValue("@userID", p_userID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+        }
+    }
+
+    public async Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize)
+    {
+        User Result = new User();
+        string sqlQuery = @"Update Users 
+                        set userSize = @userSize 
+                        where userID = @userID";
+
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            await conn.OpenAsync();
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@userSize", p_userSize);
+
+            command.Parameters.AddWithValue("@userID", p_userID);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                Result = (new User(){
+                    UserID = reader.GetInt32(0), 
+                    UserName = reader.GetString(1),
+                    UserPassword = reader.GetString(2),
+                    UserDOB = reader.GetDateTime(3),
+                    UserBio = reader.GetString(4),
+                    UserBreed = reader.GetString(5),
+                    UserSize = reader.GetString(6),
+                });
+            }
+            return Result;
+        }
+    }
+ 
 
     public async Task<Message> AddMessageAsync(Message message)
     {

@@ -4,6 +4,7 @@ import { Users } from '../models/users.model';
 import { NavbarService } from '../services/navbar.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
+import { GlobalComponent } from '../global/global.component';
 
 @Component({
   selector: 'app-login',
@@ -12,19 +13,21 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
   show:boolean = false;
+  passwordVisibility: string ="visibility";
   trySubmit:String = "";
-  isValid:boolean=true;
+  isloginConflict: boolean;
+  responseMsg:string = "";
 
-  loginGroup= new FormGroup({
+  loginGroup = new FormGroup({
     userName: new FormControl(""),
     userPassword:new FormControl(""),
-    userDBO: new FormControl(""),
+    userDOB: new FormControl(""),
     userBio:new FormControl(""),
     userBreed:new FormControl(""),
     userSize:new FormControl("")
   });
 
-  constructor(private router: Router, public nav: NavbarService, private loginService: LoginService) { }
+  constructor(private router: Router, public nav: NavbarService, private loginService: LoginService) { this.isloginConflict = false; }
 
   ngOnInit(): void {
     this.nav.hide();
@@ -33,9 +36,18 @@ export class LoginComponent implements OnInit {
   showPassword()
   {
     this.show = !this.show;
+    
+    if(this.passwordVisibility === "visibility")
+    {
+      this.passwordVisibility = "visibility_off";
+    }
+    else
+    {
+      this.passwordVisibility = "visibility";
+    }
   } 
 
-  checkUser(p_loginGroup:FormGroup)
+  login(p_loginGroup:FormGroup)
   {
     
     let loginGroup:Users =
@@ -43,15 +55,15 @@ export class LoginComponent implements OnInit {
       userID: 0,
       userName:p_loginGroup.get("userName")?.value,
       userPassword:p_loginGroup.get("userPassword")?.value,
-      userDBO: new Date,
+      userDOB: new Date,
       userBio: "",
       userBreed: "",
       userSize: "",
       userImg:""
     }
    
-    this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
-  
+      this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/HomePage"]); GlobalComponent.loggedInUserName = loginGroup.userName;}}, error => {this.isloginConflict = true;});
+
   }
 
 }

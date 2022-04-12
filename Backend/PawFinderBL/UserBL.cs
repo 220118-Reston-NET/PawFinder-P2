@@ -21,6 +21,11 @@ public class UserBL : IUserBL
         return _repo.GetUser(UserID);
     }
 
+    public User GetUserByUsername(string userName)
+    {
+        return _repo.GetUserByUsername(userName);
+    }
+
     public User RegisterUser(User p_user)
     {
         List<User> listOfAllUsers = _repo.GetAllUsers();
@@ -61,7 +66,6 @@ public class UserBL : IUserBL
              return ListOfUsers
                          .Where(user => user.UserName.Contains(p_name))
                          .ToList();
-        
     }
 
     public List<User> ViewMatchedUser(int userID)
@@ -73,30 +77,6 @@ public class UserBL : IUserBL
     {
         return _repo.GetConversation(UserID1, UserID2);
     }
-
-
-    // public string GenerateFileName(string fileName, string userName)
-    // {
-    //     try
-    //     {
-    //         string strFileName = string.Empty;
-    //         string[] strName = fileName.Split('.');
-    //         strFileName = userName + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd") + "/"
-    //             + DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." +
-    //             strName[strName.Length - 1];
-    //         return strFileName;
-    //     }
-    //     catch (Exception)
-    //     {
-    //         return fileName;
-    //     }
-    // }
-
-    public User UpdateUser(User user)
-    {
-        return _repo.UpdateUser(user);
-    }
-
     public Message AddMessage(Message message)
     {
         return _repo.AddMessage(message);
@@ -194,6 +174,11 @@ public class UserBL : IUserBL
         return await _repo.GetUserAsync(UserID);
     }
 
+    public async Task<User> GetUserByUsernameAsync(string userName)
+    {
+        return await _repo.GetUserByUsernameAsync(userName);
+    }
+
     public async Task<User> RegisterUserAsync(User p_user)
     {
         List<User> listOfAllUsers = _repo.GetAllUsers();
@@ -231,7 +216,7 @@ public class UserBL : IUserBL
         List<User> ListOfUsers = await _repo.GetAllUsersAsync();
 
              return ListOfUsers
-                         .Where(user => user.UserName.Contains(p_name))
+                         .Where(user => user.UserName.Equals(p_name))
                          .ToList();
     }
 
@@ -248,7 +233,6 @@ public class UserBL : IUserBL
         return Result
                 .Where(user => user.UserID.Equals(passeeID))
                 .ToList();
-        
     }
 
     public async Task<List<Like>> SearchLikedUserAsync(int LikerID, int LikedID)
@@ -258,7 +242,6 @@ public class UserBL : IUserBL
         return ListOfLikedUsers
                 .Where(like => like.LikedID.Equals(LikedID))
                 .ToList();
-        
     }
 
     public async Task<List<User>> ViewMatchedUserAsync(int userID)
@@ -271,9 +254,22 @@ public class UserBL : IUserBL
         return await _repo.GetConversationAsync(UserID1, UserID2);
     }
 
-    public async Task<User> UpdateUserAsync(User user)
+    public async Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
     {
-        return await _repo.UpdateUserAsync(user);
+        if (p_userBio!= null && p_userSize != null)
+        {
+            return await _repo.UpdateUserBioSizeAsync(p_userID, p_userBio, p_userSize);
+
+        }
+        else if (p_userBio!= null && p_userSize == null)
+        {
+            return await _repo.UpdateUserBioAsync(p_userID, p_userBio);
+
+        }
+        else
+        {
+            return await _repo.UpdateUserSizeAsync(p_userID, p_userSize);
+        }
     }
 
     public async Task<Message> AddMessageAsync(Message message)
@@ -345,5 +341,9 @@ public class UserBL : IUserBL
         return await _repo.AddLikedUserAsync(LikerID, LikedID);
     }
 
+    public async Task<List<Like>> GetLikedUserAsync(int UserID)
+    {
+        return await _repo.GetLikedUserAsync(UserID);
+    }
 
 }

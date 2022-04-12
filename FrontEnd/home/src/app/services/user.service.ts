@@ -17,12 +17,12 @@ export class UserService {
 
   updateUser(user: Users)
   {
-    return this.http.put<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/UpdateUser", user);
+    return this.http.put<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/UpdateUserBioSize", user);
   }
 
-  getPotentialMatch(p_userID:number)
+  getPotentialMatch(p_userID:number): Observable<Users[]>
   {
-    return this.http.get("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetPotentialMatch?UserID=" + p_userID)
+    return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetPotentialMatch?UserID=" + p_userID)
   }
 
   getAllUsers(): Observable<Users[]>
@@ -33,6 +33,16 @@ export class UserService {
   getUserByUserID(p_userID:number): Observable<Users>
   {
     return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUser?userID="+p_userID);
+  }
+
+  getUserByUserName(p_userName:string): Observable<Users>
+  {
+    return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUserByUsername?userName="+p_userName);
+  }
+
+  getLikeToDislikeRatio(p_userID:number): Observable<number[]>
+  {
+    return this.http.get<number[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetLikeToDislikeRatio?userID="+p_userID);
   }
 
 }

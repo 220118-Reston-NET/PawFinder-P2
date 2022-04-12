@@ -5,6 +5,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from '../services/user.service';
+import { GlobalComponent } from '../global/global.component';
 
 @Component({
   selector: 'app-registor',
@@ -14,20 +15,21 @@ import { UserService } from '../services/user.service';
 export class RegistorComponent implements OnInit{
   
   myResult:any;
+  isRegisterConflict:boolean;
 
   userGroup= new FormGroup({
     userName: new FormControl(""),
     userPassword:new FormControl(""),
-    userDBO: new FormControl(""),
+    userDOB: new FormControl(""),
     userBio:new FormControl(""),
     userBreed:new FormControl(""),
     userSize:new FormControl("")    
   });
 
   show:boolean = false;
-  
-  constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) {
-  }
+  passwordVisibility: string = "visibility";
+
+  constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) { this.isRegisterConflict = false; }
 
   ngOnInit(): void {
     this.nav.hide();
@@ -36,24 +38,33 @@ export class RegistorComponent implements OnInit{
   showPassword()
   {
     this.show = !this.show;
+
+    if(this.passwordVisibility === "visibility")
+    {
+      this.passwordVisibility = "visibility_off";
+    }
+    else
+    {
+      this.passwordVisibility = "visibility";
+    }
   }
 
-  addUser(p_userGroup:FormGroup){
+  Register(p_userGroup:FormGroup){
 
     let user:Users=
     {
       userID:0,
       userName:p_userGroup.get("userName")?.value,
       userPassword:p_userGroup.get("userPassword")?.value,
-      userDBO:p_userGroup.get("userDOB")?.value,
+      userDOB:p_userGroup.get("userDOB")?.value,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:p_userGroup.get("userBreed")?.value,
       userSize:p_userGroup.get("userSize")?.value,
-
-      userImg:p_userGroup.get("userImg")?.value
+      userImg:""
     }
     
-    this.userService.addUser(user).subscribe(result => {if(result) {this.router.navigate(["/Profile"])}});
+    this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.userID;
+      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/HomePage"]);}}, error => {this.isRegisterConflict = true;});
 
   }
    onFilechange(event: any)

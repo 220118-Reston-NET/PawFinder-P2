@@ -18,6 +18,9 @@ import { UserComponent } from './user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundError } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GlobalComponent } from './global/global.component';
+import { LikeDislikeRatioGraphComponent } from './like-dislike-ratio-graph/like-dislike-ratio-graph.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -36,7 +39,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ChatComponent,
     UserComponent,
     HomePageComponent,
-    NavBarComponent
+    NavBarComponent,
+    GlobalComponent,
+    LikeDislikeRatioGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -58,12 +63,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       {path: "Like", component: LikeComponent},
       {path: "Login", component: LoginComponent},
       {path: "Registor", component: RegistorComponent},
-      {path: "", component:ProfileComponent}, 
+      {path: "", component:LoginComponent}, 
       {path: "**", component:NotFoundError} 
     ]),
 
     
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
