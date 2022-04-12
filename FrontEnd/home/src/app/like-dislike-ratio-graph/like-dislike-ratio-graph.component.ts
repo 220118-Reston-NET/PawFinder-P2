@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import DatalabelsPlugin from "chartjs-plugin-datalabels";
 import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { GlobalComponent } from '../global/global.component';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { BaseChartDirective } from 'ng2-charts';
 export class LikeDislikeRatioGraphComponent {
 likeDislikeRatio:number[] = [ 0, 0 ];
 
-constructor() { }
+constructor(private userService: UserService) { }
 
 ngOnInit(): void{
   this.getNumberOfLikesAndDislikes();
@@ -61,6 +63,7 @@ getNumberOfLikesAndDislikes()
 {
   //TODO: make an api controller request in the back end to get the user's total likes and total dislikes
   //use this to show the number on the chart
+  this.userService.getLikeToDislikeRatio(GlobalComponent.loggedInUserID).subscribe(result => {this.likeDislikeRatio = result})
 
   // Takes old data out of the chart
   this.pieChartData.datasets[0].data.pop();

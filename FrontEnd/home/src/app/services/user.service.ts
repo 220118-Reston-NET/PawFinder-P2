@@ -40,4 +40,9 @@ export class UserService {
     return this.http.get<Users>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetUserByUsername?userName="+p_userName);
   }
 
+  getLikeToDislikeRatio(p_userID:number): Observable<number[]>
+  {
+    return this.http.get<number[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetLikeToDislikeRatio?userID="+p_userID);
+  }
+
 }
