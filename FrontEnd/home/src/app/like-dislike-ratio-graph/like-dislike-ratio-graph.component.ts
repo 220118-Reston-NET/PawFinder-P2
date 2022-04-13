@@ -18,7 +18,7 @@ export class LikeDislikeRatioGraphComponent implements OnInit
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   likeDislikeRatio:number[] = [ 0, 0 ];
-  noInfoToDisplayOnChart: boolean = true;
+  noInfoToDisplayOnChart: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -39,6 +39,7 @@ export class LikeDislikeRatioGraphComponent implements OnInit
         position: 'top',
       },
       datalabels: {
+        font: { size: 0 },
         formatter: (value, ctx) => {
           if (ctx.chart.data.labels) {
             return ctx.chart.data.labels[ctx.dataIndex];

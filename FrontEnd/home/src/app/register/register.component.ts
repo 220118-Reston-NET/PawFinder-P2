@@ -1,5 +1,5 @@
-import { PawfinderService } from './../services/pawfinder.service';
-import { Users } from './../models/users.model';
+import { PawfinderService } from '../services/pawfinder.service';
+import { Users } from '../models/users.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
@@ -8,11 +8,11 @@ import { UserService } from '../services/user.service';
 import { GlobalComponent } from '../global/global.component';
 
 @Component({
-  selector: 'app-registor',
-  templateUrl: './registor.component.html',
-  styleUrls: ['./registor.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class RegistorComponent implements OnInit{
+export class RegisterComponent implements OnInit{
   
   myResult:any;
   isRegisterConflict:boolean;
@@ -88,7 +88,7 @@ export class RegistorComponent implements OnInit{
 
   Registor() 
   {
-    this.router.navigate(["/Registor"]);
+    this.router.navigate(["/Register"]);
   }
 
 }

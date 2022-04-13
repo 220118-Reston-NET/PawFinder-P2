@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   userBreed:string = "no user selected";
 
   show:boolean = true;
-
+  isEditingProfile:boolean = false;
 
  userGroup= new FormGroup({
   userName: new FormControl(""),
@@ -93,6 +93,18 @@ export class ProfileComponent implements OnInit {
 
     this.userGroup.reset({userBio:"", userSize:""});
 
+    this.isEditingProfile = false;
+
+  }
+
+  editProfile()
+  {
+    this.isEditingProfile = true;
+  }
+
+  goBack()
+  {
+    this.isEditingProfile = false;
   }
 
   loadUser()

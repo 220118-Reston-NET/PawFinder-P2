@@ -6,7 +6,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegistorComponent } from './registor/registor.component';
+import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatchComponent } from './match/match.component';
@@ -34,7 +34,7 @@ import { NgChartsModule } from 'ng2-charts';
     NavBarComponent,
     MatchComponent,
     LikeComponent,
-    RegistorComponent,
+    RegisterComponent,
     PassComponent,
     ChatComponent,
     UserComponent,
@@ -62,7 +62,7 @@ import { NgChartsModule } from 'ng2-charts';
       {path: "Chat", component:ChatComponent},
       {path: "Like", component: LikeComponent},
       {path: "Login", component: LoginComponent},
-      {path: "Registor", component: RegistorComponent},
+      {path: "Register", component: RegisterComponent},
       {path: "", component:LoginComponent}, 
       {path: "**", component:NotFoundError} 
     ]),

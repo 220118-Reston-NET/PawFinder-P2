@@ -1,9 +1,22 @@
+.profile-container
+{
+    margin-top: 2rem;
+}
+
 .flex-row
 {
     display: flex;
     align-items: center;
     justify-content: center;
     justify-content: space-evenly;
+}
+
+.flexbox
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .switch-login-to-signup

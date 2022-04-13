@@ -3,7 +3,6 @@
     padding: 1rem;
     width: 25rem;
     background: white;
-    opacity: 75%;
 
     border: 1rem black;
     margin-top: 0.3rem;
@@ -23,14 +22,21 @@
     position: relative;
 }
 
-.tooltip {
+.information-hover
+{
+    text-align: right;
+}
+
+.like-dislike-tooltip {
     display:inline-block;
     position:relative;
     text-align:left;
     cursor: default;
+    color: black;
+    
 }
 
-.tooltip .right {
+.like-dislike-tooltip .right {
     
     top:50%;
     left:100%;
@@ -50,11 +56,11 @@
     min-width: 10rem;
 }
 
-.tooltip:hover .right {
+.like-dislike-tooltip:hover .right {
     display:block;
 }
 
-.tooltip .right i {
+.like-dislike-tooltip .right i {
     position:absolute;
     top:50%;
     right:100%;
@@ -64,7 +70,7 @@
     overflow:hidden;
 }
 
-.tooltip .right i::after {
+.like-dislike-tooltip .right i::after {
     content:'';
     position:absolute;
     width:0.75rem;
