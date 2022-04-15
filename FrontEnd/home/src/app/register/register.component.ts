@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit{
   
   myResult:any;
   isRegisterConflict:boolean;
+  dropdownSize: string = "Choose size";
+  dropdownBreed: string = "Choose breed";
 
   userGroup= new FormGroup({
     userName: new FormControl(""),
@@ -28,6 +30,8 @@ export class RegisterComponent implements OnInit{
 
   show:boolean = false;
   passwordVisibility: string = "visibility";
+  userSize: string = "";
+  UserBreed: string = "";
 
   constructor(private router: Router, private userService: UserService, public nav: NavbarService, public service:PawfinderService) { this.isRegisterConflict = false; }
 
@@ -58,8 +62,8 @@ export class RegisterComponent implements OnInit{
       userPassword:p_userGroup.get("userPassword")?.value,
       userDOB:p_userGroup.get("userDOB")?.value,
       userBio:p_userGroup.get("userBio")?.value,
-      userBreed:p_userGroup.get("userBreed")?.value,
-      userSize:p_userGroup.get("userSize")?.value,
+      userBreed:this.UserBreed,
+      userSize:this.userSize,
       userImg:""
     }
     
@@ -73,8 +77,20 @@ export class RegisterComponent implements OnInit{
   //  this.file = event.target.files[0]
    }
  
- upload() 
- {
+  chooseBreed(p_breed:string)
+  {
+    this.UserBreed = p_breed;
+    this.dropdownBreed = p_breed;
+  }
+
+  chooseSize(p_size:string)
+  {
+    this.userSize = p_size;
+    this.dropdownSize = p_size;
+  }
+
+  upload() 
+  {
       // if (this.file) {
       //   this.service.uploadfile(this.file).subscribe(resp => {
       //     alert("Uploaded")

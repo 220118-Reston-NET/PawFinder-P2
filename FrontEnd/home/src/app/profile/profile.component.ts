@@ -19,9 +19,11 @@ export class ProfileComponent implements OnInit {
   userBio:string = "no user selected";
   userSize:string = "no user selected";
   userBreed:string = "no user selected";
+  userImg: string = "";
 
   show:boolean = true;
   isEditingProfile:boolean = false;
+  dropdownSize:string = "Edit size";
 
  userGroup= new FormGroup({
   userName: new FormControl(""),
@@ -75,7 +77,7 @@ export class ProfileComponent implements OnInit {
       userDOB: new Date,
       userBio:p_userGroup.get("userBio")?.value,
       userBreed:"",
-      userSize:p_userGroup.get("userSize")?.value,
+      userSize:this.userSize,
       userImg:""
     }
     
@@ -105,6 +107,13 @@ export class ProfileComponent implements OnInit {
   goBack()
   {
     this.isEditingProfile = false;
+    this.dropdownSize = "Edit size";
+  }
+
+  chooseSize(p_size:string)
+  {
+    this.userSize = p_size;
+    this.dropdownSize = p_size;
   }
 
   loadUser()
@@ -122,7 +131,7 @@ export class ProfileComponent implements OnInit {
           userBio:result.userBio,
           userBreed:result.userBreed,
           userSize:result.userSize,
-          userImg:""
+          userImg:result.userImg
         }
         
         this.userID = user.userID;
@@ -131,7 +140,16 @@ export class ProfileComponent implements OnInit {
         this.userBio= user.userBio;
         this.userSize = user.userSize;
         this.userBreed = user.userBreed;
-  
+        if(user.userImg === "")
+        {
+          //default profile image to show they don't have a profile image.
+          this.userImg = "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+        }
+        else
+        {
+          this.userImg = user.userImg;
+        }
+
       });
 
   }

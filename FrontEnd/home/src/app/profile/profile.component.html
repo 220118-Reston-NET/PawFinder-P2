@@ -2,10 +2,10 @@
 <div class="profile-container">
     <li>
         <div class="flexbox">
-            <div class="card">
+            <div class="profile-box">
                 <div class="flex-row">
                     <div>
-                        <img width="100%" class="img-fluid" alt="Image">
+                        <img width="100%" class="img-fluid" [src]="userImg">
                     </div>
                     <div class="profile">
                         <div>
@@ -20,15 +20,23 @@
                     <div *ngIf="isEditingProfile">
                         <form [formGroup]="userGroup">
                             <div>
-                            <label for="userBio">Bio:</label><br>
-                            <h4>{{userBio}}</h4>
-                            <input type="text" placeholder="write new bio"  formControlName="userBio" /><br />
+                                <label for="userBio">Bio:</label><br>
+                                <h4>{{userBio}}</h4>
+                                <input type="text" placeholder="write new bio"  formControlName="userBio" /><br />
                             </div>
-                            <div>
-                            <label for="userSize">Size:</label><br>
-                            <h4>{{userSize}}</h4>
-                            <input type="text" placeholder="change size" formControlName="userSize" /><br />
-                            </div>
+                            <div class="flex-row">
+                                <label for="userSize" class="form-label">Size:</label>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle chooseButtons" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                      {{dropdownSize}}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                      <li><button class="dropdown-item" type="button" (click)="chooseSize('Small')">Small</button></li>
+                                      <li><button class="dropdown-item" type="button" (click)="chooseSize('Medium')">Medium</button></li>
+                                      <li><button class="dropdown-item" type="button" (click)="chooseSize('Large')">Large</button></li>
+                                    </ul>
+                                  </div>
+                              </div>
                             <div flex-row>
                                 <button class="btn btn-primary paw-finder-login-signup-button" type="button" (click)="goBack()">Go Back</button>
                                 <button class="btn btn-primary paw-finder-login-signup-button" type="button" (click)="updateUserInfo(userGroup)">Submit</button>
@@ -45,7 +53,6 @@
         </div>
     </li>    
 </div>
-
 <div class="switch-login-to-signup">
     <a routerLink="/Login" class="btn btn-primary paw-finder-login-signup-button">Logout</a>
 </div>

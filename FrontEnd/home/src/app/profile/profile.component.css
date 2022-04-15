@@ -8,7 +8,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .flexbox
@@ -17,6 +18,14 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.profile-box
+{
+    padding: 1rem;
+    border: 0.5rem solid black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
 }
 
 .switch-login-to-signup
@@ -42,16 +51,19 @@
     cursor: pointer;
 }
 
-li { list-style-type: none; 
+li 
+{ 
+    list-style-type: none; 
 }
 
-img:hover{
-    border-style: groove;
-    background-color: rgb(216, 128, 12);
-}
-img{
-    border-color: black;
-}
-button{
+button
+{
     border-radius: 10%;
+}
+
+.chooseButtons
+{
+    background-color: white;
+    color: gray;
+    margin-left: 1rem;
 }

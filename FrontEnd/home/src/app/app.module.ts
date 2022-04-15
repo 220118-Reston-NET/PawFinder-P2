@@ -22,9 +22,6 @@ import { GlobalComponent } from './global/global.component';
 import { LikeDislikeRatioGraphComponent } from './like-dislike-ratio-graph/like-dislike-ratio-graph.component';
 import { NgChartsModule } from 'ng2-charts';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,8 +47,6 @@ import { NgChartsModule } from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-
-    
     RouterModule.forRoot([
       // { path: "", redirectTo: "/login", pathMatch: "full" },
       {path: "HomePage", component: HomePageComponent}, 
@@ -66,11 +61,7 @@ import { NgChartsModule } from 'ng2-charts';
       {path: "", component:LoginComponent}, 
       {path: "**", component:NotFoundError} 
     ]),
-
-    
-    BrowserAnimationsModule,
-
-    
+    BrowserAnimationsModule,    
     NgChartsModule
   ],
   providers: [],
