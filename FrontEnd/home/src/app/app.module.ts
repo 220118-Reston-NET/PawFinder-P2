@@ -58,7 +58,7 @@ import { NgChartsModule } from 'ng2-charts';
       {path: "Like", component: LikeComponent},
       {path: "Login", component: LoginComponent},
       {path: "Register", component: RegisterComponent},
-      {path: "", component:LoginComponent}, 
+      {path: "", component:HomePageComponent}, 
       {path: "**", component:NotFoundError} 
     ]),
     BrowserAnimationsModule,    
