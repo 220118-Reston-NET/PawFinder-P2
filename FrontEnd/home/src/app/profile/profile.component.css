@@ -96,3 +96,8 @@
     color: white; 
     border: none;
 }
+
+.group-item-heading
+{
+    font-weight: bold;
+}
