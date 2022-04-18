@@ -1,6 +1,30 @@
-<h1 class="loginHeading">Your Matches:</h1>
+<h1 class="match-heading">Your Matches:</h1>
 
-<li *ngFor = "let users of listOfUsers">
+<div *ngFor="let users of listOfUsers" class="flex-container">
+    <div class="card" style="width: 50rem; max-height: 50rem;">
+        <img src="https://pawfinderstorageaccount.blob.core.windows.net/pawfindercontainer/istockphoto-husky.jpg" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{users.userName}}</h5>
+          <p class="card-text">{{users.userBio}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><span class="group-item-heading">Breed: </span>{{users.userBreed}}</li>
+          <li class="list-group-item"><span class="group-item-heading">DOB: </span>{{users.userDOB}}</li>
+          <li class="list-group-item"><span class="group-item-heading">Size: </span>{{users.userSize}}</li>
+        </ul>
+        <div class="card-body">
+            <div class="flex-row button-centered">
+                <h2 class="group-item-heading">Send Message:</h2>
+                <button class="favorite styled btn-primary message-button" type="button" data-toggle="popover"
+                    title="chat" (click)="chatwithUser(users.userID)"><i class="material-icons">chat</i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <li *ngFor = "let users of listOfUsers">
     <div class="container d-flex justify-content-center align-items-center" style="margin-top: 5rem;">
         <div class="card">
             <div class="upper">
@@ -26,7 +50,7 @@
                                 <li class="page-item" style="list-style-type: none; padding-left: 1rem;">
                                     Send Message:    
                                     <button class="favorite styled btn-primary" type="button" data-toggle="popover"
-                                            title="chat" style="margin-left: 1rem;" chat><i class="material-icons" (click)="chatwithUser(users.userID)">chat</i></button>
+                                            title="chat" style="margin-left: 1rem;" chat><i class="material-icons" ">chat</i></button>
                                 </li>
                             </ul>
                         </nav>
@@ -37,4 +61,4 @@
     
         </div>
     </div>
-</li>
+</li> -->

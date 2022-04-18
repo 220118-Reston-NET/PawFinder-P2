@@ -27,7 +27,7 @@ export class LikeComponent implements OnInit {
   userBio:string = "";
   userSize:string = "";
   userBreed:string = "";
-  userImg:string = "https://pawfinderstorageaccount.blob.core.windows.net/pawfindercontainer/istockphoto-husky.jpg";
+  userImg:string = "";
   
   showNextProfile: boolean = true;
   i:number = 0;
@@ -52,8 +52,7 @@ export class LikeComponent implements OnInit {
         this.userBio= result[0].userBio;
         this.userSize = result[0].userSize;
         this.userBreed = result[0].userBreed;
-        //!! REMOVED THIS FOR TESTING NEEDS TO BE ADDED BACK WHEN RETRIEVING USER IMG FROM BACKEND WORKS
-        //this.userImg = result[0].userImg;
+        this.userImg = result[0].userImg;
       }
 
     });
@@ -91,8 +90,7 @@ export class LikeComponent implements OnInit {
       this.userBio= currentUser.userBio;
       this.userSize = currentUser.userSize;
       this.userBreed = currentUser.userBreed;
-      //!! REMOVED THIS FOR TESTING NEEDS TO BE ADDED BACK WHEN RETRIEVING USER IMG FROM BACKEND WORKS
-      //this.userImg = currentUser.userImg;
+      this.userImg = currentUser.userImg;
     }
 
     
@@ -127,8 +125,7 @@ export class LikeComponent implements OnInit {
       this.userBio= currentUser.userBio;
       this.userSize = currentUser.userSize;
       this.userBreed = currentUser.userBreed;
-      //!! REMOVED THIS FOR TESTING NEEDS TO BE ADDED BACK WHEN RETRIEVING USER IMG FROM BACKEND WORKS
-      //this.userImg = currentUser.userImg;
+      this.userImg = currentUser.userImg;
     }
 
   }

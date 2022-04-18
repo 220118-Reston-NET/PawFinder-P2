@@ -14,12 +14,12 @@ import { GlobalComponent } from '../global/global.component';
 })
 export class ProfileComponent implements OnInit {
   userID:number = 0;
-  userName:string= "so user selected";
+  userName:string= "no user selected";
   userDOB:Date = new Date;
   userBio:string = "no user selected";
   userSize:string = "no user selected";
   userBreed:string = "no user selected";
-  userImg: string = "https://pawfinderstorageaccount.blob.core.windows.net/pawfindercontainer/istockphoto-husky.jpg";
+  userImg: string = "no user selected";
 
   show:boolean = true;
   isEditingProfile:boolean = false;
@@ -140,8 +140,7 @@ export class ProfileComponent implements OnInit {
         this.userBio= user.userBio;
         this.userSize = user.userSize;
         this.userBreed = user.userBreed;
-        //!! TOOK THIS OUT FOR TESTING PURPOSES NEEDS TO BE ADDED ONCE GETTING USER IMG FUNCTIONALITY IS WORKING AGAIN
-        //this.userImg = user.userImg;
+        this.userImg = user.userImg;
       });
 
   }
