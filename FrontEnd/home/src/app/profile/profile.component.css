@@ -1,6 +1,8 @@
-.profile-container
+.flex-container
 {
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
 .flex-row
@@ -8,24 +10,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-content: center;
     flex-direction: row;
 }
 
-.flexbox
+.flex-row-left-aligned
 {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    flex-direction: row;
 }
 
-.profile-box
+.flex-row-spaced-evenly
 {
-    padding: 1rem;
-    border: 0.5rem solid black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: white;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .switch-login-to-signup
@@ -38,8 +37,6 @@
 {
     background-color: #940132;
     border-radius: 0.5rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
     text-align: center;
     text-decoration: none;
     color: white; 
@@ -51,14 +48,27 @@
     cursor: pointer;
 }
 
-li 
-{ 
-    list-style-type: none; 
+.editing-buttons
+{
+    margin-top: -0.5rem;
+    background-color: #940132;
+    border-radius: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: white; 
+    border: none;
+    margin-right: 0.5rem;
 }
 
-button
+.editing-buttons:hover
 {
-    border-radius: 10%;
+    cursor: pointer;
+}
+
+.button-centered
+{
+    display: flex;
+    justify-content: center;
 }
 
 .chooseButtons
@@ -66,4 +76,23 @@ button
     background-color: white;
     color: gray;
     margin-left: 1rem;
+}
+
+.graph-container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logout-button
+{
+    background-color: #940132;
+    margin-top: 5rem;
+    border-radius: 0.5rem;
+    font-size: 5rem;
+    text-align: center;
+    text-decoration: none;
+    color: white; 
+    border: none;
 }

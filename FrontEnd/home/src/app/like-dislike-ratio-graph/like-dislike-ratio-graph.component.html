@@ -1,3 +1,4 @@
+<!-- if the users has no likes yet, it will display this html below -->
 <div *ngIf="noInfoToDisplayOnChart">
   <div class="ratio-pie-chart">
     <div class="chart">
@@ -6,10 +7,12 @@
   </div>
 </div>
 
+<!-- if the users has likes, it will display this html below -->
 <div *ngIf="!noInfoToDisplayOnChart">
   <div class="ratio-pie-chart">
     <div class="information-hover">
-      <div class="like-dislike-tooltip">ⓘ
+      <span class="ratio-chart-heading">Like To Dislike Ratio </span>
+      <div class="like-dislike-tooltip"><span class="ratio-chart-heading">ⓘ</span>
         <div class="right">
           <p>This graph shows your like to dislike ratio. To increase your likes try adding more to your profile!</p>
           <i></i>

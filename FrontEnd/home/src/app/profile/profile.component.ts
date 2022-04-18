@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   userBio:string = "no user selected";
   userSize:string = "no user selected";
   userBreed:string = "no user selected";
-  userImg: string = "";
+  userImg: string = "https://pawfinderstorageaccount.blob.core.windows.net/pawfindercontainer/istockphoto-husky.jpg";
 
   show:boolean = true;
   isEditingProfile:boolean = false;
@@ -140,16 +140,8 @@ export class ProfileComponent implements OnInit {
         this.userBio= user.userBio;
         this.userSize = user.userSize;
         this.userBreed = user.userBreed;
-        if(user.userImg === "")
-        {
-          //default profile image to show they don't have a profile image.
-          this.userImg = "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
-        }
-        else
-        {
-          this.userImg = user.userImg;
-        }
-
+        //!! TOOK THIS OUT FOR TESTING PURPOSES NEEDS TO BE ADDED ONCE GETTING USER IMG FUNCTIONALITY IS WORKING AGAIN
+        //this.userImg = user.userImg;
       });
 
   }

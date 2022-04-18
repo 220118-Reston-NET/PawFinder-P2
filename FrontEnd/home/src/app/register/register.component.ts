@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit{
     }
     
     this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.userID;
-      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/HomePage"]);}}, error => {this.isRegisterConflict = true;});
+      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/Profile"]);}}, error => {this.isRegisterConflict = true;});
 
   }
    onFilechange(event: any)
