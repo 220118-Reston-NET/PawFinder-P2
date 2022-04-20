@@ -4,10 +4,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .flexbox-container-row
 {
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,33 +17,48 @@
 
 .chat-heading
 {
-  text-align: center; 
+  text-align: center;
+  margin-bottom: -1rem; 
 }
 
 .message-container
 {
-  align-items: center;
-  width: 40%;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-right: 0.5rem;
 }
 
-.message-text-box
+.scrollable-container
 {
-  justify-content: center;
-  width: 40%;
-  border: 1rem black;
+  height: 70vh;
+}
+
+.message-scrollable
+{
+  width: 45%;
+  height: 100%;
+  overflow-y: auto;
+  word-wrap: normal;
+  white-space: pre-wrap;
 }
 
 .sender-text-box
 {
-  background-color: blue;
-  color: white;
+  border: 0.2rem black solid;
+  background-color: lightblue;
+  padding-left: 0.5rem;
+  padding-top: 0.2rem;
+  width: 100%;
 }
 
 .receiver-text-box
 {
-  background-color: white;
+  border: 0.2rem black solid;
+  padding-left: 0.5rem;
+  padding-top: 0.2rem;
+  background-color: lightgray;
+  width: 100%;
 }
 
 .chat-username-heading

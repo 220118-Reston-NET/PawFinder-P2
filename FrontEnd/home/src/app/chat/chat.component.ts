@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
   myUserName = GlobalComponent.loggedInUserName;
   chattingUserID = 0;
   chattingUserName = "";
+  numOfMessages: number = 0;
 
   messageGroup = new FormGroup({
     messageText: new FormControl("") 
@@ -32,7 +33,7 @@ export class ChatComponent implements OnInit {
  
     ngOnInit(): void {
       this.nav.show();
-      
+
       this.chattingUserID = GlobalComponent.chattingUserID;
 
       this.userService.getUserByUserID(this.chattingUserID).subscribe(result => 
@@ -52,8 +53,7 @@ export class ChatComponent implements OnInit {
           
           this.chattingUserName = user.userName;
 
-          this.chatService.getConveration(this.myUserID, this.chattingUserID).subscribe(result => {console.log(result); this.listOfMessages = result});
-
+          this.chatService.getConveration(this.myUserID, this.chattingUserID).subscribe(result => {console.log(result); this.listOfMessages = result; console.log(result.length); this.numOfMessages=result.length});
         });
 
     }
