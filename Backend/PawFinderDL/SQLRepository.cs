@@ -1,824 +1,738 @@
-using System.Data.SqlClient;
-using PawFinderModel;
+// using System.Data.SqlClient;
+// using PawFinderModel;
 
-namespace PawFinderDL;
-public class SQLRepository : IRepository
-{
-    private readonly string _connectionString;
-    public SQLRepository(string p_connectionString)
-    {
-        _connectionString = p_connectionString;
-    }
+// namespace PawFinderDL;
+// public class SQLRepository : IRepository
+// {
+//     private readonly string _connectionString;
+//     public SQLRepository(string p_connectionString)
+//     {
+//         _connectionString = p_connectionString;
+//     }
 
-    public User RegisterUser(User p_user)
-    {
-        string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
+//     public User RegisterUser(User p_user)
+//     {
+//         string sqlQuery = @"INSERT INTO Users
+//                             VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userName", p_user.UserName);
-            command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
-            command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
-            command.Parameters.AddWithValue("@userBio", p_user.UserBio);
-            command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
-            command.Parameters.AddWithValue("@userSize", p_user.UserSize);
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userName", p_user.UserName);
+//             command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
+//             command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
+//             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
+//             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
+//             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
 
-            command.ExecuteNonQuery();
+//             command.ExecuteNonQuery();
 
-        }
+//         }
 
-        return p_user;
-    }
+//         return p_user;
+//     }
 
-    public List<User> GetAllUsers()
-    {
-        List<User> userList = new List<User>();
+//     public List<User> GetAllUsers()
+//     {
+//         List<User> userList = new List<User>();
 
-        string sqlQuery = @"SELECT * FROM Users";
+//         string sqlQuery = @"SELECT * FROM Users";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        { 
-            conn.Open();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         { 
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                userList.Add(new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-        }
+//             while (reader.Read())
+//             {
+//                 userList.Add(new User(){
+//                     UserID = reader.GetInt32(0), 
+//                     UserName = reader.GetString(1),
+//                     UserPassword = reader.GetString(2),
+//                     UserDOB = reader.GetDateTime(3),
+//                     UserBio = reader.GetString(4),
+//                     UserBreed = reader.GetString(5),
+//                     UserSize = reader.GetString(6),
+//                 });
+//             }
+//         }
 
-        return userList;
-    }
+//         return userList;
+//     }
 
-    public User GetUser(int UserID)
-    {
-        User Result = new User();
-        string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//     public User GetUser(int UserID)
+//     {
+//         User Result = new User();
+//         string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-            return Result;
+//             while (reader.Read())
+//             {
+//                 Result = (new User(){
+//                     UserID = reader.GetInt32(0), 
+//                     UserName = reader.GetString(1),
+//                     UserPassword = reader.GetString(2),
+//                     UserDOB = reader.GetDateTime(3),
+//                     UserBio = reader.GetString(4),
+//                     UserBreed = reader.GetString(5),
+//                     UserSize = reader.GetString(6),
+//                 });
+//             }
+//             return Result;
 
-        }
-    }
+//         }
+//     }
 
-    public User GetUserByUsername(string userName)
-    {
-        User Result = new User();
-        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//     public List<User> ViewMatchedUser(int UserID)
+//     {
+//         List<int> listOfMatchedUserID = new List<int>();
+//         List<User> listOfMatchedUser = new List<User>();
+
+//         string sqlQuery = @"SELECT * FROM MATCHEDUSERS WHERE userID1 = @userID or userID2 = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userName", userName);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-            return Result;
-
-        }
-    }
-
-    public List<User> ViewMatchedUser(int UserID)
-    {
-        List<int> listOfMatchedUserID = new List<int>();
-        List<User> listOfMatchedUser = new List<User>();
-
-        string sqlQuery = @"SELECT * FROM MATCHEDUSERS WHERE userID1 = @userID or userID2 = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//             while (reader.Read())
+//             {
+//                 if(reader.GetInt32(0) == UserID)
+//                 {
+//                     listOfMatchedUserID.Add(reader.GetInt32(1));
+//                 }
+//                 else if(reader.GetInt32(1) == UserID)
+//                 {
+//                     listOfMatchedUserID.Add(reader.GetInt32(0));
+//                 }
+//             }
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = command.ExecuteReader();
+//             foreach(var ID in listOfMatchedUserID)
+//             {
+//                 listOfMatchedUser.Add(GetUser(ID));
+//             }
 
-            while (reader.Read())
-            {
-                if(reader.GetInt32(0) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(1));
-                }
-                else if(reader.GetInt32(1) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(0));
-                }
-            }
-            
-            foreach(var ID in listOfMatchedUserID)
-            {
-                listOfMatchedUser.Add(GetUser(ID));
-            }
+//             return listOfMatchedUser;
+//         }
+//     }
 
-            return listOfMatchedUser;
-        }
-    }
-
-    public List<int> GetPassedUsersID(int UserID)
-    {
-        List<int> listOfPassedUsersID = new List<int>();
+//     public List<int> GetPassedUsersID(int UserID)
+//     {
+//         List<int> listOfPassedUsersID = new List<int>();
         
-        string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                listOfPassedUsersID.Add(reader.GetInt32(1));
-            }
+//             while (reader.Read())
+//             {
+//                 listOfPassedUsersID.Add(reader.GetInt32(1));
+//             }
 
-            return listOfPassedUsersID;
-        }
+//             return listOfPassedUsersID;
+//         }
 
-    }
+//     }
 
-    public List<Message> GetConversation(int UserID1, int UserID2)
-    {
-        List<Message> Result = new List<Message>();
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE (senderUserID = @userID1 or receiverID = @userID1) and (senderUserID = @userID2 or receiverID  = @userID2)";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//     public List<Message> GetConversation(int UserID1, int UserID2)
+//     {
+//         List<Message> Result = new List<Message>();
+//         string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 and senderUserID = @userID2 or receiverID  = @userID2";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID1", UserID1);
-            command.Parameters.AddWithValue("@userID2", UserID2);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID1", UserID1);
+//             command.Parameters.AddWithValue("@userID2", UserID2);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                Result.Add(new Message(){
-                    messageID = reader.GetInt32(0),
-                    SenderID = reader.GetInt32(1),
-                    ReceiverID = reader.GetInt32(2),
-                    messageText = reader.GetString(3),
-                    messageTimeStamp = reader.GetDateTime(4)
-                });
-            }
+//             while (reader.Read())
+//             {
+//                 Result.Add(new Message(){
+//                     messageID = reader.GetInt32(0),
+//                     SenderID = reader.GetInt32(1),
+//                     ReceiverID = reader.GetInt32(2),
+//                     messageText = reader.GetString(3),
+//                     messageTimeStamp = reader.GetDateTime(4)
+//                 });
+//             }
 
-        return Result;
-        }
-    }
+//         return Result;
+//         }
+//     }
 
-    public Message AddMessage(Message message)
-    {
-        string sqlQuery = @"INSERT INTO ChatMessage
-                            VALUES(@senderID,@receiverID, @message, @messageTimeStamp)";
+//     public User UpdateUser(User p_user)
+//     {
+//         User Result = new User();
+//         string sqlQuery = @"Update Users 
+//                         set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize 
+//                         where userID = @userID";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userName", p_user.UserName);
+//             command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
+//             command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
+//             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
+//             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
+//             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@senderID", message.SenderID);
-            command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
-            command.Parameters.AddWithValue("@message", message.messageText);
-            command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
+//             command.Parameters.AddWithValue("@userID", p_user.UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            command.ExecuteNonQuery();
+//             while (reader.Read())
+//             {
+//                 Result = (new User(){
+//                     UserID = reader.GetInt32(0), 
+//                     UserName = reader.GetString(1),
+//                     UserPassword = reader.GetString(2),
+//                     UserDOB = reader.GetDateTime(3),
+//                     UserBio = reader.GetString(4),
+//                     UserBreed = reader.GetString(5),
+//                     UserSize = reader.GetString(6),
+//                 });
+//             }
+//             return Result;
+//         }
+//     }
 
-        }
+//     public Message AddMessage(Message message)
+//     {
+//         string sqlQuery = @"INSERT INTO ChatMessage
+//                             VALUES(@senderID,@receiverID, @message, @messageTimeStamp)";
 
-        return message;
-    }
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
 
-    public int AddPassedUserID(int passerID, int passeeID)
-    {
-        string sqlQuery = @"INSERT INTO PassedUsers
-                            VALUES(@passerID, @passeeID)";
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@senderID", message.SenderID);
+//             command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
+//             command.Parameters.AddWithValue("@message", message.messageText);
+//             command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//             command.ExecuteNonQuery();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@passerID", passerID);
-            command.Parameters.AddWithValue("@passeeID", passeeID);
+//         }
 
-            command.ExecuteNonQuery();
-        }
+//         return message;
+//     }
 
-        return passeeID;
-    }
+//     public int AddPassedUserID(int passerID, int passeeID)
+//     {
+//         string sqlQuery = @"INSERT INTO PassedUsers
+//                             VALUES(@passerID, @passeeID)";
 
-    public User AddLikedUser(int LikerID, int LikedID)
-    {
-        User result = GetUser(LikedID);
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
 
-        string sqlQuery = "Insert Into LikedUsers Values(@LikerID, @LikedID)";
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@passerID", passerID);
+//             command.Parameters.AddWithValue("@passeeID", passeeID);
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//             command.ExecuteNonQuery();
+//         }
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@LikerID", LikerID);
-            command.Parameters.AddWithValue("@LikedID", LikedID);
-            command.ExecuteNonQuery();
-        }
+//         return passeeID;
+//     }
 
-        return result;
-    }
+//     public User AddLikedUser(int LikerID, int LikedID)
+//     {
+//         User result = GetUser(LikedID);
 
-    public Match AddMatch(int p_UserID1, int p_UserID2)
-    {
-        Match result = new Match();
-        result.MatcherOneID = p_UserID1;
-        result.MatcherTwoID = p_UserID2;
+//         string sqlQuery = "Insert Into LikedUsers Values(@LikerID, @LikedID)";
 
-        string sqlQuery = "Insert Into MatchedUsers Values(@UserID1, @UserID2);";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@UserID1", p_UserID1);
-            command.Parameters.AddWithValue("@UserID2", p_UserID2);
-            command.ExecuteNonQuery();
-        }
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@LikerID", LikerID);
+//             command.Parameters.AddWithValue("@LikedID", LikedID);
+//             command.ExecuteNonQuery();
+//         }
 
-        return result;
+//         return result;
 
-    }
+//     }
+
+//     public Match AddMatch(int p_UserID1, int p_UserID2)
+//     {
+//         Match result = new Match();
+//         result.MatcherOneID = p_UserID1;
+//         result.MatcherTwoID = p_UserID2;
+
+//         string sqlQuery = "Insert Into MatchedUsers Values(@UserID1, @UserID2);";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
+
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@UserID1", p_UserID1);
+//             command.Parameters.AddWithValue("@UserID2", p_UserID2);
+//             command.ExecuteNonQuery();
+//         }
+
+//         return result;
+
+//     }
 
 
-    public List<Like> GetLikedUser(int UserID)
-    {
-        List<Like> listOfLikedUsers = new List<Like>();
+//     public List<Like> GetLikedUser(int UserID)
+//     {
+//         List<Like> listOfLikedUsers = new List<Like>();
         
-        string sqlQuery = @"SELECT * FROM LikedUsers 
-                        where likerUserID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         string sqlQuery = @"SELECT * FROM LikedUsers 
+//                         where likerUserID = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                listOfLikedUsers.Add(new Like()
-                    {
-                        LikerID = reader.GetInt32(0),
-                        LikedID = reader.GetInt32(1),
-                    });
-            }
-            return listOfLikedUsers;
-        }
-    }
+//             while (reader.Read())
+//             {
+//                 listOfLikedUsers.Add(new Like()
+//                     {
+//                         LikerID = reader.GetInt32(0),
+//                         LikedID = reader.GetInt32(1),
+//                     });
+//             }
+//             return listOfLikedUsers;
+//         }
+//     }
 
-    public int GetLike(int UserID)
-    {
-        int result = 0;
-        string sqlQuery = @"Select Count(likedUserID) from LikedUsers Where likedUserID = @UserID";
+//     public int GetLike(int UserID)
+//     {
+//         int result = 0;
+//         string sqlQuery = @"Select Count(likedUserID) from LikedUsers Where likedUserID = @UserID";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@UserID", UserID);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@UserID", UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                result = reader.GetInt32(0);
-            }
-        }
+//             while (reader.Read())
+//             {
+//                 result = reader.GetInt32(0);
+//             }
+//         }
 
-        return result;
-    }
+//         return result;
+//     }
 
-    public int GetDislike(int UserID)
-    {
-        int result = 0;
-        string sqlQuery = @"Select Count(passeeID) from PassedUsers Where passeeID = @UserID";
+//     public int GetDislike(int UserID)
+//     {
+//         int result = 0;
+//         string sqlQuery = @"Select Count(passeeID) from PassedUsers Where passeeID = @UserID";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            conn.Open();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             conn.Open();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@UserID", UserID);
-            SqlDataReader reader = command.ExecuteReader();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@UserID", UserID);
+//             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                result = reader.GetInt32(0);
-            }
-        }
+//             while (reader.Read())
+//             {
+//                 result = reader.GetInt32(0);
+//             }
+//         }
 
-        return result;       
-    }
+//         return result;       
+//     }
 
 
-    //Async versions of functions=================================================================
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public async Task<User> RegisterUserAsync(User p_user)
-    {
-        string sqlQuery = @"INSERT INTO Users
-                            VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
+//     //Async versions of functions=================================================================
+//     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//     public async Task<User> RegisterUserAsync(User p_user)
+//     {
+//         string sqlQuery = @"INSERT INTO Users
+//                             VALUES(@userName, @userPassword, @userDOB, @userBio, @userBreed, @userSize)";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userName", p_user.UserName);
-            command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
-            command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
-            command.Parameters.AddWithValue("@userBio", p_user.UserBio);
-            command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
-            command.Parameters.AddWithValue("@userSize", p_user.UserSize);
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userName", p_user.UserName);
+//             command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
+//             command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
+//             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
+//             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
+//             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
 
-            await command.ExecuteNonQueryAsync();
+//             await command.ExecuteNonQueryAsync();
 
-        }
-        return p_user;
-    }
+//         }
+//         return p_user;
+//     }
 
-    public async Task<List<User>> GetAllUsersAsync()
-    {
-        List<User> userList = new List<User>();
+//     public async Task<List<User>> GetAllUsersAsync()
+//     {
+//         List<User> userList = new List<User>();
 
-        string sqlQuery = @"SELECT * FROM Users";
+//         string sqlQuery = @"SELECT * FROM Users";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        { 
-            await conn.OpenAsync();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         { 
+//             await conn.OpenAsync();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            while (reader.Read())
-            {
-                userList.Add(new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                    Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
-                });
-            }
-        }
+//             while (reader.Read())
+//             {
+//                 userList.Add(new User(){
+//                     UserID = reader.GetInt32(0), 
+//                     UserName = reader.GetString(1),
+//                     UserPassword = reader.GetString(2),
+//                     UserDOB = reader.GetDateTime(3),
+//                     UserBio = reader.GetString(4),
+//                     UserBreed = reader.GetString(5),
+//                     UserSize = reader.GetString(6),
+//                     Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
+//                 });
+//             }
+//         }
 
-        return userList;
-    }
+//         return userList;
+//     }
 
-    public async Task<User> GetUserAsync(int UserID)
-    {
-        User Result = new User();
-        string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//     public async Task<User> GetUserAsync(int UserID)
+//     {
+//         User Result = new User();
+//         string sqlQuery = @"SELECT * FROM USERS WHERE userID = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                    Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
-                });
-            }
-            return Result;
+//             while (reader.Read())
+//             {
+//                 Result = (new User(){
+//                     UserID = reader.GetInt32(0), 
+//                     UserName = reader.GetString(1),
+//                     UserPassword = reader.GetString(2),
+//                     UserDOB = reader.GetDateTime(3),
+//                     UserBio = reader.GetString(4),
+//                     UserBreed = reader.GetString(5),
+//                     UserSize = reader.GetString(6),
+//                     Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
+//                 });
+//             }
+//             return Result;
 
-        }
-    }
+//         }
+//     }
 
-    public async Task<User> GetUserByUsernameAsync(string userName)
-    {
-        User Result = new User();
-        string sqlQuery = @"SELECT * FROM USERS WHERE userName = @userName";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//     public async Task<List<User>> ViewMatchedUserAsync(int UserID)
+//     {
+//         List<int> listOfMatchedUserID = new List<int>();
+//         List<User> listOfMatchedUser = new List<User>();
+
+//         string sqlQuery = @"SELECT * FROM MATCHEDUSERS WHERE userID1 = @userID or userID2 = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userName", userName);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                    Photo = await GetPhotobyUserIDAsync(reader.GetInt32(0))
-                });
-            }
-            return Result;
-
-        }
-    }
-
-    
-
-    public async Task<List<User>> ViewMatchedUserAsync(int UserID)
-    {
-        List<int> listOfMatchedUserID = new List<int>();
-        List<User> listOfMatchedUser = new List<User>();
-
-        string sqlQuery = @"SELECT * FROM MATCHEDUSERS WHERE userID1 = @userID or userID2 = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//             while (reader.Read())
+//             {
+//                 if(reader.GetInt32(0) == UserID)
+//                 {
+//                     listOfMatchedUserID.Add(reader.GetInt32(1));
+//                 }
+//                 else if(reader.GetInt32(1) == UserID)
+//                 {
+//                     listOfMatchedUserID.Add(reader.GetInt32(0));
+//                 }
+//             }
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             foreach(var ID in listOfMatchedUserID)
+//             {
+//                 listOfMatchedUser.Add(GetUser(ID));
+//             }
 
-            while (reader.Read())
-            {
-                if(reader.GetInt32(0) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(1));
-                }
-                else if(reader.GetInt32(1) == UserID)
-                {
-                    listOfMatchedUserID.Add(reader.GetInt32(0));
-                }
-            }
+//             return listOfMatchedUser;
+//         }
+//     }
+
+//     public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
+//     {
+//         List<Message> Result = new List<Message>();
+//         string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE senderUserID = @userID1 or receiverID = @userID1 and senderUserID = @userID2 or receiverID  = @userID2";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
             
-            foreach(var ID in listOfMatchedUserID)
-            {
-                listOfMatchedUser.Add(GetUser(ID));
-            }
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID1", UserID1);
+//             command.Parameters.AddWithValue("@userID2", UserID2);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            return listOfMatchedUser;
-        }
-    }
+//             while (reader.Read())
+//             {
+//                 Result.Add(new Message(){
+//                     messageID = reader.GetInt32(0),
+//                     SenderID = reader.GetInt32(1),
+//                     ReceiverID = reader.GetInt32(2),
+//                     messageText = reader.GetString(3),
+//                     messageTimeStamp = reader.GetDateTime(4)
+//                 });
+//             }
 
-    public async Task<List<Message>> GetConversationAsync(int UserID1, int UserID2)
-    {
-        List<Message> Result = new List<Message>();
+//         return Result;
+//         }
+//     }
 
-        string sqlQuery = @"SELECT * FROM CHATMESSAGE WHERE (senderUserID = @userID1 or receiverID = @userID1) and (senderUserID = @userID2 or receiverID  = @userID2)";
+//     public async Task<User> UpdateUserAsync(User p_user)
+//     {
+//         User Result = new User();
+//         string sqlQuery = @"Update Users 
+//                         set userName = @userName, userPassword = @userPassword, userDOB = @userDOB, userBio = @userBio, userBreed = @userBreed, userSize = @userSize 
+//                         where userID = @userID";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-            
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID1", UserID1);
-            command.Parameters.AddWithValue("@userID2", UserID2);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userName", p_user.UserName);
+//             command.Parameters.AddWithValue("@userPassword", p_user.UserPassword);
+//             command.Parameters.AddWithValue("@userDOB", p_user.UserDOB);
+//             command.Parameters.AddWithValue("@userBio", p_user.UserBio);
+//             command.Parameters.AddWithValue("@userBreed", p_user.UserBreed);
+//             command.Parameters.AddWithValue("@userSize", p_user.UserSize);
 
-            while (reader.Read())
-            {
-                Result.Add(new Message(){
-                    messageID = reader.GetInt32(0),
-                    SenderID = reader.GetInt32(1),
-                    ReceiverID = reader.GetInt32(2),
-                    messageText = reader.GetString(3),
-                    messageTimeStamp = reader.GetDateTime(4)
-                });
-            }
+//             command.Parameters.AddWithValue("@userID", p_user.UserID);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-        return Result;
-        }
-    }
+//             while (reader.Read())
+//             {
+//                 Result = (new User(){
+//                     UserID = reader.GetInt32(0), 
+//                     UserName = reader.GetString(1),
+//                     UserPassword = reader.GetString(2),
+//                     UserDOB = reader.GetDateTime(3),
+//                     UserBio = reader.GetString(4),
+//                     UserBreed = reader.GetString(5),
+//                     UserSize = reader.GetString(6),
+//                 });
+//             }
+//             return Result;
+//         }
+//     }
 
-    public async Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
-    {
-        User Result = new User();
-        string sqlQuery = @"Update Users 
-                        set userBio = @userBio, userSize = @userSize 
-                        where userID = @userID";
+//     public async Task<Message> AddMessageAsync(Message message)
+//     {
+//         string sqlQuery = @"INSERT INTO ChatMessage
+//                             VALUES(@senderID,@receiverID,@message, @messageTimeStamp)";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userBio", p_userBio);
-            command.Parameters.AddWithValue("@userSize", p_userSize);
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-            command.Parameters.AddWithValue("@userID", p_userID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@senderID", message.SenderID);
+//             command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
+//             command.Parameters.AddWithValue("@message", message.messageText);
+//             command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-            return Result;
-        }
-    }
+//             await command.ExecuteNonQueryAsync();
 
-    public async Task<User> UpdateUserBioAsync(int p_userID, string p_userBio)
-    {
-        User Result = new User();
-        string sqlQuery = @"Update Users 
-                        set userBio = @userBio 
-                        where userID = @userID";
+//         }
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userBio", p_userBio);
+//         return message;
+//     }
 
-            command.Parameters.AddWithValue("@userID", p_userID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//     public async Task<Photo> AddPhotoAsync(Photo p_photo)
+//     {
+//         string sqlQuery = @"INSERT INTO Photos
+//                             VALUES(@fileName, @userID)";
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-            return Result;
-        }
-    }
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-    public async Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize)
-    {
-        User Result = new User();
-        string sqlQuery = @"Update Users 
-                        set userSize = @userSize 
-                        where userID = @userID";
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@fileName", p_photo.fileName);
+//             command.Parameters.AddWithValue("@userID", p_photo.userID);
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userSize", p_userSize);
+//             await command.ExecuteNonQueryAsync();
+//         }
+//         return p_photo;
+//     }
 
-            command.Parameters.AddWithValue("@userID", p_userID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//     public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
+//     {
+//         List<Photo> listofPhoto = new List<Photo>();
 
-            while (reader.Read())
-            {
-                Result = (new User(){
-                    UserID = reader.GetInt32(0), 
-                    UserName = reader.GetString(1),
-                    UserPassword = reader.GetString(2),
-                    UserDOB = reader.GetDateTime(3),
-                    UserBio = reader.GetString(4),
-                    UserBreed = reader.GetString(5),
-                    UserSize = reader.GetString(6),
-                });
-            }
-            return Result;
-        }
-    }
- 
+//         string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
+//                             WHERE p.userID = @userID";
 
-    public async Task<Message> AddMessageAsync(Message message)
-    {
-        string sqlQuery = @"INSERT INTO ChatMessage
-                            VALUES(@senderID,@receiverID,@message, @messageTimeStamp)";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", p_userID);
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@senderID", message.SenderID);
-            command.Parameters.AddWithValue("@receiverID", message.ReceiverID);
-            command.Parameters.AddWithValue("@message", message.messageText);
-            command.Parameters.AddWithValue("@messageTimeStamp", DateTime.Now);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            await command.ExecuteNonQueryAsync();
+//             while (reader.Read())
+//             {
+//                 listofPhoto.Add(new Photo()
+//                 {
+//                     photoID = reader.GetInt32(0),
+//                     fileName = reader.GetString(1),
+//                     userID = reader.GetInt32(2),
+//                 });
+//             }
+//         }
+//         return listofPhoto;
+//     }
 
-        }
-
-        return message;
-    }
-
-    public async Task<Photo> AddPhotoAsync(Photo p_photo)
-    {
-        string sqlQuery = @"INSERT INTO Photos
-                            VALUES(@fileName, @userID)";
-
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@fileName", p_photo.fileName);
-            command.Parameters.AddWithValue("@userID", p_photo.userID);
-
-            await command.ExecuteNonQueryAsync();
-        }
-        return p_photo;
-    }
-
-    public async Task<List<Photo>> GetPhotobyUserIDAsync(int p_userID)
-    {
-        List<Photo> listofPhoto = new List<Photo>();
-
-        string sqlQuery = @"SELECT p.photoID, p.fileName, p.userID from Photos p
-                            WHERE p.userID = @userID";
-
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
-
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", p_userID);
-
-            SqlDataReader reader = await command.ExecuteReaderAsync();
-
-            while (reader.Read())
-            {
-                listofPhoto.Add(new Photo()
-                {
-                    photoID = reader.GetInt32(0),
-                    fileName = reader.GetString(1),
-                    userID = reader.GetInt32(2),
-                });
-            }
-        }
-        return listofPhoto;
-    }
-
-    public async Task<List<int>> GetPassedUsersIDAsync(int UserID)
-    {
-        List<int> listOfPassedUsersID = new List<int>();
+//     public async Task<List<int>> GetPassedUsersIDAsync(int UserID)
+//     {
+//         List<int> listOfPassedUsersID = new List<int>();
         
-        string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//         string sqlQuery = @"SELECT * FROM PassedUsers where passerID = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            while (reader.Read())
-            {
-                listOfPassedUsersID.Add(reader.GetInt32(1));
-            }
+//             while (reader.Read())
+//             {
+//                 listOfPassedUsersID.Add(reader.GetInt32(1));
+//             }
 
-            return listOfPassedUsersID;
-        }
-    }
+//             return listOfPassedUsersID;
+//         }
+//     }
 
-    public async Task<int> AddPassedUserIDAsync(int passerID, int passeeID)
-    {
-        string sqlQuery = @"INSERT INTO PassedUsers
-                            VALUES(@passerID, @passeeID)";
+//     public async Task<int> AddPassedUserIDAsync(int passerID, int passeeID)
+//     {
+//         string sqlQuery = @"INSERT INTO PassedUsers
+//                             VALUES(@passerID, @passeeID)";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@passerID", passerID);
-            command.Parameters.AddWithValue("@passeeID", passeeID);
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@passerID", passerID);
+//             command.Parameters.AddWithValue("@passeeID", passeeID);
 
-            await command.ExecuteNonQueryAsync();
-        }
+//             await command.ExecuteNonQueryAsync();
+//         }
 
-        return passeeID;
-    }
+//         return passeeID;
+//     }
 
-    public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
-    {
-        User result = GetUser(LikedID);
+//     public async Task<User> AddLikedUserAsync(int LikerID, int LikedID)
+//     {
+//         User result = GetUser(LikedID);
 
-        string sqlQuery = "Insert Into LikedUsers Values(@LikerID, @LikedID)";
+//         string sqlQuery = "Insert Into LikedUsers Values(@LikerID, @LikedID)";
 
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@LikerID", LikerID);
-            command.Parameters.AddWithValue("@LikedID", LikedID);
-            await command.ExecuteNonQueryAsync();
-        }
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@LikerID", LikerID);
+//             command.Parameters.AddWithValue("@LikedID", LikedID);
+//             await command.ExecuteNonQueryAsync();
+//         }
         
-        return result;
-    }
+//         return result;
+//     }
 
-    public async Task<List<Like>> GetLikedUserAsync(int UserID)
-    {
-        List<Like> listOfLikedUsers = new List<Like>();
+//     public async Task<List<Like>> GetLikedUserAsync(int UserID)
+//     {
+//         List<Like> listOfLikedUsers = new List<Like>();
         
-        string sqlQuery = @"SELECT * FROM LikedUsers 
-                        where likerUserID = @userID";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//         string sqlQuery = @"SELECT * FROM LikedUsers 
+//                         where likerUserID = @userID";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
             
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@userID", UserID);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@userID", UserID);
+//             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            while (reader.Read())
-            {
-                listOfLikedUsers.Add(new Like()
-                    {
-                        LikerID = reader.GetInt32(0),
-                        LikedID = reader.GetInt32(1),
-                    });
-            }
-            return listOfLikedUsers;
-        }
-    }
+//             while (reader.Read())
+//             {
+//                 listOfLikedUsers.Add(new Like()
+//                     {
+//                         LikerID = reader.GetInt32(0),
+//                         LikedID = reader.GetInt32(1),
+//                     });
+//             }
+//             return listOfLikedUsers;
+//         }
+//     }
 
-    public async Task<Match> AddMatchAsync(int p_UserID1, int p_UserID2)
-    {
-        Match result = new Match();
-        result.MatcherOneID = p_UserID1;
-        result.MatcherTwoID = p_UserID2;
+//     public async Task<Match> AddMatchAsync(int p_UserID1, int p_UserID2)
+//     {
+//         Match result = new Match();
+//         result.MatcherOneID = p_UserID1;
+//         result.MatcherTwoID = p_UserID2;
 
-        string sqlQuery = "Insert Into MatchedUsers Values(@UserID1, @UserID2);";
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            await conn.OpenAsync();
+//         string sqlQuery = "Insert Into MatchedUsers Values(@UserID1, @UserID2);";
+//         using (SqlConnection conn = new SqlConnection(_connectionString))
+//         {
+//             await conn.OpenAsync();
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@UserID1", p_UserID1);
-            command.Parameters.AddWithValue("@UserID2", p_UserID2);
-            await command.ExecuteNonQueryAsync();
-        }
+//             SqlCommand command = new SqlCommand(sqlQuery, conn);
+//             command.Parameters.AddWithValue("@UserID1", p_UserID1);
+//             command.Parameters.AddWithValue("@UserID2", p_UserID2);
+//             await command.ExecuteNonQueryAsync();
+//         }
 
-        return result;
-    }
-}
+//         return result;
+//     }
+// }
 
     
 
