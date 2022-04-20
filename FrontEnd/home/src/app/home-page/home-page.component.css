@@ -3,11 +3,13 @@
     align-items: center;
     display:flex;
     flex-direction: column;
+    margin-top: 1rem;
 }
 
 .home-heading
 {
     margin-top: 2rem;
+    color: white;
 }
 
 #slideshow 
@@ -27,6 +29,14 @@
     float: left;
     height: 25rem;
     width: 45.5rem;
+}
+
+.slide-number
+{
+    font-size: 2rem;
+    color :white;
+    height: 2rem;
+    margin-bottom: 1rem;
 }
 
 .slide-wrapper 
@@ -63,12 +73,6 @@
         margin-left: calc(-45.5rem * 2);
     }
 
-}
-
-h1
-{
-    color :white;
-    height: 2rem;
 }
 
 .span-text 
