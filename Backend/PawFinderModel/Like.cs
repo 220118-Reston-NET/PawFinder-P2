@@ -1,9 +1,15 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
 namespace PawFinderModel
 {
-public class Like
-{
-    public int LikerID { get; set; }
-    public int LikedID { get; set; }
-    
-}
+    [Keyless]
+    public class Like
+    {
+        public int LikerID { get; set; }
+        public User Liker{ get; set; }
+        public int LikedID { get; set; }
+        public User Liked{ get; set; }
+        
+    }
 }

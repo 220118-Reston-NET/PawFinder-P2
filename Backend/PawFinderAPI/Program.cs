@@ -3,6 +3,7 @@ using Azure.Storage.Blobs;
 using PawFinderBL;
 using PawFinderDL;
 using Backend.Hubs;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +30,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
 
-builder.Services.AddScoped<IRepository>(repo => new SQLRepository(builder.Configuration.GetConnectionString("Reference2DB")));
+
+builder.Services.AddDbContext<PawFinderDBcontext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Reference2DB")));
+//builder.Services.AddScoped<IRepository>(repo => new SQLRepository(builder.Configuration.GetConnectionString("Reference2DB")));
+builder.Services.AddScoped<IRepository, DBcontextRepository>();
 builder.Services.AddScoped<IUserBL, UserBL>();
 
 builder.Services.AddScoped(_ => {
@@ -51,10 +55,10 @@ app.UseCors("CORSPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseEndpoints(
-    endpoints => {
-        endpoints.MapControllers();
-        endpoints.MapHub<ChatHub>("/chart"); //This is the SignalR endpoint
-    }
-);
+// app.UseEndpoints(
+//     endpoints => {
+//         endpoints.MapControllers();
+//         endpoints.MapHub<ChatHub>("/chart"); //This is the SignalR endpoint
+//     }
+// );
 app.Run();
