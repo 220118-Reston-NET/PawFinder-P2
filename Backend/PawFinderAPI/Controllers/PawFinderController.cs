@@ -69,6 +69,21 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+        [HttpGet("GetUserByUsername")]
+        public async Task<IActionResult> GetUserByUsernameAsync([FromQuery] string userName)
+        {
+            try
+            {
+                Log.Information("Successfully returned the user with userID");
+                return Ok(await _userBL.GetUserByUsernameAsync(userName));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Could not find user in the database.");
+                return NotFound();
+            } 
+        }
+
 
         // GET: api/PawFinder/3
         [HttpGet("ViewMatchedUser")]
@@ -86,8 +101,9 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+        // GET: api/PawFinder/4
         [HttpGet("GetPassedUsers")]
-        public async Task<IActionResult> GetPassedUserAsync(int UserID)
+        public async Task<IActionResult> GetPassedUserAsync([FromQuery] int UserID)
         {
             try
             {
@@ -108,7 +124,7 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-        // GET: api/PawFinder/4
+        // GET: api/PawFinder/5
         [HttpGet("GetConversation")]
         public async Task<IActionResult> GetConversationAsync([FromQuery] int UserID1, int UserID2)
         {
@@ -124,7 +140,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
-        // GET: api/PawFinder/4
+        // GET: api/PawFinder/6
         [HttpGet("GetPotentialMatch")]
         public async Task<IActionResult> GetPotentialMatchAsync(int UserID)
         {
@@ -140,6 +156,7 @@ namespace PawFinderAPI.Controllers
             } 
         }
 
+    
         // POST: api/PawFinder
         [HttpPost("RegisterUser")]
         public async Task<IActionResult> RegisterUserAsync([FromBody] User p_user)
@@ -242,25 +259,14 @@ namespace PawFinderAPI.Controllers
             }
         }
 
-        // PUT: api/PawFinder
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUserAsync([FromBody] User p_user)
+        
+        [HttpPut("UpdateUserBioSize")]
+        public async Task<IActionResult> UpdateUserBioSizeAsync([FromBody] User p_user)
         {
             try
             {
-                List<User> user = await _userBL.SearchUserAsync(p_user.UserName);
-                if (user.Count() == 0)
-                {
-                    Log.Information("Failed to find a user to update.");
-                    throw new Exception("User Not Found");
-                }
-                else if (user.Count() > 1)
-                {
-                    Log.Information("The usernames in this app should all be unique.");
-                    throw new Exception("This username is already taken!");
-                }
                 Log.Information("Successfully updated user information.");
-                return Ok(await _userBL.UpdateUserAsync(p_user));
+                return Ok(await _userBL.UpdateUserBioSizeAsync(p_user.UserID, p_user.UserBio, p_user.UserSize));
             }
             catch (System.Exception ex)
             {

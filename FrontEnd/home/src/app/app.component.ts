@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GlobalComponent } from './global/global.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'home';
+
+  userID = GlobalComponent.loggedInUserID;
+  userName = GlobalComponent.loggedInUserName;
+
 }

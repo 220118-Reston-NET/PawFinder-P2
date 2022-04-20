@@ -1,3 +1,32 @@
+.flex-container
+{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.flex-row
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.flex-row-left-aligned
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-spaced-evenly
+{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .switch-login-to-signup
 {
     font-size: 2rem;
@@ -8,8 +37,6 @@
 {
     background-color: #940132;
     border-radius: 0.5rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
     text-align: center;
     text-decoration: none;
     color: white; 
@@ -21,16 +48,56 @@
     cursor: pointer;
 }
 
-li { list-style-type: none; 
+.editing-buttons
+{
+    margin-top: -0.5rem;
+    background-color: #940132;
+    border-radius: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: white; 
+    border: none;
+    margin-right: 0.5rem;
 }
 
-img:hover{
-    border-style: groove;
-    background-color: rgb(216, 128, 12);
+.editing-buttons:hover
+{
+    cursor: pointer;
 }
-img{
-    border-color: black;
+
+.button-centered
+{
+    display: flex;
+    justify-content: center;
 }
-button{
-    border-radius: 10%;
+
+.chooseButtons
+{
+    background-color: white;
+    color: gray;
+    margin-left: 1rem;
+}
+
+.graph-container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logout-button
+{
+    background-color: #940132;
+    margin-top: 5rem;
+    border-radius: 0.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: white; 
+    border: none;
+}
+
+.group-item-heading
+{
+    font-weight: bold;
 }

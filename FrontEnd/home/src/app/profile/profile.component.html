@@ -1,39 +1,67 @@
-<li>
-<div class="container d-flex justify-content-center align-items-center" style="margin-top: 4rem;">
-    <div class="card">
-        <div class="upper">
-            <img src="https://i.imgur.com/Qtrsrk5.jpg" width="100%" class="img-fluid" alt="">
-        </div>
-        <div class="profile">
-            <div class="user text-center">
-                <img src="https://th.bing.com/th/id/OIP.Tt6y06apxTayghQwh3bUoQHaEK?w=207&h=100&c=7&r=0&o=4&dpr=1.5&pid=1.7"
-                    class="rounded-circle" width="220" alt="profile">
+<div class="flex-row-spaced-evenly">
+    <!-- if user is not currently editing their profile by clicking the edit profile button, show this html -->
+    <div *ngIf="!isEditingProfile">
+        <div class="card" style="width: 50rem; max-height: 50rem;">
+            <img [src]=userImg class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{userName}}</h5>
+              <p class="card-text">{{userBio}}</p>
             </div>
-        </div>
-        <div class="mt-5 text-center">
-            <h2 class="mb-0">User Name: {{userName}}</h2>
-            <h4>DOB: {{userDOB}}</h4>
-            <h4>Breed: {{userBreed}}</h4>
-            <div class="d-flex justify-content-between align-items-center mt-4 px-4 " style="margin-bottom:1.5rem;">
-                <form [formGroup]="userGroup" style="margin-left: 3rem">
-                    <div>
-                    <label for="userBio">Bio:</label><br>
-                    <h4>{{userBio}}</h4>
-                    <input type="text" placeholder="write new bio"  formControlName="userBio" /><br />
-                    </div>
-                    <div>
-                    <label for="userSize">Size:</label><br>
-                    <h4>{{userSize}}</h4>
-                    <input type="text" placeholder="change size" formControlName="userSize" /><br />
-                    </div>
-                    <button class="btn btn-primary" style="margin-top: 1rem; background-color:#940132; font-size: 1.5rem; border:none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="button" (click)="updateUserInfo(userGroup)">Update info</button> 
-                </form>  
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><span class="group-item-heading">Breed: </span>{{userBreed}}</li>
+              <li class="list-group-item"><span class="group-item-heading">DOB: </span>{{userDOB}}</li>
+              <li class="list-group-item"><span class="group-item-heading">Size: </span>{{userSize}}</li>
+            </ul>
+            <div class="card-body">
+                <div class="button-centered">
+                    <button class="btn btn-primary paw-finder-login-signup-button" type="button" (click)="editProfile()">Edit Profile</button>
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- if user is currently editing their profile, show this html -->
+    <div *ngIf="isEditingProfile">
+        <div class="card" style="width: 50rem; max-height: 50rem;">
+            <form [formGroup]="userGroup">
+                <img [src]=userImg class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">{{userName}}</h5>
+                  <input type="text" [placeholder]=userBio  formControlName="userBio"/><br />
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><span class="group-item-heading">Breed: </span>{{userBreed}}</li>
+                  <li class="list-group-item"><span class="group-item-heading">DOB: </span>{{userDOB}}</li>
+                  <div class="flex-row-left-aligned">
+                    <li for="userSize" class="list-group-item">Size:</li>
+                    <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle chooseButtons" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{dropdownSize}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><button class="dropdown-item" type="button" (click)="chooseSize('Small')">Small</button></li>
+                            <li><button class="dropdown-item" type="button" (click)="chooseSize('Medium')">Medium</button></li>
+                            <li><button class="dropdown-item" type="button" (click)="chooseSize('Large')">Large</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </ul>
+                <div class="card-body">
+                    <div class="flex-row">
+                        <button class="btn btn-primary editing-buttons" type="button" (click)="goBack()">Go Back</button>
+                        <button class="btn btn-primary editing-buttons" type="button" (click)="updateUserInfo(userGroup)">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="graph-container">
+        <app-like-dislike-ratio-graph></app-like-dislike-ratio-graph>
+        <div class="switch-login-to-signup">
+            <a routerLink="/Login" class="btn btn-primary logout-button">Logout</a>
+        </div>
+    </div>
+
 </div>
 
-<div class="switch-login-to-signup" style="margin-top: 3rem;">
-    <a routerLink="/Login" class="paw-finder-login-signup-button">Logout</a>
-</div>
-</li>

@@ -1,0 +1,36 @@
+.flex-container
+{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.group-item-heading
+{
+    font-weight: bold;
+}
+
+.buttons-spaced-evenly-container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.no-more-users-label
+{
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 3rem;
+    margin-top: 15rem;
+}
+
+.link-buttons
+{
+    color: white;
+    background-color: red;
+}

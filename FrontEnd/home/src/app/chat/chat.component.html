@@ -1,63 +1,31 @@
-<h1>Chat room</h1>
-<div  class="chat-room">
-    <div>
+<!-- TODO: Fix the message styling to have the messages centered -->
+<!-- TODO: make the messages scrollable and have the postition of the text box at the 
+    TODO: bottom of the screen and always have it there no matter the number of messages (like discord) -->
+<div class="flexbox-container">
+    <h1 class="chat-heading">Chatting with: {{chattingUserName}}</h1>
+</div>
 
-        <!-- Grid row -->
-        <div class="row px-lg-2 px-2">
-
-            <!-- Grid column -->
-            <div class="col-md-6 col-xl-4 px-0">
-
-                <h6 class="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
-                <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
-                    <ul class="list-unstyled friend-list">
-                        <li class="active grey lighten-3 p-2">
-                            <a routerLink="/Profile.UserID" class="d-flex justify-content-between">
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.webp" alt="avatar"
-                                    class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
-                                <div class="text-small">
-                                    <h3>John Doe</h3>
-                                    <p class="last-message text-muted">Hello, Are you there?</p>
-                                </div>
-                                <div class="chat-footer">
-                                    <p class="text-smaller text-muted mb-0">Just now</p>
-                                    <!-- <mdb-badge danger="true" class="float-right">1</mdb-badge> -->
-                                </div>
-                            </a>
-                        </li>
-                        <li class="p-2">
-                            <a class="d-flex justify-content-between" routerLink="/Profile.UserID" >
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.webp" alt="avatar"
-                                    class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
-                                <div class="text-small">
-                                    <strong>Danny Smith</strong>
-                                    <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
-                                </div>
-                                <div class="chat-footer">
-                                    <p class="text-smaller text-muted mb-0">5 min ago</p>
-                                    <span class="text-muted float-right">
-                                        <!-- <mdb-icon fas icon="reply" aria-hidden="true"></mdb-icon> -->
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="white">
-                        <div class="form-group basic-textarea">
-                            <textarea class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3"
-                                placeholder="Type your message here..."></textarea>
-                        </div>
-                    </div>
-                    <button type="button" mdbBtn color="pink" outline="true" rounded="true" size="sm"
-                        class="waves-effect waves-dark float-right">Send</button>
-
-                </div>
-
+<div class="flexbox-container scrollable-container">
+    <div class="message-scrollable">
+        <div *ngFor = "let message of listOfMessages" class="message-container">
+            <div *ngIf = "message.senderID === myUserID" class="sender-text-box">
+                <h3 class="chat-username-heading">{{myUserName}}</h3>
+                <p>{{message.messageText}}</p>
             </div>
-            <!-- Grid column -->
-
-        </div>
-        <!-- Grid row -->
-
+            
+            <div *ngIf = "message.senderID === chattingUserID" class="receiver-text-box">
+                <h3 class="chat-username-heading">{{chattingUserName}}</h3>                        
+                <p>{{message.messageText}}</p>
+            </div>
+        </div>    
     </div>
+</div>
+
+<div class="flexbox-container-row">
+    <form [formGroup]="messageGroup" class="text-box-padding">
+        <textarea class="form-control pl-2 my-0" rows="2"
+            placeholder="Type your message here..." formControlName="messageText"></textarea>
+    </form>
+    <button type="button" mdbBtn color="pink" outline="true" rounded="true" size="sm"
+        class="btn btn-primary send-msg-button" (click)="sendMessage(messageGroup)">Send</button>
 </div>

@@ -1,3 +1,12 @@
+.flex-row
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.5rem;
+}
+
 .imagediv 
 {
     display: flex;
@@ -37,17 +46,9 @@
     align-items: center;
     display:flex;
     flex-direction: column;
+    width: 100%;
 }
 
-.form-outline 
-{
-    margin-top: .5rem;
-}
-  
-.form-control 
-{
-    margin-top: .5rem;
-}
   
 button 
 {
@@ -72,15 +73,21 @@ button
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 3rem;
     text-align: center;
-    padding-top: 5%;
-    padding-bottom: 1.5rem
+    padding-top: 2%;
+    padding-bottom: 0.5rem
 }
 
-label{
+label
+{
     color:rgb(255, 255, 235);
     font-size: 1.5rem;
-    padding-top: 1rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.dob-input
+{
+    color: gray;
+    
 }
 
 .paw-finder-login-signup-button
@@ -93,7 +100,8 @@ label{
     border-color: black;
 }
 
-.paw-finder-login-signup-button:hover{
+.paw-finder-login-signup-button:hover
+{
   background-color: rgb(245, 35, 63);
 }
 
@@ -104,8 +112,8 @@ label{
 
 .password-eye
 {   
-    padding-top: 50%;
     z-index: 1;
+    padding-top: 50%;
     cursor: pointer;
     color: #940132;
     -webkit-user-select: none;
@@ -117,7 +125,24 @@ label{
 
 .password-eye:hover
 {
-    color:rgb(245, 35, 63);
+    color: rgb(245, 35, 63);
+}
+
+.chooseButtons
+{
+    background-color: white;
+    color: gray;
+}
+
+input[type="date"]:before 
+{
+    content: attr(placeholder) !important;
+    margin-right: 0.5em;
+}
+input[type="date"]:focus:before,
+input[type="date"]:valid:before 
+{
+    content: "";
 }
 
 .register-link
