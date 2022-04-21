@@ -7,7 +7,7 @@ public interface IRepository
     User RegisterUser(User p_user);
     List<User> GetAllUsers();
     User GetUser(int UserID);
-    //User GetUserByUsername(string userName);
+    User GetUserByUsername(string userName);
     List<User> ViewMatchedUser(int UserID);
     List<Message> GetConversation(int UserID1, int UserID2);
     Message AddMessage(Message message);
