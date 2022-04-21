@@ -30,6 +30,8 @@ Backend
 
 -ADO.NET
 
+-Entity Framework Core
+
 -Xunit
 
 -Serilog
