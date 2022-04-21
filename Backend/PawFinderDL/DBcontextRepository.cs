@@ -177,12 +177,12 @@ public class DBcontextRepository : IRepository
 
     public User GetUserByUsername(string userName)
     {
-        throw new NotImplementedException();
+        return _context.User.Where(user => user.UserName == userName).ToList()[0];
     }
 
-    public Task<User> GetUserByUsernameAsync(string userName)
+    public async Task<User> GetUserByUsernameAsync(string userName)
     {
-        throw new NotImplementedException();
+        return _context.User.Where(user => user.UserName == userName).ToList()[0];
     }
 
     public User RegisterUser(User p_user)
