@@ -175,6 +175,16 @@ public class DBcontextRepository : IRepository
         return _context.User.Where(user => user.UserID == UserID).ToList()[0];
     }
 
+    public User GetUserByUsername(string userName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> GetUserByUsernameAsync(string userName)
+    {
+        throw new NotImplementedException();
+    }
+
     public User RegisterUser(User p_user)
     {
         _context.User.Add(p_user);
@@ -203,6 +213,21 @@ public class DBcontextRepository : IRepository
         _context.User.Update(p_user);
         await _context.SaveChangesAsync();
         return p_user;
+    }
+
+    public Task<User> UpdateUserBioAsync(int p_userID, string p_userBio)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize)
+    {
+        throw new NotImplementedException();
     }
 
     public List<User> ViewMatchedUser(int UserID)
