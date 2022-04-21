@@ -1,5 +1,5 @@
 import { PawfinderService } from '../services/pawfinder.service';
-import { Users } from '../models/users.model';
+import { User } from '../models/users.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
@@ -55,20 +55,20 @@ export class RegisterComponent implements OnInit{
 
   Register(p_userGroup:FormGroup){
 
-    let user:Users=
+    let user:User=
     {
-      userID:0,
-      userName:p_userGroup.get("userName")?.value,
-      userPassword:p_userGroup.get("userPassword")?.value,
-      userDOB:p_userGroup.get("userDOB")?.value,
-      userBio:p_userGroup.get("userBio")?.value,
-      userBreed:this.UserBreed,
-      userSize:this.userSize,
-      userImg:""
+      UserID:0,
+      UserName:p_userGroup.get("userName")?.value,
+      UserPassword:p_userGroup.get("userPassword")?.value,
+      UserDOB:p_userGroup.get("userDOB")?.value,
+      UserBio:p_userGroup.get("userBio")?.value,
+      UserBreed:this.UserBreed,
+      UserSize:this.userSize,
+      pictureURL:""
     }
     
-    this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.userID;
-      GlobalComponent.loggedInUserName = result.userName; this.router.navigate(["/Profile"]);}}, error => {this.isRegisterConflict = true;});
+    this.userService.addUser(user).subscribe(result => {if(result) { GlobalComponent.loggedInUserID = result.UserID;
+      GlobalComponent.loggedInUserName = result.UserName; this.router.navigate(["/Profile"]);}}, error => {this.isRegisterConflict = true;});
 
   }
    onFilechange(event: any)

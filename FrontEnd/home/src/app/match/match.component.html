@@ -4,19 +4,19 @@
     <div class="card" style="width: 50rem; max-height: 50rem;">
         <img src="https://pawfinderstorageaccount.blob.core.windows.net/pawfindercontainer/istockphoto-husky.jpg" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">{{users.userName}}</h5>
-          <p class="card-text">{{users.userBio}}</p>
+          <h5 class="card-title">{{users.UserName}}</h5>
+          <p class="card-text">{{users.UserBio}}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><span class="group-item-heading">Breed: </span>{{users.userBreed}}</li>
-          <li class="list-group-item"><span class="group-item-heading">DOB: </span>{{users.userDOB}}</li>
-          <li class="list-group-item"><span class="group-item-heading">Size: </span>{{users.userSize}}</li>
+          <li class="list-group-item"><span class="group-item-heading">Breed: </span>{{users.UserBreed}}</li>
+          <li class="list-group-item"><span class="group-item-heading">DOB: </span>{{users.UserDOB}}</li>
+          <li class="list-group-item"><span class="group-item-heading">Size: </span>{{users.UserSize}}</li>
         </ul>
         <div class="card-body">
             <div class="flex-row button-centered">
                 <h2 class="group-item-heading">Send Message:</h2>
                 <button class="favorite styled btn-primary message-button" type="button" data-toggle="popover"
-                    title="chat" (click)="chatwithUser(users.userID)"><i class="material-icons">chat</i></button>
+                    title="chat" (click)="chatwithUser(users.UserID)"><i class="material-icons">chat</i></button>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <!-- if user is not currently editing their profile by clicking the edit profile button, show this html -->
     <div *ngIf="!isEditingProfile">
         <div class="card" style="width: 50rem; max-height: 50rem;">
-            <img [src]=userImg class="card-img-top">
+            <img [src]=pictureURL class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{userName}}</h5>
               <p class="card-text">{{userBio}}</p>
@@ -24,7 +24,7 @@
     <div *ngIf="isEditingProfile">
         <div class="card" style="width: 50rem; max-height: 50rem;">
             <form [formGroup]="userGroup">
-                <img [src]=userImg class="card-img-top">
+                <img [src]=pictureURL class="card-img-top">
                 <div class="card-body">
                   <h5 class="card-title">{{userName}}</h5>
                   <input type="text" [placeholder]=userBio  formControlName="userBio"/><br />

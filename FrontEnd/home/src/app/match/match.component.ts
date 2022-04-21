@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalComponent } from '../global/global.component';
-import { Users } from '../models/users.model';
+import { User } from '../models/users.model';
 import { MatchService } from '../services/match.service';
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from '../services/user.service';
@@ -13,7 +13,7 @@ import { UserService } from '../services/user.service';
 })
 export class MatchComponent implements OnInit {
   
-  listOfUsers:Users[];
+  listOfUsers:User[];
   sizeOfUsersList:number = 0;
   myUserID = GlobalComponent.loggedInUserID;
   chattingWithUserID = 0;

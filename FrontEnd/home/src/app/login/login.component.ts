@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Users } from '../models/users.model';
+import { User } from '../models/users.model';
 import { NavbarService } from '../services/navbar.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
@@ -50,19 +50,19 @@ export class LoginComponent implements OnInit {
   login(p_loginGroup:FormGroup)
   {
     
-    let loginGroup:Users =
+    let loginGroup:User =
     {
-      userID: 0,
-      userName:p_loginGroup.get("userName")?.value,
-      userPassword:p_loginGroup.get("userPassword")?.value,
-      userDOB: new Date,
-      userBio: "",
-      userBreed: "",
-      userSize: "",
-      userImg:""
+      UserID: 0,
+      UserName:p_loginGroup.get("userName")?.value,
+      UserPassword:p_loginGroup.get("userPassword")?.value,
+      UserDOB: new Date,
+      UserBio: "",
+      UserBreed: "",
+      UserSize: "",
+      pictureURL:""
     }
    
-      this.loginService.verifyUser(loginGroup.userName, loginGroup.userPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"]); GlobalComponent.loggedInUserName = loginGroup.userName;}}, error => {this.isloginConflict = true;});
+      this.loginService.verifyUser(loginGroup.UserName, loginGroup.UserPassword).subscribe(result => {if(result) {this.router.navigate(["/Profile"]); GlobalComponent.loggedInUserName = loginGroup.UserName;}}, error => {this.isloginConflict = true;});
 
   }
 

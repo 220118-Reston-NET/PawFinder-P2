@@ -1,5 +1,5 @@
 import { PawfinderService } from './../services/pawfinder.service';
-import { Users } from './../models/users.model';
+import { User } from './../models/users.model';
 import { Component, OnInit } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -14,8 +14,8 @@ export class UserComponent implements OnInit {
 
     filteredName:string = "";
 
-    listOfUsers:Users[];
-    filteredListOfUser:Users[];
+    listOfUsers:User[];
+    filteredListOfUser:User[];
     // "photo": [
     //   {
     //     "photoID": 1,
@@ -42,7 +42,6 @@ export class UserComponent implements OnInit {
     {
         this.title = "title has been changed!";
         this.src1 = "https://upload.wikimedia.org/wikipedia/commons/5/56/Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg";
-        // this.listOfPokemon.push({base_experience:64, id:1,name:'bulbasaur',sprites:{front_default:'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'}});
     }
 
     changeVisible()

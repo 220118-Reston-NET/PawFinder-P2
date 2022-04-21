@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PawfinderService } from './../services/pawfinder.service';
-import { Users } from './../models/users.model';
+import { User } from './../models/users.model';
 import { ActivatedRoute} from '@angular/router';
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from '../services/user.service';
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   userBio:string = "no user selected";
   userSize:string = "no user selected";
   userBreed:string = "no user selected";
-  userImg: string = "no user selected";
+  pictureURL: string = "no user selected";
 
   show:boolean = true;
   isEditingProfile:boolean = false;
@@ -69,26 +69,26 @@ export class ProfileComponent implements OnInit {
 
   updateUserInfo(p_userGroup:FormGroup){
 
-    let user:Users=
+    let user:User=
     {
-      userID: this.userID,
-      userName:this.userName,
-      userPassword:"",
-      userDOB: new Date,
-      userBio:p_userGroup.get("userBio")?.value,
-      userBreed:"",
-      userSize:this.userSize,
-      userImg:""
+      UserID: this.userID,
+      UserName:this.userName,
+      UserPassword:"",
+      UserDOB: new Date,
+      UserBio:p_userGroup.get("userBio")?.value,
+      UserBreed:"",
+      UserSize:this.userSize,
+      pictureURL:""
     }
     
-    if(user.userBio === "")
+    if(user.UserBio === "")
     {
-      user.userBio = this.userBio;
+      user.UserBio = this.userBio;
     }
 
-    if(user.userSize === "")
+    if(user.UserSize === "")
     {
-      user.userSize = this.userSize;
+      user.UserSize = this.userSize;
     }
 
     this.userService.updateUser(user).subscribe( () => { this.loadUser(); });
@@ -120,27 +120,27 @@ export class ProfileComponent implements OnInit {
   {
     this.userService.getUserByUserName(GlobalComponent.loggedInUserName).subscribe(result => 
 
-      {GlobalComponent.loggedInUserID = result.userID;
+      {GlobalComponent.loggedInUserID = result.UserID;
   
-        let user:Users=
+        let user:User=
         {
-          userID: result.userID,
-          userName:result.userName,
-          userPassword:"",
-          userDOB: result.userDOB,
-          userBio:result.userBio,
-          userBreed:result.userBreed,
-          userSize:result.userSize,
-          userImg:result.userImg
+          UserID: result.UserID,
+          UserName:result.UserName,
+          UserPassword:"",
+          UserDOB: result.UserDOB,
+          UserBio:result.UserBio,
+          UserBreed:result.UserBreed,
+          UserSize:result.UserSize,
+          pictureURL:result.pictureURL
         }
         
-        this.userID = user.userID;
-        this.userName = user.userName;
-        this.userDOB = user.userDOB;
-        this.userBio= user.userBio;
-        this.userSize = user.userSize;
-        this.userBreed = user.userBreed;
-        this.userImg = user.userImg;
+        this.userID = user.UserID;
+        this.userName = user.UserName;
+        this.userDOB = user.UserDOB;
+        this.userBio= user.UserBio;
+        this.userSize = user.UserSize;
+        this.userBreed = user.UserBreed;
+        this.pictureURL = user.pictureURL;
       });
 
   }

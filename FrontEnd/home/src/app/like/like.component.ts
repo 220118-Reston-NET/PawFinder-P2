@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GlobalComponent } from '../global/global.component';
-import { Users } from '../models/users.model';
+import { User } from '../models/users.model';
 import { LikeService } from '../services/like.service';
 import { MatchService } from '../services/match.service';
 import { NavbarService } from '../services/navbar.service';
@@ -18,7 +18,7 @@ export class LikeComponent implements OnInit {
   
   myUserID:number = GlobalComponent.loggedInUserID;
   
-  listOfUsers:Users[];
+  listOfUsers:User[];
   sizeOfUsersList:number = 0;
 
   userID:number = 0;
@@ -46,13 +46,13 @@ export class LikeComponent implements OnInit {
       }
       else
       {
-        this.userID = result[0].userID;
-        this.userName = result[0].userName;
-        this.userDOB = result[0].userDOB;
-        this.userBio= result[0].userBio;
-        this.userSize = result[0].userSize;
-        this.userBreed = result[0].userBreed;
-        this.userImg = result[0].userImg;
+        this.userID = result[0].UserID;
+        this.userName = result[0].UserName;
+        this.userDOB = result[0].UserDOB;
+        this.userBio= result[0].UserBio;
+        this.userSize = result[0].UserSize;
+        this.userBreed = result[0].UserBreed;
+        this.userImg = result[0].pictureURL;
       }
 
     });
@@ -72,25 +72,25 @@ export class LikeComponent implements OnInit {
     }
     else
     {
-      let currentUser:Users=
+      let currentUser:User=
       {
-        userID: this.listOfUsers[this.i].userID,
-        userName:this.listOfUsers[this.i].userName,
-        userPassword:"",
-        userDOB: this.listOfUsers[this.i].userDOB,
-        userBio:this.listOfUsers[this.i].userBio,
-        userBreed:this.listOfUsers[this.i].userBreed,
-        userSize:this.listOfUsers[this.i].userSize,
-        userImg:""
+        UserID: this.listOfUsers[this.i].UserID,
+        UserName:this.listOfUsers[this.i].UserName,
+        UserPassword:"",
+        UserDOB: this.listOfUsers[this.i].UserDOB,
+        UserBio:this.listOfUsers[this.i].UserBio,
+        UserBreed:this.listOfUsers[this.i].UserBreed,
+        UserSize:this.listOfUsers[this.i].UserSize,
+        pictureURL:this.listOfUsers[this.i].pictureURL
       }
       
-      this.userID = currentUser.userID;
-      this.userName = currentUser.userName;
-      this.userDOB = currentUser.userDOB;
-      this.userBio= currentUser.userBio;
-      this.userSize = currentUser.userSize;
-      this.userBreed = currentUser.userBreed;
-      this.userImg = currentUser.userImg;
+      this.userID = currentUser.UserID;
+      this.userName = currentUser.UserName;
+      this.userDOB = currentUser.UserDOB;
+      this.userBio= currentUser.UserBio;
+      this.userSize = currentUser.UserSize;
+      this.userBreed = currentUser.UserBreed;
+      this.userImg = currentUser.pictureURL;
     }
 
     
@@ -107,25 +107,25 @@ export class LikeComponent implements OnInit {
     }
     else
     {
-      let currentUser:Users=
+      let currentUser:User=
       {
-        userID: this.listOfUsers[this.i].userID,
-        userName:this.listOfUsers[this.i].userName,
-        userPassword:"",
-        userDOB: this.listOfUsers[this.i].userDOB,
-        userBio:this.listOfUsers[this.i].userBio,
-        userBreed:this.listOfUsers[this.i].userBreed,
-        userSize:this.listOfUsers[this.i].userSize,
-        userImg:""
+        UserID: this.listOfUsers[this.i].UserID,
+        UserName:this.listOfUsers[this.i].UserName,
+        UserPassword:"",
+        UserDOB: this.listOfUsers[this.i].UserDOB,
+        UserBio:this.listOfUsers[this.i].UserBio,
+        UserBreed:this.listOfUsers[this.i].UserBreed,
+        UserSize:this.listOfUsers[this.i].UserSize,
+        pictureURL:this.listOfUsers[this.i].pictureURL
       }
     
-      this.userID = currentUser.userID;
-      this.userName = currentUser.userName;
-      this.userDOB = currentUser.userDOB;
-      this.userBio= currentUser.userBio;
-      this.userSize = currentUser.userSize;
-      this.userBreed = currentUser.userBreed;
-      this.userImg = currentUser.userImg;
+      this.userID = currentUser.UserID;
+      this.userName = currentUser.UserName;
+      this.userDOB = currentUser.UserDOB;
+      this.userBio= currentUser.UserBio;
+      this.userSize = currentUser.UserSize;
+      this.userBreed = currentUser.UserBreed;
+      this.userImg = currentUser.pictureURL;
     }
 
   }

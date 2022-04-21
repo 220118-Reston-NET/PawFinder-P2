@@ -1,11 +1,11 @@
-export interface Users
+export interface User
 {
-    userID:number;
-    userName:string;
-    userPassword:string;
-    userDOB:Date;
-    userBio:string;
-    userBreed:string;
-    userSize:string;
-    userImg:string;
+    UserID:number;
+    UserName:string;
+    UserPassword:string;
+    UserDOB:Date;
+    UserBio:string;
+    UserBreed:string;
+    UserSize:string;
+    pictureURL:string;
 }

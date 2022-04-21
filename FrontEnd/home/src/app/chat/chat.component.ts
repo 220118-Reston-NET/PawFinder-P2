@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalComponent } from '../global/global.component';
 import { Message } from '../models/message.model';
-import { Users } from '../models/users.model';
+import { User } from '../models/users.model';
 import { ChatService } from '../services/chat.service';
 import { NavbarService } from '../services/navbar.service';
 import { PawfinderService } from '../services/pawfinder.service';
@@ -39,19 +39,19 @@ export class ChatComponent implements OnInit {
       this.userService.getUserByUserID(this.chattingUserID).subscribe(result => 
 
         {
-          let user:Users=
+          let user:User=
           {
-            userID: result.userID,
-            userName:result.userName,
-            userPassword:"",
-            userDOB: new Date,
-            userBio:"",
-            userBreed:"",
-            userSize:"",
-            userImg:""
+            UserID: result.UserID,
+            UserName:result.UserName,
+            UserPassword:"",
+            UserDOB: new Date,
+            UserBio:"",
+            UserBreed:"",
+            UserSize:"",
+            pictureURL:""
           }
           
-          this.chattingUserName = user.userName;
+          this.chattingUserName = user.UserName;
 
           this.chatService.getConveration(this.myUserID, this.chattingUserID).subscribe(result => {console.log(result); this.listOfMessages = result; console.log(result.length); this.numOfMessages=result.length});
         });

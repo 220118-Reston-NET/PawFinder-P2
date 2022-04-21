@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Match } from '../models/match.model';
-import { Users } from '../models/users.model';
+import { User } from '../models/users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { Users } from '../models/users.model';
 export class PawfinderService {
 
   constructor(private http:HttpClient) { }
-  getAllUsers(): Observable<Users[]>
+  getAllUsers(): Observable<User[]>
   {
-    return this.http.get<Users[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers");
+    return this.http.get<User[]>("https://pawfinderwebapp.azurewebsites.net/api/PawFinder/GetAllUsers");
   }
   getAllMatch():Observable<Match[]>
   {
