@@ -21,57 +21,34 @@ A place for dogs to meet and chat via instant messaging. Dogs will have their ow
 ## Tech Stack
 
 Backend
-
--C#
-
--LINQ
-
--JSON
-
--ADO.NET
-
--Xunit
-
--Serilog
-
--Azure DevOps
-
--ASP.NET WebAPI
-
--ASP.NET SignalR
-
--Swagger/ThunderClient
-
--Moq
-
+* C#
+* LINQ
+* JSON
+* ADO.NET
+* Xunit
+* Serilog
+* Azure DevOps
+* ASP.NET WebAPI
+* ASP.NET SignalR
+* Swagger/ThunderClient
+* Moq
 
 Frontend
-
--HTML
-
--CSS
-
--JavaScript
-
--TypeScript
-
--Bootstrap
-
--JSON
-
--Angular
+* HTML
+* CSS
+* JavaScript
+* TypeScript
+* Bootstrap
+* JSON
+* Angular
 
 Others
+* VS Code
+* DBeaver
+* Git
+* GitHub
+* SonarCloud
 
--VS Code
-
--DBeaver
-
--Git
-
--GitHub
-
--SonarCloud
 
 ## Usage
 
