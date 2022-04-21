@@ -44,7 +44,7 @@ public interface IRepository
     /// <returns> Returns an individual user. </returns>
     Task<User> GetUserAsync(int UserID);
 
-    //Task<User> GetUserByUsernameAsync(string userName);
+    Task<User> GetUserByUsernameAsync(string userName);
 
     /// <summary>
     /// Will give back matched user from userID.
@@ -68,10 +68,10 @@ public interface IRepository
     /// <returns> Returns updated user information. </returns>
     // Task<User> UpdateUserAsync(User p_user);
 
-    //Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize);
-    //Task<User> UpdateUserBioAsync(int p_userID, string p_userBio);
+    Task<User> UpdateUserBioSizeAsync(int p_userID, string p_userBio, string p_userSize);
+    Task<User> UpdateUserBioAsync(int p_userID, string p_userBio);
 
-    //Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize);
+    Task<User> UpdateUserSizeAsync(int p_userID, string p_userSize);
 
 
     /// <summary>
