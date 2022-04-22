@@ -6,13 +6,13 @@
   </div>
 
   <div style="text-align: center;">
-    <form [formGroup]="loginGroup" autocomplete='off'>
+    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete='off'>
         <div>
-          <label *ngIf="isloginConflict" class="login-conflict">Incorrect User Name or Password.</label>
+          <label *ngIf="isLoginConflict" class="login-conflict">Incorrect User Name or Password.</label>
             <div class="form-outline flex-wrapper">
                 <label class="form-label">Username:</label>
                 <input name="username" 
-                    formControlName="userName"
+                    [(ngModel)]="model.username"
                     type="text" 
                     class="form-control"
                     placeholder="username" />
@@ -25,7 +25,7 @@
                 <div class="flex-wrapper flex-row">
                   <input 
                       name="password"
-                      formControlName="userPassword"
+                      [(ngModel)]="model.password"
                       [type]="show ? 'text' : 'password'" 
                       class="form-control"
                       placeholder="password" />
@@ -39,7 +39,7 @@
         </div>
         <div class="flex-wrapper">
             <button type="button"
-                class="btn btn-primary btn-lg paw-finder-login-signup-button" type="submit" (click)="login(loginGroup)">Login</button>
+                class="btn btn-primary btn-lg paw-finder-login-signup-button" type="submit">Login</button>
         </div>
 
         <div class="flex-wrapper">

@@ -1,7 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalComponent } from './global/global.component';
 import { LikeDislikeRatioGraphComponent } from './like-dislike-ratio-graph/like-dislike-ratio-graph.component';
 import { NgChartsModule } from 'ng2-charts';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,9 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,    
     NgChartsModule
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true
+  } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

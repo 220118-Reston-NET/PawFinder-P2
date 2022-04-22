@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiURL: 'https://pawfinderwebapp.azurewebsites.net',
+  webURL: 'https://pawfinderwebappfe.azurewebsites.net'
 };
