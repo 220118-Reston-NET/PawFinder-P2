@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GlobalComponent implements OnInit {
 
-  public static loggedInUserID:number = 0;
-  public static loggedInUserName: string = "";
+  public static loggedInUserID:number = 1;
+  public static loggedInUserName: string = "timthedog";
   
   public static chattingUserID:number = 0;
 

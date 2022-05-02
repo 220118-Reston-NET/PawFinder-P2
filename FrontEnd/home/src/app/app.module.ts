@@ -22,6 +22,7 @@ import { GlobalComponent } from './global/global.component';
 import { LikeDislikeRatioGraphComponent } from './like-dislike-ratio-graph/like-dislike-ratio-graph.component';
 import { NgChartsModule } from 'ng2-charts';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     HomePageComponent,
     NavBarComponent,
     GlobalComponent,
-    LikeDislikeRatioGraphComponent
+    LikeDislikeRatioGraphComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
       {path: "Like", component: LikeComponent},
       {path: "Login", component: LoginComponent},
       {path: "Register", component: RegisterComponent},
+      {path: "Settings", component: UserSettingsComponent},
       {path: "", component:HomePageComponent}, 
       {path: "**", component:NotFoundError} 
     ]),

@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   isEditingProfile:boolean = false;
   dropdownSize:string = "Edit size";
 
- userGroup= new FormGroup({
+ userGroup = new FormGroup({
   userName: new FormControl(""),
   userPassword:new FormControl(""),
   userDOB: new FormControl(""),

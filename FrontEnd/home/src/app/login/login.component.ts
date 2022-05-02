@@ -70,7 +70,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { AccountService } from '../services/account.service';
 import { NavbarService } from '../services/navbar.service';
 

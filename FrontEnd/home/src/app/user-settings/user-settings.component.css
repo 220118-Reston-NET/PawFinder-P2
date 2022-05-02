@@ -1,17 +1,61 @@
-.ratio-pie-chart
+.flex-row-spaced-evenly
 {
-    padding: 1rem;
-    width: 25rem;
-    background: white;
-
-    border: 1rem black;
-    margin-top: 0.3rem;
-    margin-left: 3em;
-    margin-right: 3em;
-
-    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
+.flex-row-right
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.flex-row-centered
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flex-row-absolute
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-margin
+{
+    margin-top: 2rem;
+}
+
+.setting-heading
+{
+    margin-right: 1rem;
+}
+
+/* the two classes below hold the code for the interests buttons (it changes the color based on if that is a current interest or not of the user). */
+.inactive
+{
+    background-color: white;
+}
+
+.active
+{
+    color: white;
+    background-color: blue;
+}
+
+.button-centered
+{
+    display: flex;
+    justify-content: center;
+}
+
+/* the styling below is for the information I. 
+It handles everything for when the user hovers over the I on the page to show information about that seting */
 .ratio-chart-heading
 {
     text-align: center;
@@ -36,6 +80,7 @@
 }
 
 .like-dislike-tooltip .right {
+    
     top:50%;
     left:100%;
     margin-left:1.25rem;
@@ -60,7 +105,7 @@
 
 .like-dislike-tooltip .right i {
     position:absolute;
-    top:50%;
+    top:17%;
     right:100%;
     margin-top:-0.75rem;
     width:0.75rem;
@@ -78,4 +123,19 @@
     transform:translate(50%,-20%) rotate(-45deg);
     background-color:#EEE;
     border:1px solid #000;box-shadow:0 1px 0.5rem #555;
+}
+
+/* the styling below is for the hide like-dislike ratio on profile. It changes the color of the slider. */
+.showChart
+{
+    font-size: 2.5rem;
+    color: gray;
+    cursor: pointer;
+}
+
+.hideChart
+{
+    font-size: 2.5rem;
+    color: blue;
+    cursor: pointer;
 }

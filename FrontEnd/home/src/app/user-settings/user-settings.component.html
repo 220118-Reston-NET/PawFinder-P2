@@ -1,0 +1,64 @@
+<div class="flex-row-centered flex-margin">
+    <form>
+        <div class="card" style="width: 50rem; max-height: 50rem; padding: 1rem;">
+            <div class="flex-row-absolute">
+                <div class="flex-row-centered">
+                    <h3 class="setting-heading">Hide Like-Dislike Ratio On Profile:</h3>
+                    <label class="switch">
+                        <div>
+                            <span  [ngClass]="[chartToggleButton]" (click)="showOrHideRatioChart()">
+                              {{chartVisibility}}
+                              </span>
+                          </div>
+                    </label>
+                </div>
+                <div class="like-dislike-tooltip"><span class="ratio-chart-heading">ⓘ</span>
+                    <div class="right">
+                        <p>Turning this off will make it so that the like to dislike chart no longer appears on your profile page
+                            (Note: this chart is only able to be seen by you and nobody else can see your own personal like-dislike ratio).                           
+                        </p>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-row-absolute flex-margin">
+                <div class="flex-row-centered">
+                    <h3 class="setting-heading">Age Range:</h3>
+                    <input type="range" id="points" formControlName="ageRange" min="0" max="10">
+                </div>
+                <div class="like-dislike-tooltip"><span class="ratio-chart-heading">ⓘ</span>
+                    <div class="right">
+                        <p>This is the age range of other dogs that will appear on your like page. The larger your age range is,
+                            the more likely you are to find potential matches! (Note: changing your age rage will not affect your matches).                           
+                        </p>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-row-absolute flex-margin">
+                <div class="flex-row-centered">
+                    <h3 class="setting-heading">Interests:</h3>
+                    <button [ngClass]="[WalksButton]" (click)="toggleInterests('Walks');">Walks</button>
+                    <button [ngClass]="[BeachesButton]" (click)="toggleInterests('Beaches');">Beaches</button>
+                    <button [ngClass]="[SwimmingButton]" (click)="toggleInterests('Swimming');">Swimming</button>
+                    <button [ngClass]="[FetchButton]" (click)="toggleInterests('Fetch');">Fetch</button>
+                    <button [ngClass]="[SleepingButton]" (click)="toggleInterests('Sleeping');">Sleeping</button>
+                    <button [ngClass]="[EatingButton]" (click)="toggleInterests('Eating');">Eating</button>
+                </div>
+                <div class="like-dislike-tooltip"><span class="ratio-chart-heading">ⓘ</span>
+                    <div class="right">
+                        <p>Selecting interests will allow you to find users that share your similar interests! You can choose
+                            up to 3 interests.                           
+                        </p>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="button-centered">
+                    <button class="btn btn-primary" type="button" (click)="submit()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
